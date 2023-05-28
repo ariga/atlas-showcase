@@ -1,0 +1,22 @@
+name: Sync Kratos
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'dirs/kratos/*'
+jobs:
+  sync:
+    permissions:
+      contents: read
+      id-token: write
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ariga/atlas-sync-action@v0
+        with:
+          dir: 'examples/migration/ent/migrate/migrations'
+          driver: mysql
+          cloud-url: https://api.atlasgo.link
+          cloud-public: true
