@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'dirs/kratos/*'
 jobs:
   sync:
     permissions:
@@ -15,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ariga/atlas-sync-action@v0
         with:
-          dir: 'examples/migration/ent/migrate/migrations'
+          dir: 'dirs/migrations'
           driver: mysql
           cloud-url: https://api.atlasgo.link
           cloud-public: true
