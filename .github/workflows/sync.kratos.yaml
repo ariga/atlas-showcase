@@ -10,7 +10,6 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
