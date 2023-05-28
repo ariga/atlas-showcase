@@ -1,0 +1,22 @@
+name: Sync Harbor
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'dirs/harbor/*'
+jobs:
+  sync:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ariga/atlas-sync-action@v0
+        with:
+          dir: 'dirs/harbor'
+          dir-format: golang-migrate
+          driver: postgres
+          cloud-public: true
+          

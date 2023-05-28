@@ -1,0 +1,54 @@
+name: Atlas CI Public Webhooks Dir
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'dirs/webhooks/*'
+  pull_request:
+    paths:
+      - 'dirs/webhooks/*'
+  workflow_dispatch:
+jobs:
+  sync:
+    permissions:
+      contents: read
+      id-token: write
+    needs: lint
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ariga/atlas-sync-action@v0
+        with:
+          dir: 'dirs/webhooks'
+          driver: mysql
+          cloud-public: true
+  lint:
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    services:
+      mysql:
+        image: mysql:8.0.29
+        env:
+          MYSQL_ROOT_PASSWORD: pass
+          MYSQL_DATABASE: dev
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd "mysqladmin ping -ppass"
+          --health-interval 10s
+          --health-start-period 10s
+          --health-timeout 5s
+          --health-retries 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.1
+        with:
+          fetch-depth: 0
+      - uses: ariga/atlas-action@v0
+        with:
+          dir: 'dirs/webhooks'
+          dev-url: mysql://root:pass@localhost:3306/dev

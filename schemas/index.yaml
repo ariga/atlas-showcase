@@ -1,0 +1,7 @@
+savedSchemas:
+- title: WordPress
+  engine: mysql
+  src: wordpress.hcl
+- title: Django Getting Started
+  engine: postgres
+  src: django.hcl

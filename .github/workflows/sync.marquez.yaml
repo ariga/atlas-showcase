@@ -1,0 +1,22 @@
+name: Sync Marquez
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'dirs/marquez/*'
+  workflow_dispatch:
+jobs:
+  sync:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ariga/atlas-sync-action@v0
+        with:
+          dir: 'dirs/marquez'
+          dir-format: flyway
+          driver: postgres
+          cloud-public: true
