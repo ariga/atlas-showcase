@@ -1,1 +1,0 @@
-ALTER TABLE lineage_events DROP CONSTRAINT lineage_event_pk;

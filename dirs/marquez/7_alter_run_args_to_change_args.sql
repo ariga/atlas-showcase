@@ -1,1 +1,0 @@
-ALTER TABLE run_args ALTER COLUMN args TYPE TEXT;
