@@ -11,7 +11,6 @@ CREATE TABLE keto_relation_tuples_uuid
     subject_set_relation     VARCHAR(64) NULL,
     commit_time              TIMESTAMP   NOT NULL,
     PRIMARY KEY (shard_id, nid),
-    CONSTRAINT keto_relation_tuples_uuid_nid_fk FOREIGN KEY (nid) REFERENCES networks (id),
     CONSTRAINT chk_keto_rt_uuid_subject_type CHECK (((((subject_id IS NULL) AND (subject_set_namespace IS NOT NULL)) AND
                                                       (subject_set_object IS NOT NULL)) AND
                                                      (subject_set_relation IS NOT NULL)) OR
