@@ -12,8 +12,8 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-BEGIN;
+-- BEGIN;
 
-DROP EXTENSION IF EXISTS pgaudit;
+-- DROP EXTENSION IF EXISTS pgaudit;
 
-END;
+-- END;
