@@ -14,13 +14,13 @@
 
 -- Some systems don't support pgaudit, gracefully degrade in that case
 
-DO
-$$
-BEGIN
-  CREATE EXTENSION IF NOT EXISTS pgaudit;
-EXCEPTION
-  WHEN undefined_file THEN
-    -- do nothing
-END;
-$$
-LANGUAGE plpgsql;
+-- DO
+-- $$
+-- BEGIN
+--   CREATE EXTENSION IF NOT EXISTS pgaudit;
+-- EXCEPTION
+--   WHEN undefined_file THEN
+--     -- do nothing
+-- END;
+-- $$
+-- LANGUAGE plpgsql;
