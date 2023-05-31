@@ -16,5 +16,4 @@ jobs:
         with:
           dir: 'dirs/kratos'
           driver: mysql
-          cloud-url: https://gh-api.atlasgo.link
           cloud-public: true
