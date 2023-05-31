@@ -1,4 +1,4 @@
-name: Atlas CI Public
+name: Atlas CI Public Employees Dir
 on:
   push:
     branches:
