@@ -1,0 +1,20 @@
+name: Sync Keto
+on:
+  push:
+    branches:
+      - master
+jobs:
+  sync:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ariga/atlas-sync-action@v0
+        with:
+          dir: 'dirs/keto'
+          dir-format: golang-migrate
+          driver: postgres
+          cloud-url: https://gh-api.atlasgo.link
+          cloud-public: true
