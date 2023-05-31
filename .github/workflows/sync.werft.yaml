@@ -17,5 +17,4 @@ jobs:
           dir: 'dirs/werft'
           dir-format: golang-migrate
           driver: postgres
-          cloud-url: https://gh-api.atlasgo.link
           cloud-public: true

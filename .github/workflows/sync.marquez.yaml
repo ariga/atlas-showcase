@@ -15,7 +15,6 @@ jobs:
       - uses: ariga/atlas-sync-action@v0
         with:
           dir: 'dirs/marquez'
-          driver: postgres
-          cloud-url: https://gh-api.atlasgo.link
-          cloud-public: true
           dir-format: flyway
+          driver: postgres
+          cloud-public: true
