@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'dirs/harbor/*'
 jobs:
   sync:
     permissions:

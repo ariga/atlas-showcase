@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'dirs/werft/*'
   workflow_dispatch:
 jobs:
   sync:

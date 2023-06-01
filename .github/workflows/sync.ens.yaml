@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'dirs/exposure-notifications-server/*'
   workflow_dispatch:
 jobs:
   sync:
