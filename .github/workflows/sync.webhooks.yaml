@@ -8,6 +8,7 @@ on:
   pull_request:
     paths:
       - 'dirs/webhooks/*'
+  workflow_dispatch:
 jobs:
   sync:
     permissions:
