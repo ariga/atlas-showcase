@@ -18,7 +18,7 @@ jobs:
         uses: ariga/setup-atlas@v0
         with:
           cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
-      - name: push
-        working-directory: projects/estore
-        run: |
-          atlas migrate push --env local estore-inventory
+      - name: Push to Registry
+        uses: ariga/atlas-action/migrate/push@v1
+        with:
+          env: 'local'
