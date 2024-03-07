@@ -23,4 +23,5 @@ jobs:
         with:
           dir-name: 'estore-inventory'
           env: 'local'
+          dir: 'file://projects/estore/inventory/migrations'
           config: 'file://projects/estore/atlas.hcl'
