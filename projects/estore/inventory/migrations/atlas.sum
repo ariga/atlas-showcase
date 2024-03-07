@@ -1,3 +1,7 @@
-h1:OD80uv7vCyCGr2x6dS4rLVaCkoj7JyydbcT6gxQAShI=
+h1:TXS4jLbko59JU5wbXzE89sr5uGQvxCMAm+oMEdtAnmU=
 20240307092728.sql h1:BEXRAbglZQlUqXHRy4fvsEVsu7FlSfKcJ/JAkH2XgMY=
 20240307104354_add_warehouses.sql h1:heT56DSu6Ka8TJo8K4F92rVxinZmt+7tbMX+y3vaJKo=
+20240307113646_add_items.sql h1:T6WAjSdbbQiI3RmiM7amcNZGjsNy6re8QjYkWXKCJXw=
+20240307114027_add_orders_shipments.sql h1:j6t5n5vZ8dSHHvd1HcR3ObFC1+e1I1X5Zmt/EsryURc=
+20240307114116_region_inventory.sql h1:pCnxwZ1bw8sn4v+G0gyhot1Hs+i4BaPr4EbGUugkS3M=
+20240307114304_inventory_tracking_trigger.sql h1:iiEGHpZYWyR5jsW44pLcEt7cU3VfSrFC61Te0aPQLNk=
