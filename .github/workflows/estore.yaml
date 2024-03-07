@@ -1,16 +1,17 @@
-name: Setup Atlas
-
+name: EStore Inventory Pipeline
 on:
   push:
     branches:
       - master
   pull_request:
-    branches:
-      - master
-
+permissions:
+  contents: read
+  pull-requests: write
 jobs:
   setup:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,6 +19,13 @@ jobs:
         uses: ariga/setup-atlas@v0
         with:
           cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
+      - name: Lint Migrations
+        uses: ariga/atlas-action/migrate/lint@v1
+        with:
+          dir-name: 'estore-inventory'
+          dir: 'file://projects/estore/inventory/migrations'
+          env: 'local'
+          config: 'file://projects/estore/atlas.hcl'
       - name: Push to Registry
         if: github.ref == 'refs/heads/master'
         uses: ariga/atlas-action/migrate/push@v1
