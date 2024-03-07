@@ -303,9 +303,7 @@ trigger "after_order_insert" {
   as = <<-SQL
   BEGIN
       DECLARE regionId INT;
-  
-      -- Assuming each product is linked to a single warehouse, which is a simplification.
-      -- This might need a more complex logic based on how your warehouses and orders are structured.
+
       SELECT w.region_id INTO regionId
       FROM warehouses w
       JOIN inventory_items ii ON w.warehouse_id = ii.warehouse_id
