@@ -21,4 +21,5 @@ jobs:
       - name: Push to Registry
         uses: ariga/atlas-action/migrate/push@v1
         with:
+          dir-name: 'estore-inventory'
           env: 'local'
