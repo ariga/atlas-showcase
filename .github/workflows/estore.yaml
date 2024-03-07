@@ -19,6 +19,7 @@ jobs:
         with:
           cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
       - name: Push to Registry
+        if: github.ref == 'refs/heads/master'
         uses: ariga/atlas-action/migrate/push@v1
         with:
           dir-name: 'estore-inventory'
