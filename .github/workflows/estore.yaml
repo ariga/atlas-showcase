@@ -18,6 +18,13 @@ jobs:
         uses: ariga/setup-atlas@v0
         with:
           cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
+      - name: Lint Migrations
+        uses: ariga/atlas-action/migrate/lint@v1
+        with:
+          dir-name: 'estore-inventory'
+          dir: 'file://projects/estore/inventory/migrations'
+          env: 'local'
+          config: 'file://projects/estore/atlas.hcl'
       - name: Push to Registry
         if: github.ref == 'refs/heads/master'
         uses: ariga/atlas-action/migrate/push@v1

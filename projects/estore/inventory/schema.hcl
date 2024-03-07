@@ -67,6 +67,21 @@ table "products" {
     columns = [column.supplier_id]
   }
 }
+table "regions" {
+  schema = schema.default
+  column "region_id" {
+    null           = false
+    type           = int
+    auto_increment = true
+  }
+  column "name" {
+    null = false
+    type = varchar(255)
+  }
+  primary_key {
+    columns = [column.region_id]
+  }
+}
 table "suppliers" {
   schema = schema.default
   column "supplier_id" {
@@ -84,6 +99,38 @@ table "suppliers" {
   }
   primary_key {
     columns = [column.supplier_id]
+  }
+}
+table "warehouses" {
+  schema = schema.default
+  column "warehouse_id" {
+    null           = false
+    type           = int
+    auto_increment = true
+  }
+  column "name" {
+    null = false
+    type = varchar(255)
+  }
+  column "address" {
+    null = false
+    type = text
+  }
+  column "region_id" {
+    null = true
+    type = int
+  }
+  primary_key {
+    columns = [column.warehouse_id]
+  }
+  foreign_key "warehouses_ibfk_1" {
+    columns     = [column.region_id]
+    ref_columns = [table.regions.column.region_id]
+    on_update   = NO_ACTION
+    on_delete   = NO_ACTION
+  }
+  index "region_id" {
+    columns = [column.region_id]
   }
 }
 schema "default" {
