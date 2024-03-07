@@ -17,7 +17,7 @@ jobs:
       - name: Setup Atlas
         uses: ariga/setup-atlas@v0
         with:
-          token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
+          cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
       - name: push
         working-directory: projects/estore
         run: |
