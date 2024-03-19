@@ -36,11 +36,6 @@ table "products" {
     null = true
     type = int
   }
-  column "price" {
-    null     = false
-    type     = decimal(10,2)
-    unsigned = false
-  }
   column "description" {
     null = true
     type = text
