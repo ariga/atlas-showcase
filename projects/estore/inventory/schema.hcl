@@ -36,6 +36,11 @@ table "products" {
     null = true
     type = int
   }
+  column "price" {
+    null     = false
+    type     = decimal(10,2)
+    unsigned = false
+  }
   column "description" {
     null = true
     type = text
@@ -128,6 +133,22 @@ table "warehouses" {
     columns = [column.region_id]
   }
 }
+
+view "price_avgs" {
+  schema = schema.default
+  column "category_name" {
+    type = text
+  }
+  column "avg_price" {
+    type = int
+  }
+  as = <<-SQL
+      SELECT categories.name category_name, AVG(products.price) avg_price
+      FROM categories JOIN products ON categories.category_id = products.category_id
+      GROUP BY categories.name
+  SQL
+}
+
 schema "default" {
   charset = "utf8mb4"
   collate = "utf8mb4_0900_ai_ci"
