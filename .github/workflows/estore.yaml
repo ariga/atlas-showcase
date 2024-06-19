@@ -4,6 +4,8 @@ on:
     branches:
       - master
   pull_request:
+    paths:
+      - 'projects/estore/inventory/migrations/*'
 permissions:
   contents: read
   pull-requests: write
