@@ -5,6 +5,7 @@ CREATE TABLE `users` (
                          `email` varchar(255) NOT NULL,
                          `is_admin` bool NULL DEFAULT 0,
                          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
                          `date_of_birth` date NULL,
                          PRIMARY KEY (`id`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
