@@ -80,6 +80,7 @@ CREATE TABLE `orders` (
                           `fulfillment_center_id` int NOT NULL,
                           `total_amount` decimal(10,2) NOT NULL,
                           `comment` varchar(100) NULL,
+                          `status` varchar(50) NOT NULL DEFAULT 'PENDING',
                           PRIMARY KEY (`id`),
                           INDEX `fulfillment_center_id` (`fulfillment_center_id`),
                           INDEX `user_id` (`user_id`),
