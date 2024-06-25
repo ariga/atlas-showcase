@@ -81,6 +81,8 @@ CREATE TABLE `orders` (
                           `total_amount` decimal(10,2) NOT NULL,
                           `comment` varchar(100) NULL,
                           `status` varchar(50) NOT NULL DEFAULT 'PENDING',
+                          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                          `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
                           PRIMARY KEY (`id`),
                           INDEX `fulfillment_center_id` (`fulfillment_center_id`),
                           INDEX `user_id` (`user_id`),
