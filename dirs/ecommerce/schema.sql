@@ -21,6 +21,7 @@ CREATE TABLE `products` (
                             `product_name` varchar(255) NOT NULL,
                             `price` decimal(10,2) NOT NULL,
                             `category_id` int NULL,
+                            `description` text NULL,
                             PRIMARY KEY (`id`),
                             INDEX `category_id` (`category_id`),
                             UNIQUE INDEX `product_name` (`product_name`),
