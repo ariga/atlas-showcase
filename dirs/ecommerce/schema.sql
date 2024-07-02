@@ -7,6 +7,7 @@ CREATE TABLE `users` (
                          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
                          `date_of_birth` date NULL,
+                         `active` bool NOT NULL DEFAULT 1,
                          PRIMARY KEY (`id`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 -- Create "categories" table
