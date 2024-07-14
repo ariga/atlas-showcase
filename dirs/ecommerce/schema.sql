@@ -10,7 +10,8 @@ CREATE TABLE `users` (
                          `date_of_birth` date NULL,
                          `active` bool NOT NULL DEFAULT 1,
                          `last_login` timestamp NULL,
-                         PRIMARY KEY (`id`)
+                         PRIMARY KEY (`id`),
+                         UNIQUE INDEX `email` (`email`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 -- Create "categories" table
 CREATE TABLE `categories` (
