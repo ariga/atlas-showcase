@@ -10,6 +10,7 @@ CREATE TABLE `users` (
                          `date_of_birth` date NULL,
                          `active` bool NOT NULL DEFAULT 1,
                          `last_login` timestamp NULL,
+                         `address` varchar(255) NULL,
                          PRIMARY KEY (`id`),
                          UNIQUE INDEX `email` (`email`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
