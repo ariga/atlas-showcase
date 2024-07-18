@@ -27,6 +27,7 @@ CREATE TABLE `products` (
                             `price` decimal(10,2) NOT NULL,
                             `category_id` int NULL,
                             `description` text NULL,
+                            `featured` bool NOT NULL DEFAULT 0,
                             PRIMARY KEY (`id`),
                             INDEX `category_id` (`category_id`),
                             UNIQUE INDEX `product_name` (`product_name`),
