@@ -29,6 +29,7 @@ CREATE TABLE `products` (
 `price` decimal(10,2) NOT NULL,
 `category_id` int NULL,
 `description` text NULL,
+`image_url` varchar(255) NULL,
 `featured` bool NOT NULL DEFAULT 0,
 `status` varchar(50) NOT NULL DEFAULT 'active',
 PRIMARY KEY (`id`),
