@@ -5,27 +5,12 @@ on:
       - master
   pull_request:
     paths:
-      - 'dirs/ecommerce/migrations/*'
+      - "dirs/ecommerce/migrations/*"
 jobs:
-  sync:
+  atlas:
     permissions:
       contents: read
       id-token: write
-    needs: lint
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ariga/atlas-sync-action@v0
-        with:
-          dir: 'dirs/ecommerce/migrations'
-          driver: mysql
-          cloud-public: true
-  lint:
-    permissions:
-      contents: read
-      id-token: write
-      pull-requests: write
     services:
       mysql:
         image: mysql:8.0.29
@@ -42,11 +27,25 @@ jobs:
           --health-retries 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.0.1
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
-      - uses: ariga/atlas-action@v0
+          fetch-depth: 0
+      - name: Setup Atlas
+        uses: ariga/setup-atlas@v0
         with:
-          dir: 'dirs/ecommerce/migrations'
+          cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
+      - name: Lint
+        uses: ariga/atlas-action/lint@v1
+        if: github.ref != 'refs/heads/master'
+        with:
+          dir: file://dirs/ecommerce/migrations
+          dir-name: ariga-atlas-showcase-dirs-ecommerce-migrations
           dev-url: mysql://root:pass@localhost:3306/dev
-          cloud-public: true
+      - name: Push
+        if: github.ref == 'refs/heads/master'
+        uses: ariga/atlas-action/push@v1
+        with:
+          dir: file://dirs/ecommerce/migrations
+          dir-name: ariga-atlas-showcase-dirs-ecommerce-migrations
+          dev-url: mysql://root:pass@localhost:3306/dev
+          tag: ${{ github.sha }}
