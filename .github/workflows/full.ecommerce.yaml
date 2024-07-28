@@ -35,7 +35,7 @@ jobs:
         with:
           cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
       - name: Lint
-        uses: ariga/atlas-action/lint@v1
+        uses: ariga/atlas-action/migrate/lint@v1
         if: github.ref != 'refs/heads/master'
         with:
           dir: file://dirs/ecommerce/migrations
@@ -43,7 +43,7 @@ jobs:
           dev-url: mysql://root:pass@localhost:3306/dev
       - name: Push
         if: github.ref == 'refs/heads/master'
-        uses: ariga/atlas-action/push@v1
+        uses: ariga/atlas-action/migrate/push@v1
         with:
           dir: file://dirs/ecommerce/migrations
           dir-name: ariga-atlas-showcase-dirs-ecommerce-migrations
