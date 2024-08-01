@@ -12,7 +12,8 @@ CREATE TABLE `users` (
 `last_login` timestamp NULL,
 `address` varchar(255) NULL,
 PRIMARY KEY (`id`),
-UNIQUE INDEX `email` (`email`)
+UNIQUE INDEX `email` (`email`),
+UNIQUE INDEX `user_name` (`user_name`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Create 'categories' table
