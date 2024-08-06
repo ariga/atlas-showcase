@@ -1,4 +1,4 @@
--- Create 'users' table
+ -- Create 'users' table
 CREATE TABLE `users` (
 `id` int NOT NULL,
 `user_name` varchar(255) NOT NULL,
@@ -83,6 +83,7 @@ CREATE TABLE `orders` (
 `total_amount` decimal(10,2) NOT NULL,
 `comment` varchar(100) NULL,
 `status` varchar(50) NOT NULL DEFAULT 'PENDING',
+`shipping_address` varchar(255) NOT NULL,
 `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (`id`),
