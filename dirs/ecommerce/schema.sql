@@ -1,4 +1,4 @@
- -- Create 'users' table
+-- Create 'users' table
 CREATE TABLE `users` (
 `id` int NOT NULL,
 `user_name` varchar(255) NOT NULL,
@@ -47,6 +47,7 @@ CREATE TABLE `product_reviews` (
 `user_id` int NOT NULL,
 `rating` int NOT NULL,
 `review_text` text NOT NULL,
+`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (`id`),
 INDEX `product_id` (`product_id`),
 INDEX `user_id` (`user_id`),
