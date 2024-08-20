@@ -1,4 +1,4 @@
-        -- Create 'users' table
+-- Create 'users' table
 CREATE TABLE `users` (
 `id` int NOT NULL,
 `user_name` varchar(255) NOT NULL,
@@ -52,6 +52,7 @@ CREATE TABLE `product_reviews` (
 PRIMARY KEY (`id`),
 INDEX `product_id` (`product_id`),
 INDEX `user_id` (`user_id`),
+UNIQUE INDEX `user_product_review` (`user_id`, `product_id`),
 CONSTRAINT `product_reviews_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
 CONSTRAINT `product_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
 CHECK (`rating` BETWEEN 1 AND 5)
