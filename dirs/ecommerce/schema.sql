@@ -35,6 +35,7 @@ CREATE TABLE `products` (
 `image_url` varchar(255) NULL,
 `featured` bool NOT NULL DEFAULT 0,
 `status` varchar(50) NOT NULL DEFAULT 'active',
+`discount` decimal(5,2) NOT NULL DEFAULT 0.00,
 PRIMARY KEY (`id`),
 INDEX `category_id` (`category_id`),
 UNIQUE INDEX `product_name` (`product_name`),
