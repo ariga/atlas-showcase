@@ -94,7 +94,8 @@ PRIMARY KEY (`id`),
 INDEX `fulfillment_center_id` (`fulfillment_center_id`),
 INDEX `user_id` (`user_id`),
 CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+CHECK (`total_amount` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Create 'order_items' table
