@@ -11,6 +11,7 @@ CREATE TABLE `users` (
 `active` bool NOT NULL DEFAULT 1,
 `last_login` timestamp NULL,
 `address` varchar(255) NULL,
+`profile_picture_url` varchar(255) NULL,
 PRIMARY KEY (`id`),
 UNIQUE INDEX `email` (`email`),
 UNIQUE INDEX `user_name` (`user_name`),
