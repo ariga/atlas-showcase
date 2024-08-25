@@ -23,6 +23,7 @@ CREATE TABLE `categories` (
 `id` int NOT NULL,
 `category_name` varchar(255) NOT NULL,
 `category_description` text NULL,
+`category_code` varchar(100) NOT NULL UNIQUE,
 PRIMARY KEY (`id`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
