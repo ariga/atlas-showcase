@@ -12,6 +12,7 @@ CREATE TABLE `users` (
 `last_login` timestamp NULL,
 `address` varchar(255) NULL,
 `profile_picture_url` varchar(255) NULL,
+`phone_verified` bool NOT NULL DEFAULT 0,
 PRIMARY KEY (`id`),
 UNIQUE INDEX `email` (`email`),
 UNIQUE INDEX `user_name` (`user_name`),
