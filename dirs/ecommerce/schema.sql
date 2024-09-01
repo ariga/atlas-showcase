@@ -94,6 +94,7 @@ CREATE TABLE `orders` (
 `shipping_address` varchar(255) NOT NULL,
 `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+`order_reference` varchar(100) NULL,
 PRIMARY KEY (`id`),
 INDEX `fulfillment_center_id` (`fulfillment_center_id`),
 INDEX `user_id` (`user_id`),
