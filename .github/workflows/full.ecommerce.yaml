@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: write
     services:
       mysql:
         image: mysql:8.0.29
