@@ -11,7 +11,6 @@ CREATE TABLE `users` (
 `active` bool NOT NULL DEFAULT 1,
 `last_login` timestamp NULL,
 `address` varchar(255) NULL,
-`profile_picture_url` varchar(255) NULL,
 `phone_verified` bool NOT NULL DEFAULT 0,
 `deleted_at` timestamp NULL,
 PRIMARY KEY (`id`),
