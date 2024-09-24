@@ -113,6 +113,7 @@ CREATE TABLE `order_items` (
 `product_id` int NOT NULL,
 `quantity` int NOT NULL,
 `price` decimal(10,2) NOT NULL,
+`order_reference` varchar(100) NULL,
 PRIMARY KEY (`id`),
 INDEX `order_id` (`order_id`),
 INDEX `product_id` (`product_id`),
