@@ -17,7 +17,8 @@ CREATE TABLE `users` (
 PRIMARY KEY (`id`),
 UNIQUE INDEX `email` (`email`),
 UNIQUE INDEX `user_name` (`user_name`),
-UNIQUE INDEX `phone_number` (`phone_number`)
+UNIQUE INDEX `phone_number` (`phone_number`),
+CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Create 'categories' table
