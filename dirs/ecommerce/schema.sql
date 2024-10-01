@@ -1,7 +1,7 @@
 -- Create 'users' table
 CREATE TABLE `users` (
 `id` int NOT NULL,
-`user_name` varchar(255) NOT NULL,
+`username` varchar(255) NOT NULL,
 `email` varchar(255) NOT NULL,
 `phone_number` varchar(15) NOT NULL,
 `is_admin` bool NULL DEFAULT 0,
@@ -16,7 +16,7 @@ CREATE TABLE `users` (
 `deleted_at` timestamp NULL,
 PRIMARY KEY (`id`),
 UNIQUE INDEX `email` (`email`),
-UNIQUE INDEX `user_name` (`user_name`),
+UNIQUE INDEX `username` (`username`),
 UNIQUE INDEX `phone_number` (`phone_number`),
 CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
