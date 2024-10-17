@@ -4,6 +4,7 @@ CREATE TABLE `users` (
 `user_name` varchar(255) NOT NULL,
 `email` varchar(255) NOT NULL,
 `phone_number` varchar(15) NOT NULL,
+`country_code` varchar(5) NOT NULL DEFAULT '+1',
 `is_admin` bool NULL DEFAULT 0,
 `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
