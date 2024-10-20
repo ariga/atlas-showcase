@@ -129,9 +129,11 @@ CREATE TABLE `posts` (
 `user_id` int NOT NULL,
 `title` varchar(255) NOT NULL,
 `body` text NOT NULL,
+`last_updated_by` int NULL,
 PRIMARY KEY (`id`),
 INDEX `user_id` (`user_id`),
-CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`last_updated_by`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Create 'payment_methods' table
