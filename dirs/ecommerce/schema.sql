@@ -42,6 +42,7 @@ CREATE TABLE `products` (
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
     `image_url` varchar(255) NULL COMMENT 'URL to the product image',
+    `thumbnail_url` varchar(255) NULL COMMENT 'URL to the product thumbnail image',
     `featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the product is featured, defaults to false',
     `status` varchar(50) NOT NULL DEFAULT 'active' COMMENT 'Current status of the product (e.g., active, inactive)',
     `discount` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Discount amount on the product',
