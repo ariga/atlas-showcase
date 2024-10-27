@@ -19,7 +19,8 @@ CREATE TABLE `users` (
     UNIQUE INDEX `email` (`email`),
     UNIQUE INDEX `user_name` (`user_name`),
     UNIQUE INDEX `phone_number` (`phone_number`),
-    CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+    CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    CHECK (`phone_number` REGEXP '^[0-9]{1,15}$')
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table storing user information, including authentication and profile details';
 
 -- Create 'categories' table
