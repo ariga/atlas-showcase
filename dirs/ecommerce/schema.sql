@@ -9,6 +9,7 @@ CREATE TABLE `users` (
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the user was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the user record',
     `date_of_birth` date NULL,
+    `gender` ENUM('male', 'female', 'other') NULL COMMENT 'User gender',
     `active` bool NOT NULL DEFAULT 1 COMMENT 'Flag indicating if the user account is active, defaults to true',
     `last_login` timestamp NULL,
     `address` varchar(255) NULL,
@@ -150,3 +151,5 @@ CREATE TABLE `payment_methods` (
     INDEX `user_id` (`user_id`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
     ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+        
