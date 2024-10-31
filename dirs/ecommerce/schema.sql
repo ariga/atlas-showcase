@@ -82,7 +82,7 @@ CREATE TABLE `inventory` (
     `id` int NOT NULL COMMENT 'Unique identifier for each inventory record',
     `product_id` int NOT NULL COMMENT 'Foreign key referencing the product',
     `fulfillment_center_id` int NOT NULL COMMENT 'Foreign key referencing the fulfillment center',
-    `quantity` int NOT NULL COMMENT 'Available quantity of the product in the fulfillment center',
+    `quantity` int NOT NULL DEFAULT 0 COMMENT 'Available quantity of the product in the fulfillment center',
     PRIMARY KEY (`id`),
     INDEX `fulfillment_center_id` (`fulfillment_center_id`),
     INDEX `product_id` (`product_id`),
@@ -151,5 +151,3 @@ CREATE TABLE `payment_methods` (
     INDEX `user_id` (`user_id`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
     ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-
-        
