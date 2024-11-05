@@ -40,6 +40,7 @@ CREATE TABLE `products` (
     `id` int NOT NULL COMMENT 'Unique identifier for each product',
     `product_name` varchar(255) NOT NULL COMMENT 'Name of the product',
     `price` decimal(10,2) NOT NULL COMMENT 'Price of the product',
+    `currency_code` varchar(3) NOT NULL DEFAULT 'USD' COMMENT 'Currency code for the product price',
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
     `image_url` varchar(255) NULL COMMENT 'URL to the product image',
@@ -136,7 +137,7 @@ CREATE TABLE `posts` (
     INDEX `user_id` (`user_id`),
     CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`last_updated_by`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL
-    ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Create 'payment_methods' table
 CREATE TABLE `payment_methods` (
@@ -150,4 +151,4 @@ CREATE TABLE `payment_methods` (
     PRIMARY KEY (`id`),
     INDEX `user_id` (`user_id`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
-    ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
