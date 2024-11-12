@@ -2,7 +2,7 @@
 CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
     `user_name` varchar(255) NOT NULL COMMENT 'The username of the user, must be unique',
-    `email` varchar(255) NOT NULL,
+    `email_address` varchar(255) NOT NULL,
     `phone_number` varchar(15) NOT NULL,
     `country_code` varchar(5) NOT NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US',
     `is_admin` bool NULL DEFAULT 0 COMMENT 'Flag indicating if the user is an admin, defaults to false',
@@ -17,10 +17,10 @@ CREATE TABLE `users` (
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `email` (`email`),
+    UNIQUE INDEX `email_address` (`email_address`),
     UNIQUE INDEX `user_name` (`user_name`),
     UNIQUE INDEX `phone_number` (`phone_number`),
-    CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    CHECK (`email_address` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$')
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table storing user information, including authentication and profile details';
 
