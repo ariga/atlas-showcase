@@ -88,7 +88,8 @@ CREATE TABLE `inventory` (
     INDEX `fulfillment_center_id` (`fulfillment_center_id`),
     INDEX `product_id` (`product_id`),
     CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-    CONSTRAINT `inventory_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+    CONSTRAINT `inventory_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+    CHECK (`quantity` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for managing inventory levels of products at various fulfillment centers';
 
 -- Create 'orders' table
