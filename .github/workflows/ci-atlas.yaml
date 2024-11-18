@@ -1,0 +1,40 @@
+name: Atlas
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/ci-atlas.yaml
+      - 'dirs/ecommerce/migrations/*'
+  pull_request:
+    paths:
+      - 'dirs/ecommerce/migrations/*'
+# Permissions to write comments on the pull request.
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  atlas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ariga/setup-atlas@v0
+        with:
+          cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN_Z0ZJC7 }}
+      - uses: ariga/atlas-action/migrate/lint@v1
+        with:
+          dir: 'file://dirs/ecommerce/migrations'
+          dir-name: 'ronen-test'
+          config: 'file://dirs/ecommerce/atlas.hcl'
+          env: 'local'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: ariga/atlas-action/migrate/push@v1
+        if: github.ref == 'refs/heads/master'
+        with:
+            dir: 'file://dirs/ecommerce/migrations'
+            dir-name: 'ronen-test'
+            config: 'file://dirs/ecommerce/atlas.hcl'
+            env: 'local'
