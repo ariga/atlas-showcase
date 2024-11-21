@@ -13,7 +13,6 @@ CREATE TABLE `users` (
     `active` bool NOT NULL DEFAULT 1 COMMENT 'Flag indicating if the user account is active, defaults to true',
     `last_login` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of the last login of the user',
     `address` varchar(255) NULL,
-    `profile_picture_url` varchar(255) NULL COMMENT 'URL to the user profile picture',
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     PRIMARY KEY (`id`),
