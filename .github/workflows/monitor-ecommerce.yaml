@@ -34,8 +34,6 @@ jobs:
       # The next steps are the only ones required to monitor schema changes.
       - name: Setup Atlas
         uses: ariga/setup-atlas@master
-        with:
-          cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - uses: ariga/atlas-action/monitor/schema@master
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
