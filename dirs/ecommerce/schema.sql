@@ -16,6 +16,7 @@ CREATE TABLE `users` (
     `address` varchar(255) NULL,
     `profile_picture_url` varchar(255) NULL COMMENT 'URL to the user profile picture',
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
+    `profile_completed` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user has completed their profile, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email` (`email`),
@@ -157,3 +158,4 @@ CREATE TABLE `payment_methods` (
     INDEX `user_id` (`user_id`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
