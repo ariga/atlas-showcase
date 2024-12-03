@@ -31,6 +31,7 @@ CREATE TABLE `categories` (
     `category_name` varchar(255) NOT NULL COMMENT 'The name of the category, must be unique',
     `category_description` text NULL COMMENT 'Description of the category',
     `category_code` varchar(100) NOT NULL UNIQUE COMMENT 'Unique code for the category',
+    `category_type` ENUM('standard', 'premium', 'exclusive') NOT NULL DEFAULT 'standard' COMMENT 'Type of category',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the category was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the category record',
     PRIMARY KEY (`id`)
@@ -157,3 +158,4 @@ CREATE TABLE `payment_methods` (
     INDEX `user_id` (`user_id`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
