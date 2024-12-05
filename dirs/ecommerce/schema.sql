@@ -1,7 +1,7 @@
 -- Create 'users' table
 CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
-    `user_name` varchar(255) NOT NULL COMMENT 'The username of the user, must be unique',
+    `username` varchar(255) NOT NULL COMMENT 'The username of the user, must be unique',
     `email` varchar(255) NOT NULL,
     `phone_number` varchar(15) NOT NULL,
     `country_code` varchar(5) NOT NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US',
@@ -19,7 +19,7 @@ CREATE TABLE `users` (
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email` (`email`),
-    UNIQUE INDEX `user_name` (`user_name`),
+    UNIQUE INDEX `username` (`username`),
     UNIQUE INDEX `phone_number` (`phone_number`),
     CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$')
