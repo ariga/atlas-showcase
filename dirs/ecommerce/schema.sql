@@ -107,11 +107,13 @@ CREATE TABLE `orders` (
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
     `order_reference` varchar(100) NULL COMMENT 'Optional reference number for the order',
     `is_featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the order is featured, defaults to false',
+    `modified_by` int NULL COMMENT 'User ID of the person who last modified the order',
     PRIMARY KEY (`id`),
     INDEX `fulfillment_center_id` (`fulfillment_center_id`),
     INDEX `user_id` (`user_id`),
     CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+    CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`modified_by`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
     CHECK (`total_amount` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing orders placed by users';
 
