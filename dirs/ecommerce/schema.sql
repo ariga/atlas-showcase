@@ -153,7 +153,7 @@ CREATE TABLE `payment_methods` (
     `card_number` varchar(20) NOT NULL,
     `expiration_date` date NOT NULL,
     `cardholder_name` varchar(255) NOT NULL,
-    `status` varchar(50) NOT NULL DEFAULT 'active',
+    `status` varchar(50) NOT NULL DEFAULT 'active' COMMENT 'Current status of the payment method, defaults to active',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     INDEX `user_id` (`user_id`),
