@@ -18,6 +18,7 @@ CREATE TABLE `users` (
     `reward_points` int NOT NULL DEFAULT 0 COMMENT 'The number of reward points the user has accumulated',
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
+    `last_order_date` date NULL COMMENT 'Date of the user\'s last order',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email` (`email`),
     UNIQUE INDEX `user_name` (`user_name`),
