@@ -90,6 +90,7 @@ CREATE TABLE `inventory` (
     `product_id` int NOT NULL COMMENT 'Foreign key referencing the product',
     `fulfillment_center_id` int NOT NULL COMMENT 'Foreign key referencing the fulfillment center',
     `quantity` int NOT NULL DEFAULT 0 COMMENT 'Available quantity of the product in the fulfillment center',
+    `stock_threshold` int NOT NULL DEFAULT 10 COMMENT 'Minimum quantity of the product before restocking is needed',
     PRIMARY KEY (`id`),
     INDEX `fulfillment_center_id` (`fulfillment_center_id`),
     INDEX `product_id` (`product_id`),
