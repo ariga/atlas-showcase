@@ -144,11 +144,13 @@ CREATE TABLE `posts` (
     `title` varchar(255) NOT NULL,
     `body` text NOT NULL,
     `last_updated_by` int NULL,
+    `created_by` int NOT NULL COMMENT 'User who originally created the post',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the post was created',
     PRIMARY KEY (`id`),
     INDEX `user_id` (`user_id`),
     CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-    CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`last_updated_by`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL
+    CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`last_updated_by`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+    CONSTRAINT `posts_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Create 'payment_methods' table
