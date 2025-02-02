@@ -65,7 +65,7 @@ CREATE TABLE `product_reviews` (
     `id` int NOT NULL COMMENT 'Unique identifier for each review',
     `product_id` int NOT NULL COMMENT 'Foreign key referencing the product being reviewed',
     `user_id` int NOT NULL COMMENT 'Foreign key referencing the user who made the review',
-    `rating` int NOT NULL COMMENT 'Rating given by the user (1 to 5)',
+    `rating` int NOT NULL DEFAULT 3 COMMENT 'Rating given by the user (1 to 5)',
     `review_text` text NOT NULL COMMENT 'Review text provided by the user',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the review was created',
     PRIMARY KEY (`id`),
