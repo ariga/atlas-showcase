@@ -6,6 +6,7 @@ CREATE TABLE `users` (
     `phone_number` varchar(15) NOT NULL,
     `country_code` varchar(5) NOT NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US',
     `is_admin` bool NULL DEFAULT 0 COMMENT 'Flag indicating if the user is an admin, defaults to false',
+    `email_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user email address is verified, defaults to false',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the user was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the user record',
     `date_of_birth` date NULL,
