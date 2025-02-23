@@ -50,6 +50,7 @@ CREATE TABLE `products` (
     `currency_code` varchar(3) NOT NULL DEFAULT 'USD' COMMENT 'Currency code for the product price',
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
+    `color` varchar(50) NULL COMMENT 'Color of the product, optional',
     `image_url` varchar(255) NULL COMMENT 'URL to the product image',
     `thumbnail_url` varchar(255) NULL COMMENT 'URL to the product thumbnail image',
     `featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the product is featured, defaults to false',
