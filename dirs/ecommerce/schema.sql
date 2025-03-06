@@ -118,6 +118,7 @@ CREATE TABLE `orders` (
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
     `order_reference` varchar(100) NULL COMMENT 'Optional reference number for the order',
     `is_featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the order is featured, defaults to false',
+    `description` text NULL COMMENT 'Additional details about the order',
     PRIMARY KEY (`id`),
     INDEX `fulfillment_center_id` (`fulfillment_center_id`),
     INDEX `user_id` (`user_id`),
