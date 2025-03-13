@@ -151,6 +151,7 @@ CREATE TABLE `posts` (
     `last_updated_by` int NULL,
     `created_by` int NOT NULL COMMENT 'User who originally created the post',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the post was created',
+    `date_archived` timestamp NULL COMMENT 'Timestamp of when the post was archived',
     PRIMARY KEY (`id`),
     INDEX `user_id` (`user_id`),
     CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
