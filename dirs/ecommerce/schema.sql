@@ -20,6 +20,7 @@ CREATE TABLE `users` (
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     `last_order_date` date NULL COMMENT 'Date of the user\'s last order',
+    `profile_banner_url` varchar(255) NULL COMMENT 'URL to the user profile banner image',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email_address` (`email_address`),
     UNIQUE INDEX `user_name` (`user_name`),
