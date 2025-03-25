@@ -21,6 +21,7 @@ CREATE TABLE `users` (
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     `last_order_date` date NULL COMMENT 'Date of the user\'s last order',
     `profile_banner_url` varchar(255) NULL COMMENT 'URL to the user profile banner image',
+    `roles` ENUM('admin', 'customer', 'seller') NOT NULL DEFAULT 'customer' COMMENT 'Role of the user in the system',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email_address` (`email_address`),
     UNIQUE INDEX `user_name` (`user_name`),
