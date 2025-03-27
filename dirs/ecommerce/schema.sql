@@ -59,6 +59,7 @@ CREATE TABLE `products` (
     `status` varchar(50) NOT NULL DEFAULT 'active' COMMENT 'Current status of the product (e.g., active, inactive)',
     `discount` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Discount amount on the product',
     `discount_end_date` date NULL COMMENT 'Date when the product discount ends',
+    `manufacturer` varchar(255) NOT NULL COMMENT 'Name of the manufacturer of the product',
     PRIMARY KEY (`id`),
     INDEX `category_id` (`category_id`),
     UNIQUE INDEX `product_name` (`product_name`),
