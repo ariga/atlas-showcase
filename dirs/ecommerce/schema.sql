@@ -89,6 +89,7 @@ CREATE TABLE `fulfillment_centers` (
     `id` int NOT NULL COMMENT 'Unique identifier for each fulfillment center',
     `name` varchar(255) NOT NULL COMMENT 'Name of the fulfillment center',
     `location` varchar(255) NOT NULL COMMENT 'Physical location of the fulfillment center',
+    `website_url` varchar(255) NULL COMMENT 'URL of the official website of the fulfillment center',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `name` (`name`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing fulfillment center details for product shipping';
