@@ -2,7 +2,7 @@
 CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
     `user_name` varchar(255) NOT NULL COMMENT 'The username of the user, must be unique',
-    `email_address` varchar(255) NOT NULL,
+    `email` varchar(255) NOT NULL,
     `phone_number` varchar(15) NOT NULL,
     `country_code` varchar(5) NOT NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US',
     `is_admin` bool NULL DEFAULT 0 COMMENT 'Flag indicating if the user is an admin, defaults to false',
@@ -23,11 +23,11 @@ CREATE TABLE `users` (
     `profile_banner_url` varchar(255) NULL COMMENT 'URL to the user profile banner image',
     `roles` ENUM('admin', 'customer', 'seller') NOT NULL DEFAULT 'customer' COMMENT 'Role of the user in the system',
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `email_address` (`email_address`),
+    UNIQUE INDEX `email` (`email`),
     UNIQUE INDEX `user_name` (`user_name`),
     UNIQUE INDEX `phone_number` (`phone_number`),
-    UNIQUE INDEX `user_name_email_address` (`user_name`, `email_address`),
-    CHECK (`email_address` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    UNIQUE INDEX `user_name_email` (`user_name`, `email`),
+    CHECK (`email` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$'),
     CHECK (`last_order_date` IS NULL OR `last_order_date` >= `created_at`),
     CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$'))
