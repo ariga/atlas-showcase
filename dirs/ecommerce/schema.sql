@@ -60,6 +60,7 @@ CREATE TABLE `products` (
     `discount` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Discount amount on the product',
     `discount_end_date` date NULL COMMENT 'Date when the product discount ends',
     `manufacturer` varchar(255) NOT NULL COMMENT 'Name of the manufacturer of the product',
+    `tax_percentage` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Applicable sales tax percentage for the product',
     PRIMARY KEY (`id`),
     INDEX `category_id` (`category_id`),
     UNIQUE INDEX `product_name` (`product_name`),
