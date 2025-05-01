@@ -58,6 +58,7 @@ CREATE TABLE `products` (
     `featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the product is featured, defaults to false',
     `status` varchar(50) NOT NULL DEFAULT 'active' COMMENT 'Current status of the product (e.g., active, inactive)',
     `discount` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Discount amount on the product',
+    `max_discount` decimal(5,2) NOT NULL DEFAULT 20.00 COMMENT 'Maximum allowable discount amount for the product',
     `discount_end_date` date NULL COMMENT 'Date when the product discount ends',
     `manufacturer` varchar(255) NOT NULL COMMENT 'Name of the manufacturer of the product',
     `tax_percentage` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Applicable sales tax percentage for the product',
@@ -65,7 +66,8 @@ CREATE TABLE `products` (
     INDEX `category_id` (`category_id`),
     UNIQUE INDEX `product_name` (`product_name`),
     CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
-    CHECK (`discount` BETWEEN 0.00 AND 100.00)
+    CHECK (`discount` BETWEEN 0.00 AND 100.00),
+    CHECK (`discount` <= `max_discount`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing product details, including pricing and category associations';
 
 -- Create 'product_reviews' table
