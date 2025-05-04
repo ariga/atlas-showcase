@@ -30,7 +30,8 @@ CREATE TABLE `users` (
     CHECK (`email_address` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$'),
     CHECK (`last_order_date` IS NULL OR `last_order_date` >= `created_at`),
-    CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$'))
+    CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')),
+    CHECK (`reward_points` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table storing user information, including authentication and profile details';
 
 -- Create 'categories' table
@@ -183,3 +184,5 @@ CREATE TABLE `payment_methods` (
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+    
