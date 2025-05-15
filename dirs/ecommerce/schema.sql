@@ -63,6 +63,7 @@ CREATE TABLE `products` (
     `discount_end_date` date NULL COMMENT 'Date when the product discount ends',
     `manufacturer` varchar(255) NOT NULL COMMENT 'Name of the manufacturer of the product',
     `tax_percentage` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Applicable sales tax percentage for the product',
+    `tags` varchar(255) NULL COMMENT 'Comma-separated tags for the product',
     PRIMARY KEY (`id`),
     INDEX `category_id` (`category_id`),
     UNIQUE INDEX `product_name` (`product_name`),
@@ -185,3 +186,4 @@ CREATE TABLE `payment_methods` (
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
