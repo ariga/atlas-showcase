@@ -22,6 +22,7 @@ CREATE TABLE `users` (
     `last_order_date` date NULL COMMENT 'Date of the user\'s last order',
     `profile_banner_url` varchar(255) NULL COMMENT 'URL to the user profile banner image',
     `roles` ENUM('admin', 'customer', 'seller') NOT NULL DEFAULT 'customer' COMMENT 'Role of the user in the system',
+    `phone_number_verified_at` timestamp NULL COMMENT 'Timestamp of when the user phone number was verified',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email_address` (`email_address`),
     UNIQUE INDEX `user_name` (`user_name`),
@@ -187,4 +188,3 @@ CREATE TABLE `payment_methods` (
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-
