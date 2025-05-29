@@ -19,7 +19,7 @@ CREATE TABLE `users` (
     `reward_points` int NOT NULL DEFAULT 0 COMMENT 'The number of reward points the user has accumulated',
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
-    `last_order_date` date NULL COMMENT 'Date of the user\'s last order',
+    `last_order_date` date NULL COMMENT 'Date of the users last order',
     `profile_banner_url` varchar(255) NULL DEFAULT 'N/A' COMMENT 'URL to the user profile banner image',
     `roles` ENUM('admin', 'customer', 'seller') NOT NULL DEFAULT 'customer' COMMENT 'Role of the user in the system',
     `phone_number_verified_at` timestamp NULL COMMENT 'Timestamp of when the user phone number was verified',
@@ -44,6 +44,7 @@ CREATE TABLE `categories` (
     `category_code` varchar(100) NOT NULL UNIQUE COMMENT 'Unique code for the category',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the category was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the category record',
+    `status` ENUM('active', 'inactive') NOT NULL DEFAULT 'active' COMMENT 'Current status of the category',
     PRIMARY KEY (`id`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing product categories, facilitating product classification';
 
