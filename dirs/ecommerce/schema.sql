@@ -45,7 +45,8 @@ CREATE TABLE `categories` (
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the category was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the category record',
     `status` ENUM('active', 'inactive') NOT NULL DEFAULT 'active' COMMENT 'Current status of the category',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `category_name` (`category_name`)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing product categories, facilitating product classification';
 
 -- Create 'products' table
