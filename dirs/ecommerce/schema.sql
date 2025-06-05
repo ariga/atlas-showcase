@@ -135,7 +135,7 @@ CREATE TABLE `orders` (
     `order_reference` varchar(100) NULL COMMENT 'Optional reference number for the order',
     `is_featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the order is featured, defaults to false',
     `description` text NULL COMMENT 'Additional details about the order',
-    `order_status` ENUM('pending', 'shipped', 'delivered', 'cancelled', 'returned') NOT NULL DEFAULT 'pending' COMMENT 'Status of the order',
+    `order_status` ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled', 'returned') NOT NULL DEFAULT 'pending' COMMENT 'Status of the order',
     PRIMARY KEY (`id`),
     INDEX `fulfillment_center_id` (`fulfillment_center_id`),
     INDEX `user_id` (`user_id`),
@@ -192,3 +192,4 @@ CREATE TABLE `payment_methods` (
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
