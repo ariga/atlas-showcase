@@ -9,7 +9,7 @@ import (
 // University model
 type University struct {
 	gorm.Model
-	Name            string       `gorm:"type:varchar(200);not null"`
+	Name            string       `gorm:"type:varchar(200);unique;not null"`
 	Location        string       `gorm:"type:varchar(100);not null"`
 	EstablishedDate time.Time    `gorm:"type:date"`
 	Departments     []Department // One-to-Many relationship: A University has many Departments
@@ -18,10 +18,10 @@ type University struct {
 // Department model
 type Department struct {
 	gorm.Model
-	Name             string `gorm:"type:varchar(100);unique;not null"`
-	HeadOfDepartment string `gorm:"type:varchar(100)"`
-	UniversityID     uint
-	University       University `gorm:"constraint:OnDelete:CASCADE;"`
+	Name             string     `gorm:"type:varchar(100);unique;not null"`
+	HeadOfDepartment string     `gorm:"type:varchar(100)"`
+	UniversityID     uint       `gorm:"not null"`
+	University       University `gorm:"constraint:OnDelete:CASCADE"`
 	Students         []Student  // One-to-Many relationship: A Department has many Students
 }
 
