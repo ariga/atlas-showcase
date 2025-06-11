@@ -1,4 +1,4 @@
-name: Django CI
+name: GORM CI
 
 on:
   pull_request:
