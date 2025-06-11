@@ -52,7 +52,7 @@ rule "schema" "unique-non-id-column" {
     match {
       predicate = predicate.table.in
       vars = {
-        names = ["academie_university", "academie_department", "academie_student"]
+        names = ["universities", "departments", "students"]
       }
     }
     assert {
@@ -82,7 +82,7 @@ rule "schema" "foreign-key-not-nullable" {
     match {
       predicate = predicate.table.in
       vars = {
-        names = ["academie_department"]
+        names = ["departments"]
       }
     }
     foreign_key {
@@ -114,7 +114,7 @@ rule "schema" "foreign-key-postfix-id" {
     match {
       predicate = predicate.table.in
       vars = {
-        names = ["academie_department", "academie_student"]
+        names = ["departments", "students"]
       }
     }
     foreign_key {
