@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  lint:
+  schema-lint:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ github.token }}
@@ -21,6 +21,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
+        working-directory: ./projects/django
         run: |
           pip install django atlas-provider-django
       - name: Set up Atlas CLI
@@ -32,6 +33,7 @@ jobs:
       - name: Atlas Schema Lint
         uses: ariga/atlas-action/schema/lint@master
         with:
+          working-directory: ./projects/django
           env: django
           dev-url: 'env://dev'
           url: 'env://url'
