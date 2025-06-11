@@ -34,6 +34,7 @@ jobs:
       - name: Atlas Schema Lint
         uses: ariga/atlas-action/schema/lint@master
         with:
+          working-directory: ./projects/django
           env: django
           dev-url: 'env://dev'
           url: 'env://url'
