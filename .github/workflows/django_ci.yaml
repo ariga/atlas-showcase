@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'projects/django/**'
+      - '.github/workflows/django_ci.yaml'
 
 permissions:
   contents: read
