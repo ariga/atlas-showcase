@@ -18,10 +18,10 @@ type University struct {
 // Department model
 type Department struct {
 	gorm.Model
-	Name             string `gorm:"type:varchar(100);unique;not null"`
-	HeadOfDepartment string `gorm:"type:varchar(100)"`
-	UniversityID     uint
-	University       University `gorm:"constraint:OnDelete:CASCADE;"`
+	Name             string     `gorm:"type:varchar(100);unique;not null"`
+	HeadOfDepartment string     `gorm:"type:varchar(100)"`
+	UniversityID     uint       `gorm:"not null"`
+	University       University `gorm:"constraint:OnDelete:CASCADE"`
 	Students         []Student  // One-to-Many relationship: A Department has many Students
 }
 
