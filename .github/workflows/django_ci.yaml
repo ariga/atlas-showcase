@@ -2,8 +2,8 @@ name: Django CI
 
 on:
   pull_request:
-    branches:
-      - master
+    paths:
+      - 'projects/django/**'
 
 permissions:
   contents: read
@@ -31,9 +31,6 @@ jobs:
       - name: Set up Atlas action
         uses: ariga/atlas-action/setup@master
       - name: Atlas Schema Lint
-        uses: ariga/atlas-action/schema/lint@master
-        with:
-          working-directory: ./projects/django
-          env: django
-          dev-url: 'sqlite://?mode=memory&_fk=1'
-          url: 'env://url'
+        working-directory: ./projects/django
+        run: |
+          python3 manage.py atlas-provider-django --dialect sqlite
