@@ -36,5 +36,5 @@ jobs:
         with:
           working-directory: ./projects/django
           env: django
-          dev-url: 'env://dev'
+          dev-url: 'sqlite://?mode=memory&_fk=1'
           url: 'env://url'
