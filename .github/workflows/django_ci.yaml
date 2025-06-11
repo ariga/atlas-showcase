@@ -31,6 +31,8 @@ jobs:
       - name: Set up Atlas action
         uses: ariga/atlas-action/setup@master
       - name: Atlas Schema Lint
-        working-directory: ./projects/django
-        run: |
-          python3 manage.py atlas-provider-django --dialect sqlite
+        uses: ariga/atlas-action/schema/lint@master
+        with:
+          env: django
+          dev-url: 'env://dev'
+          url: 'env://url'
