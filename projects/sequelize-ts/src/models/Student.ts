@@ -36,7 +36,7 @@ export class Student extends Model {
 
     @ForeignKey(() => Department)
     @Column(DataType.INTEGER)
-    departmentId?: number;
+    departmentLink?: number;
 
     @BelongsTo(() => Department, {
         onDelete: 'SET NULL',
