@@ -166,7 +166,7 @@ CREATE TABLE `posts` (
     `id` int NOT NULL,
     `user_id` int NOT NULL,
     `title` varchar(255) NOT NULL,
-    `body` text NOT NULL,
+    `body` text NOT NULL COMMENT 'The content of the post, must not be empty',
     `last_updated_by` int NULL,
     `created_by` int NOT NULL COMMENT 'User who originally created the post',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the post was created',
