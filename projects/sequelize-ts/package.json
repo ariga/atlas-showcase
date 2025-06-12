@@ -1,0 +1,33 @@
+{
+  "name": "sequelize-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sequelize": "npx sequelize-cli --config sequelize-cli-config.ts",
+    "db:migrate": "ts-node -r tsconfig-paths/register ./node_modules/.bin/sequelize-cli --config sequelize-cli-config.ts db:migrate",
+    "db:create": "ts-node -r tsconfig-paths/register ./node_modules/.bin/sequelize-cli --config sequelize-cli-config.ts db:create",
+    "model:generate": "echo 'Use decorator-based models with sequelize-typescript. No need to generate models with CLI.'",
+    "migration:generate": "ts-node -r tsconfig-paths/register ./node_modules/.bin/sequelize-cli --config sequelize-cli-config.ts migration:generate",
+    "migrate:undo": "ts-node -r tsconfig-paths/register ./node_modules/.bin/sequelize-cli --config sequelize-cli-config.ts db:migrate:undo",
+    "migrate:undo:all": "ts-node -r tsconfig-paths/register ./node_modules/.bin/sequelize-cli --config sequelize-cli-config.ts db:migrate:undo:all",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.1",
+    "@types/sequelize": "^4.28.20",
+    "@types/validator": "^13.15.1",
+    "sequelize-cli": "^6.6.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@ariga/ts-atlas-provider-sequelize": "^0.3.2",
+    "sequelize-typescript": "^2.1.6",
+    "sqlite3": "^5.1.7"
+  }
+}
