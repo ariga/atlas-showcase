@@ -3,7 +3,7 @@ module gorm
 go 1.24.2
 
 require (
-	ariga.io/atlas-provider-gorm v0.5.2
+	ariga.io/atlas-provider-gorm v0.5.3
 	gorm.io/gorm v1.30.0
 )
 
