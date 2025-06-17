@@ -75,7 +75,8 @@ CREATE TABLE `products` (
     UNIQUE INDEX `product_name` (`product_name`),
     CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
     CHECK (`discount` BETWEEN 0.00 AND 100.00),
-    CHECK (`discount` <= `max_discount`)
+    CHECK (`discount` <= `max_discount`),
+    CHECK (`tax_percentage` BETWEEN 0.00 AND 100.00)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing product details, including pricing and category associations';
 
 -- Create 'product_reviews' table
@@ -193,3 +194,4 @@ CREATE TABLE `payment_methods` (
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
