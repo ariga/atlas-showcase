@@ -30,7 +30,7 @@ jobs:
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - name: Set up Atlas action
-        uses: ariga/atlas-action/setup@master
+        uses: ariga/atlas-action/setup@d1655a01682319057d894ec872d6ca4b82cd4eba
       - name: Atlas Schema Lint
         uses: ariga/atlas-action/schema/lint@d1655a01682319057d894ec872d6ca4b82cd4eba
         with:
