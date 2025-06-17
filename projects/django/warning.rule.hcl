@@ -1,3 +1,12 @@
+predicate "table" "in" {
+  variable "names" {
+    type = list(string)
+  }
+  name {
+    in = var.names
+  }
+}
+
 predicate "column" "postfix_id" {
   name {
     match = ".+_id$"
