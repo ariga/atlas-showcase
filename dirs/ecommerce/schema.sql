@@ -194,3 +194,15 @@ CREATE TABLE `payment_methods` (
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
     CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+-- Automatically ensure 'total_amount' in 'orders' matches 'order_items'
+CREATE TRIGGER before_order_check
+BEFORE INSERT ON orders
+FOR EACH ROW
+BEGIN
+  DECLARE order_total DECIMAL(10, 2);
+  SELECT SUM(quantity * price) INTO order_total FROM order_items WHERE order_id = NEW.id;
+  IF NEW.total_amount < order_total THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
+  END IF;
+END;
