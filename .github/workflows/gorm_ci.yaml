@@ -34,3 +34,10 @@ jobs:
           env: gorm
           dev-url: 'sqlite://?mode=memory&_fk=1'
           url: 'env://url'
+      - name: Atlas Schema Plan
+        uses: ariga/atlas-action/schema/plan@v1
+        with:
+          working-directory: ./projects/gorm
+          env: gorm
+          dev-url: 'sqlite://?mode=memory&_fk=1'
+          url: 'env://url'
