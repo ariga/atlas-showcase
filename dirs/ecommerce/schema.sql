@@ -130,6 +130,7 @@ CREATE TABLE `orders` (
     `user_id` int NOT NULL COMMENT 'Foreign key referencing the user who placed the order',
     `fulfillment_center_id` int NOT NULL COMMENT 'Foreign key referencing the fulfillment center for the order',
     `total_amount` decimal(10,2) NOT NULL COMMENT 'Total amount for the order',
+    `shipping_cost` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Shipping cost associated with the order',
     `comment` varchar(100) NULL COMMENT 'Optional comment for the order',
     `status` varchar(50) NOT NULL DEFAULT 'PENDING' COMMENT 'Current status of the order',
     `shipping_address` varchar(255) NOT NULL COMMENT 'Shipping address for the order',
