@@ -1,0 +1,48 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    persistCredentials: true
+    fetchDepth: 0
+    fetchTags: true
+
+  - script: |
+      echo "Configuring git user for commits..."
+      git config user.email "azure-pipelines[bot]@users.noreply.github.com"
+      git config user.name "azure-pipelines[bot]"
+    displayName: 'Configure Git User for Commits'
+
+  - script: curl -sSf https://atlasgo.sh | sh
+    displayName: Install Atlas
+  - script: atlas version
+    displayName: atlas version
+  - script: atlas login --token $(ATLAS_TOKEN)
+    displayName: Atlas Login
+
+  - task: AtlasAction@1
+    inputs:
+      action: 'migrate lint'
+      dir_name: 'azure-demo'
+      config: 'file://atlas.hcl'
+      env: 'pg'
+      githubConnection: 'peter-parker-inc'
+
+  - task: AtlasAction@1
+    inputs:
+      action: 'migrate diff'
+      config: 'file://atlas.hcl'
+      env: 'pg'
+      githubConnection: 'peter-parker-inc'
+
+  - task: AtlasAction@1
+    inputs:
+      action: 'migrate push'
+      dir_name: 'azure-demo'
+      latest: true
+      env: 'pg'
+      githubConnection: 'peter-parker-inc'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
