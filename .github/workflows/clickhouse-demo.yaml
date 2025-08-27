@@ -1,0 +1,58 @@
+name: Plan Declarative Migration
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'sql/**'
+  pull_request:
+    paths:
+      - 'sql/**'
+  workflow_dispatch:
+# Permissions to write comments on the pull request.
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+
+  plan:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      CLICKHOUSE_URL: ${{ secrets.CLICKHOUSE_URL }}
+      CLICKHOUSE_DEV_URL: ${{ secrets.CLICKHOUSE_DEV_URL }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ariga/setup-atlas@v0
+        with:
+          cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
+      - uses: ariga/atlas-action/schema/plan@v1
+        with:
+          env: local
+  push:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      CLICKHOUSE_URL: ${{ secrets.CLICKHOUSE_URL }}
+      CLICKHOUSE_DEV_URL: ${{ secrets.CLICKHOUSE_DEV_URL }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ariga/setup-atlas@v0
+        with:
+          cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
+      - uses: ariga/atlas-action/schema/plan/approve@v1
+        id: plan-approve
+        with:
+          env: local
+      - uses: ariga/atlas-action/schema/push@v1
+        with:
+          env: local
+      - uses: ariga/atlas-action/schema/apply@v1
+        with:
+          env: local

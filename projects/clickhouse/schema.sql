@@ -1,0 +1,2 @@
+-- This file imports all SQL definitions from the sql/ directory
+-- atlas:import sql/main.sql
