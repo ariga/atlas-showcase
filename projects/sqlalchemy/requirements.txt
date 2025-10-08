@@ -1,0 +1,3 @@
+sqlalchemy>=2.0.43
+clickhouse_sqlalchemy>=0.3.2
+atlas-provider-sqlalchemy>=0.4.1
