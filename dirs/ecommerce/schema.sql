@@ -43,7 +43,7 @@ CREATE TABLE `categories` (
     `id` int NOT NULL COMMENT 'Unique identifier for each category',
     `category_name` varchar(255) NOT NULL COMMENT 'The name of the category, must be unique',
     `category_description` text NULL COMMENT 'Description of the category',
-    `category_code` varchar(100) NOT NULL UNIQUE COMMENT 'Unique code for the category',
+    `category_code` char(10) NOT NULL UNIQUE COMMENT 'Unique code for the category of a fixed length',
     `category_image_url` varchar(255) NULL COMMENT 'URL to an image representing the category',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the category was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the category record',
