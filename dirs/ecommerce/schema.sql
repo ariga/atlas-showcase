@@ -67,7 +67,7 @@ CREATE TABLE `products` (
     `thumbnail_url` varchar(255) NULL COMMENT 'URL to the product thumbnail image',
     `featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the product is featured, defaults to false',
     `status` ENUM('active', 'inactive', 'discontinued') NOT NULL DEFAULT 'active' COMMENT 'Status of the product',
-    `discount` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'Discount amount on the product',
+    `discount` decimal(6,2) NOT NULL DEFAULT 0.00 COMMENT 'Discount amount on the product',
     `max_discount` decimal(5,2) NOT NULL DEFAULT 20.00 COMMENT 'Maximum allowable discount amount for the product',
     `discount_end_date` date NULL COMMENT 'Date when the product discount ends',
     `manufacturer` varchar(255) NOT NULL COMMENT 'Name of the manufacturer of the product',
