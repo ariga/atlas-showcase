@@ -58,7 +58,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `products` (
     `id` int NOT NULL COMMENT 'Unique identifier for each product',
     `product_name` varchar(255) NOT NULL COMMENT 'Name of the product',
-    `price` decimal(10,2) NOT NULL COMMENT 'Price of the product',
+    `price` decimal(12,4) NOT NULL COMMENT 'Price of the product',
     `currency_code` char(3) NOT NULL DEFAULT 'USD' COMMENT 'Currency code for the product price',
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
@@ -212,3 +212,5 @@ BEGIN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
   END IF;
 END;
+
+    
