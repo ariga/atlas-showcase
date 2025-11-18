@@ -5,7 +5,7 @@ CREATE TABLE `users` (
     `email_address` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'Email address of the user, now stored case-insensitively',
     `phone_number` varchar(15) NULL COMMENT 'Phone number of the user, now allowed to be NULL',
     `country_code` char(3) NOT NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US',
-    `is_admin` bool NULL DEFAULT 0 COMMENT 'Flag indicating if the user is an admin, defaults to false',
+    `is_admin` tinyint(1) NULL DEFAULT 0 COMMENT 'Flag indicating if the user is an admin, defaults to false',
     `email_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user email address is verified, defaults to false',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the user was created',
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the user record',
