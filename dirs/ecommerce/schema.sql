@@ -1,3 +1,4 @@
+
 -- Create 'users' table
 CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
@@ -58,7 +59,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `products` (
     `id` int NOT NULL COMMENT 'Unique identifier for each product',
     `product_name` varchar(255) NOT NULL COMMENT 'Name of the product',
-    `price` decimal(12,4) NOT NULL COMMENT 'Price of the product',
+    `price` decimal(12,2) NOT NULL COMMENT 'Price of the product',
     `currency_code` char(3) NOT NULL DEFAULT 'USD' COMMENT 'Currency code for the product price',
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
