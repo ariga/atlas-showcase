@@ -31,7 +31,7 @@ CREATE TABLE `users` (
     UNIQUE INDEX `user_name_email_address` (`user_name`, `email_address`),
     UNIQUE INDEX `country_code_phone_number` (`country_code`, `phone_number`),
     INDEX `last_login` (`last_login`),
-    CHECK (`email_address` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\c.[a-zA-Z]{2,}$'),
+    CHECK (`email_address` REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\x{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$' OR `phone_number` IS NULL),
     CHECK (`last_order_date` IS NULL OR `last_order_date` >= `created_at`),
     CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')),
@@ -59,7 +59,7 @@ CREATE TABLE `products` (
     `id` int NOT NULL COMMENT 'Unique identifier for each product',
     `product_name` varchar(255) NOT NULL COMMENT 'Name of the product',
     `price` decimal(12,2) NOT NULL COMMENT 'Price of the product',
-    `currency_code` char(3) NOT NULL DEFAULT 'USD' COMMENT 'Currency code for the product price',
+    `currency_code` char(3) NULL DEFAULT '' COMMENT 'Currency code for the product price, can be NULL, empty by default',
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
     `color` varchar(50) NULL COMMENT 'Color of the product, optional',
@@ -212,3 +212,4 @@ BEGIN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
   END IF;
 END;
+
