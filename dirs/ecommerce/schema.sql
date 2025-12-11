@@ -59,7 +59,7 @@ CREATE TABLE `products` (
     `id` int NOT NULL COMMENT 'Unique identifier for each product',
     `product_name` varchar(255) NOT NULL COMMENT 'Name of the product',
     `price` decimal(12,2) NOT NULL COMMENT 'Price of the product',
-    `currency_code` char(3) NULL DEFAULT '' COMMENT 'Currency code for the product price, can be NULL, empty by default',
+    `currency_code` char(3) NOT NULL DEFAULT 'USD' COMMENT 'Currency code for the product price, set to USD by default',
     `category_id` int NULL COMMENT 'Foreign key referencing categories',
     `description` text NULL COMMENT 'Description of the product',
     `color` varchar(50) NULL COMMENT 'Color of the product, optional',
