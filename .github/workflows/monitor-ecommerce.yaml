@@ -34,7 +34,7 @@ jobs:
       # The next steps are the only ones required to monitor schema changes.
       - name: Setup Atlas
         uses: ariga/setup-atlas@master
-      - uses: ariga/atlas-action/monitor/schema@master
+      - uses: ariga/atlas-action/monitor/schema@v1
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
           url: mysql://${{ steps.secrets.outputs.username }}:${{ steps.secrets.outputs.password }}@ecommerce.atlas.ariga:3306/${{ steps.secrets.outputs.schema }}
