@@ -1,4 +1,4 @@
-        -- Create 'users' table
+-- Create 'users' table
 CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
     `user_name` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'The username of the user, must be unique',
@@ -138,7 +138,7 @@ CREATE TABLE `orders` (
     `status` varchar(50) NOT NULL DEFAULT 'PENDING' COMMENT 'Current status of the order',
     `shipping_address` varchar(255) NOT NULL COMMENT 'Shipping address for the order',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the order was created',
-    `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
+    `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
     `order_reference` varchar(255) NULL COMMENT 'Optional reference number for the order',
     `is_featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the order is featured, defaults to false',
     `description` text NULL COMMENT 'Additional details about the order',
@@ -212,5 +212,3 @@ BEGIN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
   END IF;
 END;
-
-        
