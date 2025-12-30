@@ -16,7 +16,7 @@ CREATE TABLE `users` (
     `last_login` timestamp NULL COMMENT 'Timestamp of the last login of the user',
     `address` varchar(255) NOT NULL COMMENT 'Address of the user, now required',
     `profile_picture_url` varchar(255) NULL COMMENT 'URL to the user profile picture',
-    `reward_points` int unsigned NOT NULL DEFAULT 0 COMMENT 'The number of reward points the user has accumulated',
+    `reward_points` bigint unsigned NOT NULL DEFAULT 0 COMMENT 'The number of reward points the user has accumulated',
     `phone_verified` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user phone number is verified, defaults to false',
     `deleted_at` timestamp NULL COMMENT 'Timestamp for soft deletion of the user record',
     `last_order_date` date NULL COMMENT 'Date of the users last order',
