@@ -307,7 +307,8 @@ CREATE TABLE "public"."groups" (
   "quota_allowance" integer NOT NULL DEFAULT 0,
   PRIMARY KEY ("id"),
   CONSTRAINT "groups_name_organization_id_key" UNIQUE ("name", "organization_id"),
-  CONSTRAINT "groups_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "groups_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "groups_quota_allowance_non_negative" CHECK (quota_allowance >= 0)
 );
 -- Create "group_members" table
 CREATE TABLE "public"."group_members" (
