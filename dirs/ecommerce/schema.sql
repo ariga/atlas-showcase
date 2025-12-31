@@ -202,6 +202,7 @@ CREATE TABLE `payment_methods` (
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Automatically ensure 'total_amount' in 'orders' matches 'order_items'
+DELIMITER $$
 CREATE TRIGGER before_order_check
 BEFORE INSERT ON orders
 FOR EACH ROW
@@ -211,4 +212,15 @@ BEGIN
   IF NEW.total_amount < order_total THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
   END IF;
-END;
+END$$
+DELIMITER ;
+
+-- Ensure users.updated_at is always set on updates (and does not go backwards)
+DELIMITER $$
+CREATE TRIGGER users_set_updated_at
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+  SET NEW.updated_at = GREATEST(COALESCE(NEW.updated_at, CURRENT_TIMESTAMP), COALESCE(OLD.updated_at, '1970-01-01 00:00:01'), CURRENT_TIMESTAMP);
+END$$
+DELIMITER ;
