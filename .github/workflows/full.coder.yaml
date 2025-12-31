@@ -1,0 +1,55 @@
+name: Atlas CI Coder (PostgreSQL)
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "dirs/coder/migrations/*"
+jobs:
+  atlas:
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: dev
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-start-period 10s
+          --health-timeout 5s
+          --health-retries 10
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Atlas
+        uses: ariga/setup-atlas@v0
+        with:
+          cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
+      - name: Lint
+        uses: ariga/atlas-action/migrate/lint@v1
+        if: github.ref != 'refs/heads/master'
+        with:
+          dir: file://dirs/coder/migrations
+          dir-name: ariga-atlas-showcase-dirs-coder-migrations
+          dev-url: postgres://postgres:pass@localhost:5432/dev?sslmode=disable
+      - name: Push
+        if: github.ref == 'refs/heads/master'
+        uses: ariga/atlas-action/migrate/push@v1
+        with:
+          dir: file://dirs/coder/migrations
+          dir-name: ariga-atlas-showcase-dirs-coder-migrations
+          dev-url: postgres://postgres:pass@localhost:5432/dev?sslmode=disable
+          tag: ${{ github.sha }}
+
