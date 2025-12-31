@@ -688,7 +688,8 @@ CREATE TABLE "public"."workspaces" (
   PRIMARY KEY ("id"),
   CONSTRAINT "workspaces_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "workspaces_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
-  CONSTRAINT "workspaces_template_id_fkey" FOREIGN KEY ("template_id") REFERENCES "public"."templates" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT
+  CONSTRAINT "workspaces_template_id_fkey" FOREIGN KEY ("template_id") REFERENCES "public"."templates" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
+  CONSTRAINT "workspaces_ttl_non_negative" CHECK (ttl IS NULL OR ttl >= 0)
 );
 -- Create index "workspaces_owner_id_lower_idx" to table: "workspaces"
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);
