@@ -99,7 +99,8 @@ CREATE TABLE "public"."api_keys" (
   "scope" "public"."api_key_scope" NOT NULL DEFAULT 'all',
   "token_name" text NOT NULL DEFAULT '',
   PRIMARY KEY ("id"),
-  CONSTRAINT "api_keys_user_id_uuid_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "api_keys_user_id_uuid_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "api_keys_lifetime_seconds_non_negative" CHECK (lifetime_seconds >= 0)
 );
 -- Create index "idx_api_key_name" to table: "api_keys"
 CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token_name") WHERE (login_type = 'token'::public.login_type);
@@ -621,7 +622,7 @@ COMMENT ON COLUMN "public"."workspace_agents"."expanded_directory" IS 'The resol
 -- Set comment to column: "shutdown_script" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."shutdown_script" IS 'Script that is executed before the agent is stopped.';
 -- Set comment to column: "shutdown_script_timeout_seconds" on table: "workspace_agents"
-COMMENT ON COLUMN "public"."workspace_agents"."shutdown_script_timeout_seconds" IS 'The number of seconds to wait for the shutdown script to complete. If the script does not complete within this time, the agent lifecycle will be marked as shutdown_timeout.';
+COMMENT ON COLUMN "public"."workspace_agents"."shutdown_script_timeout_seconds" IS 'The number of seconds to wait for the shutdown script to complete within this time, the agent lifecycle will be marked as shutdown_timeout.';
 -- Set comment to column: "startup_logs_length" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."startup_logs_length" IS 'Total length of startup logs';
 -- Set comment to column: "startup_logs_overflowed" on table: "workspace_agents"
