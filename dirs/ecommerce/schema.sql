@@ -198,7 +198,8 @@ CREATE TABLE `payment_methods` (
     PRIMARY KEY (`id`),
     INDEX `user_id` (`user_id`),
     UNIQUE INDEX `user_card_number` (`user_id`, `card_number`),
-    CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+    CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+    CHECK (`card_number` REGEXP '^[0-9]{12,20}$')
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Automatically ensure 'total_amount' in 'orders' matches 'order_items'
