@@ -70,8 +70,7 @@ CREATE UNIQUE INDEX "idx_users_email" ON "public"."users" ("email") WHERE (delet
 CREATE UNIQUE INDEX "idx_users_username" ON "public"."users" ("username") WHERE (deleted = false);
 -- Create index "users_email_lower_idx" to table: "users"
 CREATE UNIQUE INDEX "users_email_lower_idx" ON "public"."users" ((lower(email))) WHERE (deleted = false);
--- Create index "users_username_lower_idx" to table: "users"
-CREATE UNIQUE INDEX "users_username_lower_idx" ON "public"."users" ((lower(username))) WHERE (deleted = false);
+-- NOTE: Destructive change applied: removed duplicate index "users_username_lower_idx"
 -- Create "insert_apikey_fail_if_user_deleted" function
 CREATE FUNCTION "public"."insert_apikey_fail_if_user_deleted" () RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE
