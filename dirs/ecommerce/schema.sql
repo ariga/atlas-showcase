@@ -11,7 +11,7 @@ CREATE TABLE `users` (
     `updated_at` timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the user record',
     `date_of_birth` datetime NOT NULL DEFAULT '1900-01-01 00:00:00' COMMENT 'Date of birth of the user',
     `gender` ENUM('male', 'female', 'other') NULL DEFAULT 'other' COMMENT 'User gender',
-    `middle_name` varchar(255) NOT NULL COMMENT 'Middle name of the user, now required',
+    `middle_name` varchar(255) NULL COMMENT 'Middle name of the user, now optional',
     `active` bool NOT NULL DEFAULT 1 COMMENT 'Flag indicating if the user account is active, defaults to true',
     `last_login` timestamp NULL COMMENT 'Timestamp of the last login of the user',
     `address` varchar(255) NOT NULL COMMENT 'Address of the user, now required',
