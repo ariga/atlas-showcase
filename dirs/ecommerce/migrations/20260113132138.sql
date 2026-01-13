@@ -1,0 +1,2 @@
+-- Modify "orders" table
+ALTER TABLE `orders` ADD INDEX `user_id_created_at` (`user_id`, `created_at`);
