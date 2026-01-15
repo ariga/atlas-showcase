@@ -226,3 +226,15 @@ BEGIN
   SET NEW.updated_at = GREATEST(COALESCE(NEW.updated_at, CURRENT_TIMESTAMP), COALESCE(OLD.updated_at, '1970-01-01 00:00:01'), CURRENT_TIMESTAMP);
 END$$
 DELIMITER ;
+
+-- NEW: When a user verifies their email, set last_login if it is not already set
+DELIMITER $$
+CREATE TRIGGER users_set_last_login_on_email_verification
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+  IF OLD.email_verified = 0 AND NEW.email_verified = 1 AND NEW.last_login IS NULL THEN
+    SET NEW.last_login = CURRENT_TIMESTAMP;
+  END IF;
+END$$
+DELIMITER ;
