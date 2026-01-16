@@ -88,7 +88,7 @@ CREATE TABLE "public"."api_keys" (
   "id" text NOT NULL,
   "hashed_secret" bytea NOT NULL,
   "user_id" uuid NOT NULL,
-  "last_used" timestamptz NOT NULL,
+  "last_used_at" timestamptz NOT NULL,
   "expires_at" timestamptz NOT NULL,
   "created_at" timestamptz NOT NULL,
   "updated_at" timestamptz NOT NULL,
