@@ -62,6 +62,7 @@ CREATE TABLE "public"."users" (
   "last_seen_at" timestamp NOT NULL DEFAULT '0001-01-01 00:00:00',
   PRIMARY KEY ("id"),
   CONSTRAINT "users_email_no_surrounding_whitespace" CHECK (email = btrim(email)),
+  CONSTRAINT "users_email_not_empty" CHECK (length(btrim(email)) > 0),
   CONSTRAINT "users_username_no_surrounding_whitespace" CHECK (username = btrim(username))
 );
 -- Create index "idx_users_email" to table: "users"
