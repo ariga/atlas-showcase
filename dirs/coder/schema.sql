@@ -558,7 +558,8 @@ CREATE TABLE "public"."workspace_resources" (
   "instance_type" character varying(256) NULL,
   "daily_cost" integer NOT NULL DEFAULT 0,
   PRIMARY KEY ("id"),
-  CONSTRAINT "workspace_resources_job_id_fkey" FOREIGN KEY ("job_id") REFERENCES "public"."provisioner_jobs" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "workspace_resources_job_id_fkey" FOREIGN KEY ("job_id") REFERENCES "public"."provisioner_jobs" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "workspace_resources_daily_cost_non_negative" CHECK (daily_cost >= 0)
 );
 -- Create index "workspace_resources_job_id_idx" to table: "workspace_resources"
 CREATE INDEX "workspace_resources_job_id_idx" ON "public"."workspace_resources" ("job_id");
