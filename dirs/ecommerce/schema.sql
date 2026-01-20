@@ -151,6 +151,7 @@ CREATE TABLE `orders` (
     INDEX `order_status` (`order_status`),
     INDEX `user_id_created_at` (`user_id`, `created_at`),
     INDEX `user_id_order_status` (`user_id`, `order_status`),
+    INDEX `fulfillment_center_id_created_at` (`fulfillment_center_id`, `created_at`),
     CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CHECK (`total_amount` >= 0)
