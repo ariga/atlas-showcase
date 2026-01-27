@@ -31,6 +31,7 @@ CREATE TABLE `users` (
     UNIQUE INDEX `user_name_email_address` (`user_name`, `email_address`),
     UNIQUE INDEX `country_code_phone_number` (`country_code`, `phone_number`),
     INDEX `last_login` (`last_login`),
+    INDEX `users_email_address_lower` ((LOWER(`email_address`))),
     CHECK (`email_address` REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$' OR `phone_number` IS NULL),
     CHECK (`last_order_date` IS NULL OR `last_order_date` >= `created_at`),
