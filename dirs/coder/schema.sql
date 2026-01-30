@@ -63,6 +63,7 @@ CREATE TABLE "public"."users" (
   PRIMARY KEY ("id"),
   CONSTRAINT "users_email_no_surrounding_whitespace" CHECK (email = btrim(email)),
   CONSTRAINT "users_email_not_empty" CHECK (length(btrim(email)) > 0),
+  CONSTRAINT "users_email_lowercase_only" CHECK (email = lower(email)),
   CONSTRAINT "users_username_no_surrounding_whitespace" CHECK (username = btrim(username)),
   CONSTRAINT "users_username_not_empty" CHECK (length(btrim(username)) > 0),
   CONSTRAINT "users_username_lowercase_only" CHECK (username = lower(username)),
