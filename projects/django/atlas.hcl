@@ -13,7 +13,11 @@ env "django" {
 }
 
 lint {
-  rule "hcl" "name" {
-    src = [ "atlas.rule.hcl" ]
+  rule "hcl" "error" {
+    error = true
+    src = [ "error.rule.hcl" ]
+  }
+  rule "hcl" "warning" {
+    src = [ "warning.rule.hcl" ]
   }
 }
