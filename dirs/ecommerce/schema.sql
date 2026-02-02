@@ -244,3 +244,11 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
+
+-- Create a role and user for analytics
+CREATE ROLE 'ecommerce_reader';
+GRANT SELECT ON ecommerce.* TO 'ecommerce_reader';
+CREATE USER 'shop_analyst'@'localhost' IDENTIFIED BY 'some-password';
+GRANT 'ecommerce_reader' TO 'shop_analyst'@'localhost';
+SET DEFAULT ROLE 'ecommerce_reader' TO 'shop_analyst'@'localhost';
+FLUSH PRIVILEGES;
