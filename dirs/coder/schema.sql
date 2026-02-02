@@ -678,7 +678,8 @@ CREATE TABLE "public"."workspace_apps" (
   "external" boolean NOT NULL DEFAULT false,
   PRIMARY KEY ("id"),
   CONSTRAINT "workspace_apps_agent_id_slug_idx" UNIQUE ("agent_id", "slug"),
-  CONSTRAINT "workspace_apps_agent_id_fkey" FOREIGN KEY ("agent_id") REFERENCES "public"."workspace_agents" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "workspace_apps_agent_id_fkey" FOREIGN KEY ("agent_id") REFERENCES "public"."workspace_agents" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "workspace_apps_healthcheck_interval_non_negative" CHECK (healthcheck_interval >= 0)
 );
 -- Create "workspaces" table
 CREATE TABLE "public"."workspaces" (
