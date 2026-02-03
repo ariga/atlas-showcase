@@ -244,19 +244,3 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
-
--- Create a role and user for analytics
-CREATE ROLE 'ecommerce_reader';
-GRANT SELECT ON ecommerce.* TO 'ecommerce_reader';
-CREATE USER 'shop_analyst'@'localhost' IDENTIFIED BY 'some-password';
-GRANT 'ecommerce_reader' TO 'shop_analyst'@'localhost';
-SET DEFAULT ROLE 'ecommerce_reader' TO 'shop_analyst'@'localhost';
-
--- NEW: Create a role and user for limited insert access (table-level)
-CREATE ROLE 'ecommerce_inserter';
-GRANT INSERT ON `product_reviews` TO 'ecommerce_inserter';
-CREATE USER 'shop_ingester'@'localhost' IDENTIFIED BY 'some-password-2';
-GRANT 'ecommerce_inserter' TO 'shop_ingester'@'localhost';
-SET DEFAULT ROLE 'ecommerce_inserter' TO 'shop_ingester'@'localhost';
-
-FLUSH PRIVILEGES;
