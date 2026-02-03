@@ -1,11 +1,5 @@
 env "local" {
-  schema {
-    src = "file://schema.sql"
-    mode {
-      roles       = true
-      permissions = true
-    }
-  }
+  src = "file://schema.sql"
   dev = "docker://mysql/8/dev"
   migration {
     dir = "file://migrations"
