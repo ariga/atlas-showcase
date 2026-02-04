@@ -41,6 +41,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: ariga/atlas-action/schema/push@v1
         with:
+          url: file://dirs/rbac/schema.sql
           schema-name: database-security-as-code
           dev-url: postgres://postgres:pass@localhost:5432/dev?sslmode=disable
           tag: ${{ github.sha }}
