@@ -142,6 +142,8 @@ CREATE INDEX "idx_audit_log_resource_id" ON "public"."audit_logs" ("resource_id"
 CREATE INDEX "idx_audit_log_user_id" ON "public"."audit_logs" ("user_id");
 -- Create index "idx_audit_logs_time_desc" to table: "audit_logs"
 CREATE INDEX "idx_audit_logs_time_desc" ON "public"."audit_logs" ("time" DESC);
+-- Create index "idx_audit_logs_org_time_desc" to table: "audit_logs"
+CREATE INDEX "idx_audit_logs_org_time_desc" ON "public"."audit_logs" ("organization_id", "time" DESC);
 -- Create "files" table
 CREATE TABLE "public"."files" (
   "hash" character varying(64) NOT NULL,
