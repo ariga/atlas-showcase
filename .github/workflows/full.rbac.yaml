@@ -5,7 +5,8 @@ on:
       - master
   pull_request:
     paths:
-      - "dirs/rbac/migrations/*"
+      - "dirs/rbac/*"
+      - ".github/workflows/full.rbac.yaml"
 jobs:
   atlas:
     permissions:
@@ -41,7 +42,8 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: ariga/atlas-action/schema/push@v1
         with:
-          url: file://dirs/rbac/schema.sql
+          working-directory: dirs/rbac
           schema-name: database-security-as-code
           dev-url: postgres://postgres:pass@localhost:5432/dev?sslmode=disable
           tag: ${{ github.sha }}
+          env: local
