@@ -159,7 +159,8 @@ CREATE TABLE `orders` (
     INDEX `orders_user_id_created_at` (`user_id`, `created_at`),
     CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-    CHECK (`total_amount` >= 0)
+    CHECK (`total_amount` >= 0),
+    CHECK (`shipping_cost` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing orders placed by users';
 
 -- Create 'order_items' table
