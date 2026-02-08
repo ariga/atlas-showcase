@@ -98,6 +98,7 @@ CREATE TABLE `product_reviews` (
     INDEX `user_id` (`user_id`),
     UNIQUE INDEX `user_product_review` (`user_id`, `product_id`),
     INDEX `product_id_user_id` (`product_id`, `user_id`),
+    INDEX `product_reviews_order_items_lookup` (`product_id`, `user_id`),
     CONSTRAINT `product_reviews_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `product_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CHECK (`rating` BETWEEN 1 AND 5)
