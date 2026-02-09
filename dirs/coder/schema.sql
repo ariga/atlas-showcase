@@ -49,7 +49,7 @@ CREATE TYPE "public"."user_status" AS ENUM ('active', 'suspended');
 -- Create "users" table
 CREATE TABLE "public"."users" (
   "id" uuid NOT NULL,
-  "email" text NOT NULL,
+  "email_address" text NOT NULL,
   "username" text NOT NULL DEFAULT '',
   "hashed_password" bytea NOT NULL,
   "created_at" timestamptz NOT NULL,
@@ -61,9 +61,9 @@ CREATE TABLE "public"."users" (
   "deleted" boolean NOT NULL DEFAULT false,
   "last_seen_at" timestamp NOT NULL DEFAULT '0001-01-01 00:00:00',
   PRIMARY KEY ("id"),
-  CONSTRAINT "users_email_no_surrounding_whitespace" CHECK (email = btrim(email)),
-  CONSTRAINT "users_email_not_empty" CHECK (length(btrim(email)) > 0),
-  CONSTRAINT "users_email_lowercase_only" CHECK (email = lower(email)),
+  CONSTRAINT "users_email_no_surrounding_whitespace" CHECK (email_address = btrim(email_address)),
+  CONSTRAINT "users_email_not_empty" CHECK (length(btrim(email_address)) > 0),
+  CONSTRAINT "users_email_lowercase_only" CHECK (email_address = lower(email_address)),
   CONSTRAINT "users_username_no_surrounding_whitespace" CHECK (username = btrim(username)),
   CONSTRAINT "users_username_not_empty" CHECK (length(btrim(username)) > 0),
   CONSTRAINT "users_username_lowercase_only" CHECK (username = lower(username)),
@@ -71,11 +71,11 @@ CREATE TABLE "public"."users" (
   CONSTRAINT "users_last_seen_at_not_in_future" CHECK (last_seen_at <= (now() AT TIME ZONE 'UTC'))
 );
 -- Create index "idx_users_email" to table: "users"
-CREATE UNIQUE INDEX "idx_users_email" ON "public"."users" ("email") WHERE (deleted = false);
+CREATE UNIQUE INDEX "idx_users_email" ON "public"."users" ("email_address") WHERE (deleted = false);
 -- Create index "idx_users_username" to table: "users"
 CREATE UNIQUE INDEX "idx_users_username" ON "public"."users" ("username") WHERE (deleted = false);
 -- Create index "users_email_lower_idx" to table: "users"
-CREATE UNIQUE INDEX "users_email_lower_idx" ON "public"."users" ((lower(email))) WHERE (deleted = false);
+CREATE UNIQUE INDEX "users_email_lower_idx" ON "public"."users" ((lower(email_address))) WHERE (deleted = false);
 -- NOTE: Destructive change applied: removed duplicate index "users_username_lower_idx"
 -- Create "insert_apikey_fail_if_user_deleted" function
 CREATE FUNCTION "public"."insert_apikey_fail_if_user_deleted" () RETURNS trigger LANGUAGE plpgsql AS $$
