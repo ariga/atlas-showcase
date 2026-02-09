@@ -32,13 +32,13 @@ CREATE TYPE "public"."user_status" AS ENUM ('active', 'inactive', 'suspended');
 -- Create "users" table
 CREATE TABLE "public"."users" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
-  "email_address" text NOT NULL,
+  "email" text NOT NULL,
   "username" text NOT NULL,
   "status" "public"."user_status" NOT NULL DEFAULT 'active',
   "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
-  CONSTRAINT "users_email_unique" UNIQUE ("email_address"),
+  CONSTRAINT "users_email_unique" UNIQUE ("email"),
   CONSTRAINT "users_username_unique" UNIQUE ("username")
 );
 
