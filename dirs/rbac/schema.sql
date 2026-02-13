@@ -141,6 +141,6 @@ GRANT SELECT ON TABLE "public"."projects" TO analyst_role;
 GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
-GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
+-- (removed) GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users and employees for audit context
 REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
