@@ -156,7 +156,7 @@ CREATE TABLE `orders` (
     INDEX `user_id_order_status` (`user_id`, `order_status`),
     INDEX `user_id_order_status_created_at` (`user_id`, `order_status`, `created_at`),
     INDEX `fulfillment_center_id_created_at` (`fulfillment_center_id`, `created_at`),
-    INDEX `order_reference` (`order_reference`),
+    INDEX `order_reference` ((IFNULL(`order_reference`, ''))),
     INDEX `orders_user_id_created_at` (`user_id`, `created_at`),
     INDEX `orders_user_id_order_reference` (`user_id`, `order_reference`),
     CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
