@@ -51,7 +51,7 @@ CREATE TABLE "public"."users" (
   "id" uuid NOT NULL,
   "email" text NOT NULL,
   "username" text NOT NULL DEFAULT '',
-  "hashed_password" bytea NOT NULL,
+  "password_hash" bytea NOT NULL,
   "created_at" timestamptz NOT NULL,
   "updated_at" timestamptz NOT NULL,
   "status" "public"."user_status" NOT NULL DEFAULT 'active',
