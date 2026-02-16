@@ -38,9 +38,12 @@ CREATE TABLE "public"."users" (
   "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
-  CONSTRAINT "users_email_unique" UNIQUE ("email"),
-  CONSTRAINT "users_username_unique" UNIQUE ("username")
+  CONSTRAINT "users_username_unique" UNIQUE ("username"),
+  CONSTRAINT "users_email_lowercase_chk" CHECK ("email" = lower("email"))
 );
+
+-- Enforce case-insensitive email uniqueness (replaces users_email_unique)
+CREATE UNIQUE INDEX "users_email_unique" ON "public"."users" (lower("email"));
 
 -- Create "departments" table
 CREATE TABLE "public"."departments" (
