@@ -609,7 +609,8 @@ CREATE TABLE "public"."workspace_agents" (
   "subsystem" "public"."workspace_agent_subsystem" NOT NULL DEFAULT 'none',
   PRIMARY KEY ("id"),
   CONSTRAINT "workspace_agents_resource_id_fkey" FOREIGN KEY ("resource_id") REFERENCES "public"."workspace_resources" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT "max_startup_logs_length" CHECK (startup_logs_length <= 1048576)
+  CONSTRAINT "max_startup_logs_length" CHECK (startup_logs_length <= 1048576),
+  CONSTRAINT "workspace_agents_connection_timeout_seconds_non_negative" CHECK (connection_timeout_seconds >= 0)
 );
 -- Create index "workspace_agents_auth_token_idx" to table: "workspace_agents"
 CREATE INDEX "workspace_agents_auth_token_idx" ON "public"."workspace_agents" ("auth_token");
