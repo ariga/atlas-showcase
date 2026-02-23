@@ -147,4 +147,3 @@ GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
 GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users and employees for audit context
 GRANT SELECT ON TABLE "public"."users" TO auditor_role;
-REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
