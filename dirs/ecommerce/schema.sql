@@ -1,6 +1,6 @@
 -- Create 'users' table
 CREATE TABLE `users` (
-    `id` int NOT NULL COMMENT 'Unique identifier for each user',
+    `id` int NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for each user',
     `user_name` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'The username of the user, must be unique',
     `email_address` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'Email address of the user, now stored case-insensitively',
     `phone_number` varchar(15) NULL COMMENT 'Phone number of the user, now allowed to be NULL',
