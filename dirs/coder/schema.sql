@@ -104,7 +104,8 @@ CREATE TABLE "public"."api_keys" (
   "token_name" text NOT NULL DEFAULT '',
   PRIMARY KEY ("id"),
   CONSTRAINT "api_keys_user_id_uuid_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT "api_keys_lifetime_seconds_non_negative" CHECK (lifetime_seconds >= 0)
+  CONSTRAINT "api_keys_lifetime_seconds_non_negative" CHECK (lifetime_seconds >= 0),
+  CONSTRAINT "api_keys_expires_at_not_before_created_at" CHECK (expires_at >= created_at)
 );
 -- Create index "idx_api_key_name" to table: "api_keys"
 CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token_name") WHERE (login_type = 'token'::public.login_type);
