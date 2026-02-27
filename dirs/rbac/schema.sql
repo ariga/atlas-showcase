@@ -118,7 +118,7 @@ GRANT USAGE ON SCHEMA "public" TO readonly_role;
 GRANT USAGE ON SCHEMA "public" TO readwrite_role;
 GRANT USAGE ON SCHEMA "public" TO admin_role;
 GRANT USAGE ON SCHEMA "public" TO analyst_role;
-GRANT USAGE ON SCHEMA "public" TO auditor_role;
+REVOKE USAGE ON SCHEMA "public" FROM auditor_role;
 
 -- Database-level permissions: Read-only access
 GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO readonly_role;
