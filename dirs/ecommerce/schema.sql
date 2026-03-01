@@ -143,7 +143,7 @@ CREATE TABLE `orders` (
     `shipping_address` varchar(255) NOT NULL COMMENT 'Shipping address for the order',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the order was created',
     `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
-    `order_reference` varchar(255) NULL COMMENT 'Optional reference number for the order',
+    `order_reference` varchar(255) NOT NULL COMMENT 'Optional reference number for the order',
     `is_featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the order is featured, defaults to false',
     `description` text NULL COMMENT 'Additional details about the order',
     `order_status` ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled', 'returned') NOT NULL DEFAULT 'pending' COMMENT 'Status of the order',
