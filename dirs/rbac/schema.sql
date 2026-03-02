@@ -137,8 +137,8 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA "public" TO admin_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT ALL PRIVILEGES ON SEQUENCES TO admin_role;
 
 -- Database-level permissions: Analyst access (read-only + specific tables)
-GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO analyst_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT ON TABLES TO analyst_role;
+REVOKE SELECT ON ALL TABLES IN SCHEMA "public" FROM analyst_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA "public" REVOKE SELECT ON TABLES FROM analyst_role;
 -- Grant additional access to projects and project_assignments for analysis
 GRANT SELECT ON TABLE "public"."projects" TO analyst_role;
 GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
