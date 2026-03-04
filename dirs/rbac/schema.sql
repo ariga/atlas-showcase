@@ -65,7 +65,8 @@ CREATE TABLE "public"."employees" (
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "employees_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT "employees_department_id_fkey" FOREIGN KEY ("department_id") REFERENCES "public"."departments" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT
+  CONSTRAINT "employees_department_id_fkey" FOREIGN KEY ("department_id") REFERENCES "public"."departments" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
+  CONSTRAINT "employees_salary_positive_chk" CHECK ("salary" > 0)
 );
 
 -- Create "projects" table
