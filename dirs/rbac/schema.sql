@@ -74,7 +74,7 @@ CREATE TABLE "public"."projects" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "name" text NOT NULL,
   "description" text NULL,
-  "budget" numeric(12,2) NULL,
+  "budget" numeric(12,2) NOT NULL,
   "start_date" date NOT NULL,
   "end_date" date NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
