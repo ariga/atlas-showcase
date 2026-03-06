@@ -712,6 +712,8 @@ CREATE TABLE "public"."workspaces" (
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);
 -- Create index "workspaces_organization_id_idx" to table: "workspaces"
 CREATE INDEX "workspaces_organization_id_idx" ON "public"."workspaces" ("organization_id");
+-- Create index "workspaces_org_active_idx" to table: "workspaces"
+CREATE INDEX "workspaces_org_active_idx" ON "public"."workspaces" ("organization_id") WHERE (deleted = false);
 -- Create "workspace_builds" table
 CREATE TABLE "public"."workspace_builds" (
   "id" uuid NOT NULL,
