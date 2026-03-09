@@ -78,7 +78,8 @@ CREATE TABLE "public"."projects" (
   "start_date" date NOT NULL,
   "end_date" date NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  CONSTRAINT "projects_end_date_after_start_date_chk" CHECK ("end_date" IS NULL OR "end_date" >= "start_date")
 );
 
 -- Create "project_assignments" table
