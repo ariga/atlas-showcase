@@ -13,7 +13,7 @@ CREATE USER app_auditor WITH PASSWORD 'auditor_password';
 -- Database-level objects: Roles
 CREATE ROLE readonly_role;
 CREATE ROLE readwrite_role;
-CREATE ROLE admin_role with CREATEDB;
+CREATE ROLE admin_role; -- removed CREATEDB for least privilege
 CREATE ROLE analyst_role with BYPASSRLS;
 CREATE ROLE auditor_role;
 CREATE ROLE all_attributes with CREATEDB CREATEROLE INHERIT LOGIN REPLICATION BYPASSRLS;
