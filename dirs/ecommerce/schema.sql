@@ -170,7 +170,6 @@ CREATE TABLE `orders` (
 
 -- Create 'order_items' table
 CREATE TABLE `order_items` (
-    `id` int NOT NULL COMMENT 'Unique identifier for each order item',
     `order_id` int NOT NULL COMMENT 'Foreign key referencing the order',
     `product_id` int NOT NULL COMMENT 'Foreign key referencing the product',
     `quantity` int NOT NULL COMMENT 'Quantity of the product in the order',
