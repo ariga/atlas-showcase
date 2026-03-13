@@ -119,7 +119,7 @@ CREATE TRIGGER "trigger_insert_apikeys" BEFORE INSERT ON "public"."api_keys" FOR
 -- Create "audit_logs" table
 CREATE TABLE "public"."audit_logs" (
   "id" uuid NOT NULL,
-  "time" timestamptz NOT NULL,
+  "occurred_at" timestamptz NOT NULL,
   "user_id" uuid NOT NULL,
   "organization_id" uuid NOT NULL,
   "ip" inet NULL,
@@ -142,11 +142,11 @@ CREATE INDEX "idx_audit_log_resource_id" ON "public"."audit_logs" ("resource_id"
 -- Create index "idx_audit_log_user_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_log_user_id" ON "public"."audit_logs" ("user_id");
 -- Create index "idx_audit_logs_time_desc" to table: "audit_logs"
-CREATE INDEX "idx_audit_logs_time_desc" ON "public"."audit_logs" ("time" DESC);
+CREATE INDEX "idx_audit_logs_time_desc" ON "public"."audit_logs" ("occurred_at" DESC);
 -- Create index "idx_audit_logs_org_time_desc" to table: "audit_logs"
-CREATE INDEX "idx_audit_logs_org_time_desc" ON "public"."audit_logs" ("organization_id", "time" DESC);
+CREATE INDEX "idx_audit_logs_org_time_desc" ON "public"."audit_logs" ("organization_id", "occurred_at" DESC);
 -- Create index "idx_audit_logs_user_time_desc" to table: "audit_logs"
-CREATE INDEX "idx_audit_logs_user_time_desc" ON "public"."audit_logs" ("user_id", "time" DESC);
+CREATE INDEX "idx_audit_logs_user_time_desc" ON "public"."audit_logs" ("user_id", "occurred_at" DESC);
 -- Create index "idx_audit_logs_request_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_logs_request_id" ON "public"."audit_logs" ("request_id") WHERE (request_id IS NOT NULL);
 -- Create "files" table
