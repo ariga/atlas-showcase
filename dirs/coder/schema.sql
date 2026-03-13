@@ -489,35 +489,20 @@ CREATE TABLE "public"."template_version_parameters" (
   CONSTRAINT "template_version_parameters_template_version_id_fkey" FOREIGN KEY ("template_version_id") REFERENCES "public"."template_versions" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "validation_monotonic_order" CHECK (validation_monotonic = ANY (ARRAY['increasing'::text, 'decreasing'::text, ''::text]))
 );
--- Set comment to column: "name" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."name" IS 'Parameter name';
--- Set comment to column: "description" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."description" IS 'Parameter description';
--- Set comment to column: "type" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."type" IS 'Parameter type';
--- Set comment to column: "mutable" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."mutable" IS 'Is parameter mutable?';
--- Set comment to column: "default_value" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."default_value" IS 'Default value';
--- Set comment to column: "icon" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."icon" IS 'Icon';
--- Set comment to column: "options" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."options" IS 'Additional options';
--- Set comment to column: "validation_regex" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."validation_regex" IS 'Validation: regex pattern';
--- Set comment to column: "validation_min" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."validation_min" IS 'Validation: minimum length of value';
--- Set comment to column: "validation_max" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."validation_max" IS 'Validation: maximum length of value';
--- Set comment to column: "validation_error" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."validation_error" IS 'Validation: error displayed when the regex does not match.';
--- Set comment to column: "validation_monotonic" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."validation_monotonic" IS 'Validation: consecutive values preserve the monotonic order';
--- Set comment to column: "required" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."required" IS 'Is parameter required?';
--- Set comment to column: "legacy_variable_name" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."legacy_variable_name" IS 'Name of the legacy variable for migration purposes';
--- Set comment to column: "display_name" on table: "template_version_parameters"
 COMMENT ON COLUMN "public"."template_version_parameters"."display_name" IS 'Display name of the rich parameter';
 -- Create "template_version_variables" table
 CREATE TABLE "public"."template_version_variables" (
@@ -532,19 +517,12 @@ CREATE TABLE "public"."template_version_variables" (
   CONSTRAINT "template_version_variables_template_version_id_name_key" UNIQUE ("template_version_id", "name"),
   CONSTRAINT "template_version_variables_template_version_id_fkey" FOREIGN KEY ("template_version_id") REFERENCES "public"."template_versions" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
 );
--- Set comment to column: "name" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."name" IS 'Variable name';
--- Set comment to column: "description" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."description" IS 'Variable description';
--- Set comment to column: "type" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."type" IS 'Variable type';
--- Set comment to column: "value" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."value" IS 'Variable value';
--- Set comment to column: "default_value" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."default_value" IS 'Variable default value';
--- Set comment to column: "required" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."required" IS 'Required variables needs a default value or a value provided by template admin';
--- Set comment to column: "sensitive" on table: "template_version_variables"
 COMMENT ON COLUMN "public"."template_version_variables"."sensitive" IS 'Sensitive variables have their values redacted in logs or site UI';
 -- Create "user_links" table
 CREATE TABLE "public"."user_links" (
@@ -613,33 +591,19 @@ CREATE TABLE "public"."workspace_agents" (
   CONSTRAINT "max_startup_logs_length" CHECK (startup_logs_length <= 1048576),
   CONSTRAINT "workspace_agents_connection_timeout_seconds_non_negative" CHECK (connection_timeout_seconds >= 0)
 );
--- Create index "workspace_agents_auth_token_idx" to table: "workspace_agents"
 CREATE INDEX "workspace_agents_auth_token_idx" ON "public"."workspace_agents" ("auth_token");
--- Create index "workspace_agents_resource_id_idx" to table: "workspace_agents"
 CREATE INDEX "workspace_agents_resource_id_idx" ON "public"."workspace_agents" ("resource_id");
--- Set comment to column: "version" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."version" IS 'Version tracks the version of the currently running workspace agent. Workspace agents register their version upon start.';
--- Set comment to column: "connection_timeout_seconds" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."connection_timeout_seconds" IS 'Connection timeout in seconds, 0 means disabled.';
--- Set comment to column: "troubleshooting_url" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."troubleshooting_url" IS 'URL for troubleshooting the agent.';
--- Set comment to column: "motd_file" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."motd_file" IS 'Path to file inside workspace containing the message of the day (MOTD) to show to the user when logging in via SSH.';
--- Set comment to column: "lifecycle_state" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."lifecycle_state" IS 'The current lifecycle state reported by the workspace agent.';
--- Set comment to column: "login_before_ready" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."login_before_ready" IS 'If true, the agent will not prevent login before it is ready (e.g. startup script is still executing).';
--- Set comment to column: "startup_script_timeout_seconds" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."startup_script_timeout_seconds" IS 'The number of seconds to wait for the startup script to complete. If the script does not complete within this time, the agent lifecycle will be marked as start_timeout.';
--- Set comment to column: "expanded_directory" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."expanded_directory" IS 'The resolved path of a user-specified directory. e.g. ~/coder -> /home/coder/coder';
--- Set comment to column: "shutdown_script" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."shutdown_script" IS 'Script that is executed before the agent is stopped.';
--- Set comment to column: "shutdown_script_timeout_seconds" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."shutdown_script_timeout_seconds" IS 'The number of seconds to wait for the shutdown script to complete within this time, the agent lifecycle will be marked as shutdown_timeout.';
--- Set comment to column: "startup_logs_length" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."startup_logs_length" IS 'Total length of startup logs';
--- Set comment to column: "startup_logs_overflowed" on table: "workspace_agents"
 COMMENT ON COLUMN "public"."workspace_agents"."startup_logs_overflowed" IS 'Whether the startup logs overflowed in length';
 -- Create "workspace_agent_metadata" table
 CREATE UNLOGGED TABLE "public"."workspace_agent_metadata" (
@@ -665,7 +629,6 @@ CREATE TABLE "public"."workspace_agent_startup_logs" (
   PRIMARY KEY ("id"),
   CONSTRAINT "workspace_agent_startup_logs_agent_id_fkey" FOREIGN KEY ("agent_id") REFERENCES "public"."workspace_agents" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
 );
--- Create index "workspace_agent_startup_logs_id_agent_id_idx" to table: "workspace_agent_startup_logs"
 CREATE INDEX "workspace_agent_startup_logs_id_agent_id_idx" ON "public"."workspace_agent_startup_logs" ("agent_id", "id");
 -- Create "workspace_apps" table
 CREATE TABLE "public"."workspace_apps" (
@@ -709,11 +672,8 @@ CREATE TABLE "public"."workspaces" (
   CONSTRAINT "workspaces_ttl_non_negative" CHECK (ttl IS NULL OR ttl >= 0),
   CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= TIMESTAMP '0001-01-01 00:00:00')
 );
--- Create index "workspaces_owner_id_lower_idx" to table: "workspaces"
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);
--- Create index "workspaces_organization_id_idx" to table: "workspaces"
 CREATE INDEX "workspaces_organization_id_idx" ON "public"."workspaces" ("organization_id");
--- Create index "workspaces_org_active_idx" to table: "workspaces"
 CREATE INDEX "workspaces_org_active_idx" ON "public"."workspaces" ("organization_id") WHERE (deleted = false);
 -- Create "workspace_builds" table
 CREATE TABLE "public"."workspace_builds" (
@@ -736,7 +696,8 @@ CREATE TABLE "public"."workspace_builds" (
   CONSTRAINT "workspace_builds_workspace_id_build_number_key" UNIQUE ("workspace_id", "build_number"),
   CONSTRAINT "workspace_builds_job_id_fkey" FOREIGN KEY ("job_id") REFERENCES "public"."provisioner_jobs" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "workspace_builds_template_version_id_fkey" FOREIGN KEY ("template_version_id") REFERENCES "public"."template_versions" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT "workspace_builds_workspace_id_fkey" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "workspace_builds_workspace_id_fkey" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "workspace_builds_daily_cost_non_negative" CHECK (daily_cost >= 0)
 );
 -- Create index "workspace_builds_workspace_id_created_at_desc_idx" to table: "workspace_builds"
 CREATE INDEX "workspace_builds_workspace_id_created_at_desc_idx" ON "public"."workspace_builds" ("workspace_id", "created_at" DESC);
@@ -748,9 +709,7 @@ CREATE TABLE "public"."workspace_build_parameters" (
   CONSTRAINT "workspace_build_parameters_workspace_build_id_name_key" UNIQUE ("workspace_build_id", "name"),
   CONSTRAINT "workspace_build_parameters_workspace_build_id_fkey" FOREIGN KEY ("workspace_build_id") REFERENCES "public"."workspace_builds" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
 );
--- Set comment to column: "name" on table: "workspace_build_parameters"
 COMMENT ON COLUMN "public"."workspace_build_parameters"."name" IS 'Parameter name';
--- Set comment to column: "value" on table: "workspace_build_parameters"
 COMMENT ON COLUMN "public"."workspace_build_parameters"."value" IS 'Parameter value';
 -- Create "workspace_resource_metadata" table
 CREATE TABLE "public"."workspace_resource_metadata" (
