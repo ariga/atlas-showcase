@@ -61,7 +61,7 @@ CREATE TABLE "public"."employees" (
   "user_id" uuid NOT NULL,
   "department_id" uuid NOT NULL,
   "salary" numeric(10,2) NOT NULL,
-  "hire_date" date NOT NULL,
+  "start_date" date NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "employees_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
