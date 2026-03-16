@@ -114,6 +114,7 @@ CREATE INDEX "idx_project_assignments_employee_id" ON "public"."project_assignme
 CREATE INDEX "idx_project_assignments_project_id" ON "public"."project_assignments" ("project_id");
 CREATE INDEX "idx_audit_logs_table_name" ON "public"."audit_logs" ("table_name");
 CREATE INDEX "idx_audit_logs_created_at" ON "public"."audit_logs" ("created_at");
+CREATE INDEX "idx_audit_logs_user_id" ON "public"."audit_logs" ("user_id");
 
 -- Database-level permissions: Grant schema usage
 GRANT USAGE ON SCHEMA "public" TO readonly_role;
