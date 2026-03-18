@@ -133,7 +133,8 @@ CREATE TABLE "public"."audit_logs" (
   "additional_fields" jsonb NOT NULL,
   "request_id" uuid NOT NULL,
   "resource_icon" text NOT NULL,
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  CONSTRAINT "audit_logs_status_code_non_negative" CHECK (status_code >= 0)
 );
 -- Create index "idx_audit_log_organization_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_log_organization_id" ON "public"."audit_logs" ("organization_id");
