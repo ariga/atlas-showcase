@@ -3,7 +3,7 @@ CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
     `user_name` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'The username of the user, must be unique',
     `email_address` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'Email address of the user, now stored case-insensitively',
-    `phone_number` varchar(15) NULL COMMENT 'Phone number of the user, now allowed to be NULL',
+    `phone_number` varchar(15) NOT NULL COMMENT 'Phone number of the user, now required',
     `country_code` char(3) NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US and can now be NULL',
     `is_admin` tinyint(1) NULL DEFAULT 0 COMMENT 'Flag indicating if the user is an admin, defaults to false',
     `email_verified` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the user email address is verified, defaults to false',
