@@ -144,7 +144,7 @@ REVOKE SELECT ON ALL TABLES IN SCHEMA "public" FROM analyst_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" REVOKE SELECT ON TABLES FROM analyst_role;
 -- Grant additional access to projects and project_assignments for analysis
 GRANT SELECT ON TABLE "public"."projects" TO analyst_role;
-GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
+REVOKE SELECT ON TABLE "public"."project_assignments" FROM analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
 GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
