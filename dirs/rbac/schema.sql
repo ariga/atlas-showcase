@@ -128,6 +128,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO readonly_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT ON TABLES TO readonly_role;
 
 -- Database-level permissions: Read-write access
+REVOKE SELECT ON ALL TABLES IN SCHEMA "public" FROM readwrite_role;
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA "public" TO readwrite_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT, INSERT, UPDATE ON TABLES TO readwrite_role;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA "public" TO readwrite_role;
