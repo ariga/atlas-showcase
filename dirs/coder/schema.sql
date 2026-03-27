@@ -139,8 +139,7 @@ CREATE TABLE "public"."audit_logs" (
 );
 -- Create index "idx_audit_log_organization_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_log_organization_id" ON "public"."audit_logs" ("organization_id");
--- Create index "idx_audit_log_resource_id" to table: "audit_logs"
-CREATE INDEX "idx_audit_log_resource_id" ON "public"."audit_logs" ("resource_id");
+-- NOTE: Destructive change applied: removed index "idx_audit_log_resource_id"
 -- Create index "idx_audit_log_user_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_log_user_id" ON "public"."audit_logs" ("user_id");
 -- Create index "idx_audit_logs_time_desc" to table: "audit_logs"
