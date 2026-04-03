@@ -703,6 +703,8 @@ CREATE TABLE "public"."workspace_builds" (
 );
 -- Create index "workspace_builds_workspace_id_created_at_desc_idx" to table: "workspace_builds"
 CREATE INDEX "workspace_builds_workspace_id_created_at_desc_idx" ON "public"."workspace_builds" ("workspace_id", "created_at" DESC);
+-- Create index "workspace_builds_job_id_idx" to table: "workspace_builds"
+CREATE INDEX "workspace_builds_job_id_idx" ON "public"."workspace_builds" ("job_id");
 -- Create "workspace_build_parameters" table
 CREATE TABLE "public"."workspace_build_parameters" (
   "workspace_build_id" uuid NOT NULL,
