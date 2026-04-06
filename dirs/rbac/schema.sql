@@ -149,6 +149,7 @@ REVOKE SELECT ON TABLE "public"."project_assignments" FROM analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
 GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
--- Grant read-only on users and employees for audit context
+-- Grant read-only on users for audit context
 GRANT SELECT ON TABLE "public"."users" TO auditor_role;
-GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
+-- Destructive change: revoke auditor access to employees
+REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
