@@ -171,7 +171,8 @@ CREATE TABLE "public"."git_auth_links" (
   "oauth_access_token" text NOT NULL,
   "oauth_refresh_token" text NOT NULL,
   "oauth_expiry" timestamptz NOT NULL,
-  CONSTRAINT "git_auth_links_provider_id_user_id_key" UNIQUE ("provider_id", "user_id")
+  CONSTRAINT "git_auth_links_provider_id_user_id_key" UNIQUE ("provider_id", "user_id"),
+  CONSTRAINT "git_auth_links_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
 );
 -- Create "replicas" table
 CREATE TABLE "public"."replicas" (
