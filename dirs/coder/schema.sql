@@ -231,6 +231,8 @@ CREATE TABLE "public"."workspace_proxies" (
 );
 -- Create index "workspace_proxies_lower_name_idx" to table: "workspace_proxies"
 CREATE UNIQUE INDEX "workspace_proxies_lower_name_idx" ON "public"."workspace_proxies" ((lower(name))) WHERE (deleted = false);
+-- Create index "workspace_proxies_lower_url_idx" to table: "workspace_proxies"
+CREATE UNIQUE INDEX "workspace_proxies_lower_url_idx" ON "public"."workspace_proxies" ((lower(url))) WHERE (deleted = false);
 -- Set comment to column: "icon" on table: "workspace_proxies"
 COMMENT ON COLUMN "public"."workspace_proxies"."icon" IS 'Expects an emoji character. (/emojis/1f1fa-1f1f8.png)';
 -- Set comment to column: "url" on table: "workspace_proxies"
