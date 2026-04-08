@@ -116,6 +116,23 @@ CREATE INDEX "idx_audit_logs_table_name" ON "public"."audit_logs" ("table_name")
 CREATE INDEX "idx_audit_logs_created_at" ON "public"."audit_logs" ("created_at");
 CREATE INDEX "idx_audit_logs_user_id" ON "public"."audit_logs" ("user_id");
 
+-- Functions
+CREATE OR REPLACE FUNCTION "public"."set_updated_at"()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  NEW.updated_at := now();
+  RETURN NEW;
+END;
+$$;
+
+-- Triggers
+CREATE TRIGGER "users_set_updated_at"
+BEFORE UPDATE ON "public"."users"
+FOR EACH ROW
+EXECUTE FUNCTION "public"."set_updated_at"();
+
 -- Database-level permissions: Grant schema usage
 GRANT USAGE ON SCHEMA "public" TO readonly_role;
 GRANT USAGE ON SCHEMA "public" TO readwrite_role;
