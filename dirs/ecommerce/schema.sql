@@ -22,7 +22,7 @@ CREATE TABLE `users` (
     `last_order_date` date NULL COMMENT 'Date of the users last order',
     `profile_banner_url` varchar(255) NULL DEFAULT 'N/A' COMMENT 'URL to the user profile banner image',
     `roles` ENUM('admin', 'customer', 'seller') NOT NULL DEFAULT 'customer' COMMENT 'Role of the user in the system',
-    `phone_number_verified_at` timestamp NOT NULL COMMENT 'Timestamp of when the user phone number was verified',
+    `phone_number_verified_at` timestamp NULL COMMENT 'Timestamp of when the user phone number was verified',
     `preferred_language` varchar(10) NOT NULL DEFAULT 'en' COMMENT 'Preferred language of the user, defaults to English',
     PRIMARY KEY (`id`),
     UNIQUE (`email_address`),
