@@ -170,3 +170,6 @@ GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
 GRANT SELECT ON TABLE "public"."users" TO auditor_role;
 -- Destructive change: revoke auditor access to employees
 REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
+
+-- CHANGE: restore auditor read access to employees for audit investigations
+GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
