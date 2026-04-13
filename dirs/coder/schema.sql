@@ -214,8 +214,7 @@ BEGIN
 	RETURN NEW;
 END;
 $$;
--- Create trigger "trigger_update_users"
-CREATE TRIGGER "trigger_update_users" AFTER INSERT OR UPDATE ON "public"."users" FOR EACH ROW WHEN (new.deleted = true) EXECUTE FUNCTION "public"."delete_deleted_user_api_keys"();
+-- NOTE: Destructive change applied: removed trigger "trigger_update_users"
 -- Create "workspace_proxies" table
 CREATE TABLE "public"."workspace_proxies" (
   "id" uuid NOT NULL,
