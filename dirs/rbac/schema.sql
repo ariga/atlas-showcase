@@ -144,6 +144,9 @@ GRANT USAGE ON SCHEMA "public" TO auditor_role;
 GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO readonly_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT ON TABLES TO readonly_role;
 
+-- CHANGE: prevent read-only consumers from seeing sensitive compensation data
+REVOKE SELECT ("salary") ON TABLE "public"."employees" FROM readonly_role;
+
 -- Database-level permissions: Read-write access
 REVOKE SELECT ON ALL TABLES IN SCHEMA "public" FROM readwrite_role;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA "public" TO readwrite_role;
