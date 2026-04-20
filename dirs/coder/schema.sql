@@ -71,7 +71,8 @@ CREATE TABLE "public"."users" (
   CONSTRAINT "users_last_seen_at_not_before_sentinel" CHECK (last_seen_at >= TIMESTAMPTZ '0001-01-01 00:00:00+00'),
   CONSTRAINT "users_last_seen_at_not_in_future" CHECK (last_seen_at <= (now() AT TIME ZONE 'UTC')),
   CONSTRAINT "users_hashed_password_not_empty" CHECK (octet_length(hashed_password) > 0),
-  CONSTRAINT "users_avatar_url_null_or_trimmed_non_empty" CHECK (avatar_url IS NULL OR (avatar_url = btrim(avatar_url) AND length(btrim(avatar_url)) > 0))
+  CONSTRAINT "users_avatar_url_null_or_trimmed_non_empty" CHECK (avatar_url IS NULL OR (avatar_url = btrim(avatar_url) AND length(btrim(avatar_url)) > 0)),
+  CONSTRAINT "users_updated_at_not_before_created_at" CHECK (updated_at >= created_at)
 );
 -- Create index "idx_users_email" to table: "users"
 CREATE UNIQUE INDEX "idx_users_email" ON "public"."users" ("email") WHERE (deleted = false);
