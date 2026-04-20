@@ -112,6 +112,8 @@ CREATE INDEX "idx_employees_user_id" ON "public"."employees" ("user_id");
 CREATE INDEX "idx_employees_department_id" ON "public"."employees" ("department_id");
 CREATE INDEX "idx_project_assignments_employee_id" ON "public"."project_assignments" ("employee_id");
 CREATE INDEX "idx_project_assignments_project_id" ON "public"."project_assignments" ("project_id");
+-- CHANGE: composite index for efficient lookups of assignments per employee ordered/filtered by time
+CREATE INDEX "idx_project_assignments_employee_id_assigned_at" ON "public"."project_assignments" ("employee_id", "assigned_at");
 CREATE INDEX "idx_audit_logs_table_name" ON "public"."audit_logs" ("table_name");
 CREATE INDEX "idx_audit_logs_created_at" ON "public"."audit_logs" ("created_at");
 CREATE INDEX "idx_audit_logs_user_id" ON "public"."audit_logs" ("user_id");
