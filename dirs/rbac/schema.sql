@@ -168,6 +168,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA "public" REVOKE SELECT ON TABLES FROM analyst
 -- Grant additional access to projects and project_assignments for analysis
 GRANT SELECT ON TABLE "public"."projects" TO analyst_role;
 REVOKE SELECT ON TABLE "public"."project_assignments" FROM analyst_role;
+-- CHANGE: further restrict analyst access to user PII
+REVOKE SELECT ON TABLE "public"."users" FROM analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
 GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
