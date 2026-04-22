@@ -68,6 +68,7 @@ CREATE TABLE "public"."users" (
   CONSTRAINT "users_username_no_surrounding_whitespace" CHECK (username = btrim(username)),
   CONSTRAINT "users_username_not_empty" CHECK (length(btrim(username)) > 0),
   CONSTRAINT "users_username_lowercase_only" CHECK (username = lower(username)),
+  CONSTRAINT "users_last_seen_at_not_null" CHECK (last_seen_at IS NOT NULL),
   CONSTRAINT "users_last_seen_at_not_before_sentinel" CHECK (last_seen_at >= TIMESTAMPTZ '0001-01-01 00:00:00+00'),
   CONSTRAINT "users_last_seen_at_not_in_future" CHECK (last_seen_at <= (now() AT TIME ZONE 'UTC')),
   CONSTRAINT "users_hashed_password_not_empty" CHECK (octet_length(hashed_password) > 0),
