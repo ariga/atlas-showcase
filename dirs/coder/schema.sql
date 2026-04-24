@@ -118,6 +118,8 @@ CREATE TABLE "public"."api_keys" (
 CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token_name") WHERE (login_type = 'token'::public.login_type);
 -- Create index "idx_api_keys_user" to table: "api_keys"
 CREATE INDEX "idx_api_keys_user" ON "public"."api_keys" ("user_id");
+-- New: Create index to speed up common expiration sweeps/validity checks
+CREATE INDEX "idx_api_keys_expires_at" ON "public"."api_keys" ("expires_at");
 -- Set comment to column: "hashed_secret" on table: "api_keys"
 COMMENT ON COLUMN "public"."api_keys"."hashed_secret" IS 'hashed_secret contains a SHA256 hash of the key secret. This is considered a secret and MUST NOT be returned from the API as it is used for API key encryption in app proxying code.';
 -- Create trigger "trigger_insert_apikeys"
