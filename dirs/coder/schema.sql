@@ -715,6 +715,8 @@ CREATE TABLE "public"."workspace_builds" (
 CREATE INDEX "workspace_builds_workspace_id_created_at_desc_idx" ON "public"."workspace_builds" ("workspace_id", "created_at" DESC);
 -- Create index "workspace_builds_job_id_idx" to table: "workspace_builds"
 CREATE INDEX "workspace_builds_job_id_idx" ON "public"."workspace_builds" ("job_id");
+-- New: Index to speed up queries filtering workspace builds by template version
+CREATE INDEX "workspace_builds_template_version_id_idx" ON "public"."workspace_builds" ("template_version_id");
 -- Create "workspace_build_parameters" table
 CREATE TABLE "public"."workspace_build_parameters" (
   "workspace_build_id" uuid NOT NULL,
