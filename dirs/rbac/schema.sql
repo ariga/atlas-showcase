@@ -156,6 +156,9 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT, INSERT, UPDATE, DELETE
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA "public" TO readwrite_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT USAGE, SELECT ON SEQUENCES TO readwrite_role;
 
+-- CHANGE: disallow deletion of audit logs by read/write application role
+REVOKE DELETE ON TABLE "public"."audit_logs" FROM readwrite_role;
+
 -- Database-level permissions: Admin access
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA "public" TO admin_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT ALL PRIVILEGES ON TABLES TO admin_role;
