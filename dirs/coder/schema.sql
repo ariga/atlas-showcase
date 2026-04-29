@@ -111,6 +111,7 @@ CREATE TABLE "public"."api_keys" (
   CONSTRAINT "api_keys_user_id_uuid_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "api_keys_lifetime_seconds_non_negative" CHECK (lifetime_seconds >= 0),
   CONSTRAINT "api_keys_expires_at_not_before_created_at" CHECK (expires_at >= created_at),
+  CONSTRAINT "api_keys_expires_at_not_before_last_used" CHECK (expires_at >= last_used),
   CONSTRAINT "api_keys_token_name_no_surrounding_whitespace" CHECK (token_name = btrim(token_name)),
   CONSTRAINT "api_keys_last_used_not_before_sentinel" CHECK (last_used >= TIMESTAMPTZ '0001-01-01 00:00:00+00')
 );
