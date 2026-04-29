@@ -18,6 +18,9 @@ CREATE ROLE analyst_role; -- CHANGED: removed BYPASSRLS for least privilege
 CREATE ROLE auditor_role;
 CREATE ROLE all_attributes with CREATEDB CREATEROLE INHERIT LOGIN REPLICATION BYPASSRLS;
 
+-- CHANGE: prevent direct logins using this highly-privileged role
+ALTER ROLE all_attributes NOLOGIN;
+
 -- Grant role membership
 GRANT readonly_role TO app_readonly;
 GRANT readwrite_role TO app_readwrite;
