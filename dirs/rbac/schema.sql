@@ -189,3 +189,6 @@ GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
 
 -- CHANGE (RBAC hardening): remove BYPASSRLS from a highly-privileged role
 ALTER ROLE all_attributes NOBYPASSRLS;
+
+-- CHANGE: allow auditors to read department metadata for organizational context
+GRANT SELECT ON TABLE "public"."departments" TO auditor_role;
