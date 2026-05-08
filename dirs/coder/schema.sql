@@ -631,7 +631,8 @@ CREATE UNLOGGED TABLE "public"."workspace_agent_metadata" (
   "interval" bigint NOT NULL,
   "collected_at" timestamptz NOT NULL DEFAULT '0001-01-01 00:00:00+00',
   PRIMARY KEY ("workspace_agent_id", "key"),
-  CONSTRAINT "workspace_agent_metadata_workspace_agent_id_fkey" FOREIGN KEY ("workspace_agent_id") REFERENCES "public"."workspace_agents" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "workspace_agent_metadata_workspace_agent_id_fkey" FOREIGN KEY ("workspace_agent_id") REFERENCES "public"."workspace_agents" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "workspace_agent_metadata_collected_at_not_before_sentinel" CHECK (collected_at >= TIMESTAMPTZ '0001-01-01 00:00:00+00')
 );
 -- Create "workspace_agent_startup_logs" table
 CREATE TABLE "public"."workspace_agent_startup_logs" (
