@@ -113,7 +113,8 @@ CREATE TABLE "public"."api_keys" (
   CONSTRAINT "api_keys_expires_at_not_before_created_at" CHECK (expires_at >= created_at),
   CONSTRAINT "api_keys_expires_at_not_before_last_used" CHECK (expires_at >= last_used),
   CONSTRAINT "api_keys_token_name_no_surrounding_whitespace" CHECK (token_name = btrim(token_name)),
-  CONSTRAINT "api_keys_last_used_not_before_sentinel" CHECK (last_used >= TIMESTAMPTZ '0001-01-01 00:00:00+00')
+  CONSTRAINT "api_keys_last_used_not_before_sentinel" CHECK (last_used >= TIMESTAMPTZ '0001-01-01 00:00:00+00'),
+  CONSTRAINT "api_keys_ip_address_not_unspecified_v6" CHECK (ip_address <> '::'::inet)
 );
 -- Create index "idx_api_key_name" to table: "api_keys"
 CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token_name") WHERE (login_type = 'token'::public.login_type);
