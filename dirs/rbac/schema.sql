@@ -1,4 +1,4 @@
--- Add new schema named "public"
+            -- Add new schema named "public"
 CREATE SCHEMA IF NOT EXISTS "public";
 -- Set comment to schema: "public"
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -20,6 +20,9 @@ CREATE ROLE all_attributes with CREATEDB CREATEROLE INHERIT LOGIN REPLICATION BY
 
 -- CHANGE: prevent direct logins using this highly-privileged role
 ALTER ROLE all_attributes NOLOGIN;
+
+-- CHANGE: further harden highly-privileged role by removing CREATEDB
+ALTER ROLE all_attributes NOCREATEDB;
 
 -- Grant role membership
 GRANT readonly_role TO app_readonly;
