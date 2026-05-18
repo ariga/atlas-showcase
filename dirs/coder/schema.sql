@@ -420,7 +420,8 @@ CREATE TABLE "public"."provisioner_job_logs" (
   "output" character varying(1024) NOT NULL,
   "id" bigserial NOT NULL,
   PRIMARY KEY ("id"),
-  CONSTRAINT "provisioner_job_logs_job_id_fkey" FOREIGN KEY ("job_id") REFERENCES "public"."provisioner_jobs" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "provisioner_job_logs_job_id_fkey" FOREIGN KEY ("job_id") REFERENCES "public"."provisioner_jobs" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "provisioner_job_logs_id_non_negative" CHECK (id >= 0)
 );
 -- Create index "provisioner_job_logs_id_job_id_idx" to table: "provisioner_job_logs"
 CREATE INDEX "provisioner_job_logs_id_job_id_idx" ON "public"."provisioner_job_logs" ("job_id", "id");
