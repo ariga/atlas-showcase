@@ -688,7 +688,8 @@ CREATE TABLE "public"."workspaces" (
   CONSTRAINT "workspaces_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "workspaces_template_id_fkey" FOREIGN KEY ("template_id") REFERENCES "public"."templates" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "workspaces_ttl_non_negative" CHECK (ttl IS NULL OR ttl >= 0),
-  CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= TIMESTAMP '0001-01-01 00:00:00')
+  CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= TIMESTAMP '0001-01-01 00:00:00'),
+  CONSTRAINT "workspaces_last_used_at_not_in_future" CHECK (last_used_at <= (now() AT TIME ZONE 'UTC'))
 );
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);
 CREATE INDEX "workspaces_organization_id_idx" ON "public"."workspaces" ("organization_id");
