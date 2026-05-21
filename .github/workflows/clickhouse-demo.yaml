@@ -23,13 +23,13 @@ jobs:
       CLICKHOUSE_URL: ${{ secrets.CLICKHOUSE_URL }}
       CLICKHOUSE_DEV_URL: ${{ secrets.CLICKHOUSE_DEV_URL }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
-      - uses: ariga/setup-atlas@v0
+      - uses: ariga/setup-atlas@2f3c785c89a15e1c0d07bcae3900fb5feb969eea # v0
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
-      - uses: ariga/atlas-action/schema/plan@v1
+      - uses: ariga/atlas-action/schema/plan@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
         with:
           env: local
   push:
@@ -40,19 +40,19 @@ jobs:
       CLICKHOUSE_URL: ${{ secrets.CLICKHOUSE_URL }}
       CLICKHOUSE_DEV_URL: ${{ secrets.CLICKHOUSE_DEV_URL }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
-      - uses: ariga/setup-atlas@v0
+      - uses: ariga/setup-atlas@2f3c785c89a15e1c0d07bcae3900fb5feb969eea # v0
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
-      - uses: ariga/atlas-action/schema/plan/approve@v1
+      - uses: ariga/atlas-action/schema/plan/approve@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
         id: plan-approve
         with:
           env: local
-      - uses: ariga/atlas-action/schema/push@v1
+      - uses: ariga/atlas-action/schema/push@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
         with:
           env: local
-      - uses: ariga/atlas-action/schema/apply@v1
+      - uses: ariga/atlas-action/schema/apply@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
         with:
           env: local
