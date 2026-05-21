@@ -17,8 +17,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ariga/atlas-sync-action@v0
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: ariga/atlas-sync-action@2ca31f55e863b6736956424c5710862653813401 # v0
         with:
           cloud-url: https://gh-api.atlasgo.link
           dir: 'dirs/employees/migrations'
@@ -45,10 +45,10 @@ jobs:
           --health-retries 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.0.1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
-      - uses: ariga/atlas-action@v0
+      - uses: ariga/atlas-action@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
         with:
           dir: 'dirs/employees/migrations'
           cloud-url: https://gh-api.atlasgo.link

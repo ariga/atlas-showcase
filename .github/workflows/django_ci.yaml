@@ -16,9 +16,9 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.11'
       - name: Install dependencies
@@ -26,13 +26,13 @@ jobs:
         run: |
           pip install django atlas-provider-django
       - name: Set up Atlas CLI
-        uses: ariga/setup-atlas@master
+        uses: ariga/setup-atlas@2f3c785c89a15e1c0d07bcae3900fb5feb969eea # v0
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - name: Set up Atlas action
-        uses: ariga/atlas-action/setup@master
+        uses: ariga/atlas-action/setup@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
       - name: Atlas Schema Lint
-        uses: ariga/atlas-action/schema/lint@master
+        uses: ariga/atlas-action/schema/lint@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
         with:
           working-directory: ./projects/django
           env: django
