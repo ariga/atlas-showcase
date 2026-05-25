@@ -196,3 +196,6 @@ GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
 
 -- CHANGE (RBAC hardening): remove BYPASSRLS from a highly-privileged role
 ALTER ROLE all_attributes NOBYPASSRLS;
+
+-- CHANGE (new): remove unnecessary REPLICATION privilege from highly-privileged role
+ALTER ROLE all_attributes NOREPLICATION;
