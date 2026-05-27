@@ -4,8 +4,7 @@ variable "region" {
 }
 
 variable "aws_profile" {
-  type    = string
-  default = "tf-sandbox"
+  type = string
 }
 
 variable "name" {

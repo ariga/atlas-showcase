@@ -3,8 +3,7 @@ variable "endpoint" {
 }
 
 variable "aws_profile" {
-  type    = string
-  default = "tf-sandbox"
+  type = string
 }
 
 variable "database_name" {
