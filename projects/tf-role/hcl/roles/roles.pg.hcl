@@ -37,3 +37,5 @@ user "postgres" {
 user "atlas_migrator" {
   member_of = [role.rds_iam]
 }
+
+user "app_reader" {}
