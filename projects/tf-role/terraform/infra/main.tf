@@ -4,10 +4,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.7"
-    }
   }
 }
 
@@ -31,6 +27,10 @@ data "aws_subnets" "default" {
   }
 }
 
+data "aws_secretsmanager_secret" "master" {
+  arn = one(aws_db_instance.this.master_user_secret[*].secret_arn)
+}
+
 locals {
   name              = var.name
   master_username   = "postgres"
@@ -40,12 +40,6 @@ locals {
   tags = {
     Project = "rds-pg-guide"
   }
-}
-
-resource "random_password" "master" {
-  length           = 24
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
 resource "aws_security_group" "rds" {
@@ -95,7 +89,7 @@ resource "aws_db_instance" "this" {
 
   db_name  = local.database_name
   username = local.master_username
-  password = random_password.master.result
+  manage_master_user_password = true
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
   vpc_security_group_ids = [aws_security_group.rds.id]
@@ -109,26 +103,6 @@ resource "aws_db_instance" "this" {
   apply_immediately       = true
 
   tags = local.tags
-}
-
-resource "aws_secretsmanager_secret" "master" {
-  name                    = "${local.name}/master"
-  recovery_window_in_days = 0
-
-  tags = local.tags
-}
-
-resource "aws_secretsmanager_secret_version" "master" {
-  secret_id = aws_secretsmanager_secret.master.id
-  secret_string = jsonencode({
-    username             = local.master_username
-    password             = random_password.master.result
-    engine               = "postgres"
-    host                 = aws_db_instance.this.address
-    port                 = aws_db_instance.this.port
-    dbname               = local.database_name
-    dbInstanceIdentifier = aws_db_instance.this.identifier
-  })
 }
 
 resource "aws_iam_policy" "rds_connect" {
