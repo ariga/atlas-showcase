@@ -53,4 +53,9 @@ env "roles" {
 
 env "schema" {
   url = "postgres://${var.migrator_username}:${urlescape(data.aws_rds_token.migrator)}@${var.endpoint}/${var.database_name}?sslmode=require"
+  schema {
+    mode {
+      permissions = true
+    }
+  }
 }

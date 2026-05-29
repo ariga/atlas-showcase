@@ -23,7 +23,7 @@ output "database_name" {
 }
 
 output "master_secret_name" {
-  value = aws_secretsmanager_secret.master.name
+  value = data.aws_secretsmanager_secret.master.name
 }
 
 output "migrator_username" {
