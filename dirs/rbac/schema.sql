@@ -91,7 +91,7 @@ CREATE TABLE "public"."project_assignments" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "employee_id" uuid NOT NULL,
   "project_id" uuid NOT NULL,
-  "role" text NOT NULL DEFAULT 'member',
+  "assignment_role" text NOT NULL DEFAULT 'member',
   "assigned_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "project_assignments_employee_id_fkey" FOREIGN KEY ("employee_id") REFERENCES "public"."employees" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
