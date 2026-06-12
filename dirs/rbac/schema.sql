@@ -191,9 +191,6 @@ GRANT SELECT ON TABLE "public"."users" TO auditor_role;
 -- Destructive change: revoke auditor access to employees
 REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
 
--- CHANGE: restore auditor read access to employees for audit investigations
-GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
-
 -- CHANGE (RBAC hardening): remove BYPASSRLS from a highly-privileged role
 ALTER ROLE all_attributes NOBYPASSRLS;
 
