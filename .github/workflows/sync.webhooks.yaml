@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
-      - uses: ariga/atlas-action@54eb978c022091c1ebf9a3c90806f36a977fad03 # v1
+      - uses: ariga/atlas-action@d24493894b48c9f8567228edd56c4430301d9eb6 # v1
         with:
           dir: 'dirs/webhooks'
           dev-url: mysql://root:pass@localhost:3306/dev
