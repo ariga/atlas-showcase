@@ -322,12 +322,15 @@ CREATE TABLE "public"."organizations" (
   "description" text NOT NULL DEFAULT '',
   "created_at" timestamptz NOT NULL,
   "updated_at" timestamptz NOT NULL,
+  "deleted" boolean NOT NULL DEFAULT false,
   PRIMARY KEY ("id")
 );
 -- Create index "idx_organization_name" to table: "organizations"
 CREATE UNIQUE INDEX "idx_organization_name" ON "public"."organizations" ("name");
 -- Create index "idx_organization_name_lower" to table: "organizations"
 CREATE UNIQUE INDEX "idx_organization_name_lower" ON "public"."organizations" ((lower(name)));
+-- New: Enforce case-insensitive uniqueness for active (non-deleted) organizations
+CREATE UNIQUE INDEX "idx_organizations_lower_name_active" ON "public"."organizations" ((lower(name))) WHERE (deleted = false);
 -- Create "groups" table
 CREATE TABLE "public"."groups" (
   "id" uuid NOT NULL,
