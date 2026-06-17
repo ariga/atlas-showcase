@@ -305,6 +305,8 @@ CREATE TABLE "public"."workspace_agent_stats" (
 CREATE INDEX "idx_agent_stats_created_at" ON "public"."workspace_agent_stats" ("created_at");
 -- Create index "idx_agent_stats_user_id" to table: "workspace_agent_stats"
 CREATE INDEX "idx_agent_stats_user_id" ON "public"."workspace_agent_stats" ("user_id");
+-- New: Index to speed up per-workspace agent stats queries
+CREATE INDEX "idx_agent_stats_workspace_id" ON "public"."workspace_agent_stats" ("workspace_id");
 -- Create "gitsshkeys" table
 CREATE TABLE "public"."gitsshkeys" (
   "user_id" uuid NOT NULL,
