@@ -82,6 +82,7 @@ CREATE TABLE "public"."projects" (
   "end_date" date NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
+  CONSTRAINT "projects_name_unique" UNIQUE ("name"),
   CONSTRAINT "projects_end_date_after_start_date_chk" CHECK ("end_date" IS NULL OR "end_date" >= "start_date"),
   CONSTRAINT "projects_budget_non_negative_chk" CHECK ("budget" >= 0)
 );
