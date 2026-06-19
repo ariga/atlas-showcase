@@ -42,7 +42,8 @@ CREATE TABLE "public"."users" (
   "updated_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "users_username_unique" UNIQUE ("username"),
-  CONSTRAINT "users_email_lowercase_chk" CHECK ("email" = lower("email"))
+  CONSTRAINT "users_email_lowercase_chk" CHECK ("email" = lower("email")),
+  CONSTRAINT "users_email_contains_at_chk" CHECK (position('@' in "email") > 1)
 );
 
 -- Enforce case-insensitive email uniqueness (replaces users_email_unique)
