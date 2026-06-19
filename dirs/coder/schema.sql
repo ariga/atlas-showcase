@@ -198,7 +198,8 @@ CREATE TABLE "public"."replicas" (
   "database_latency" integer NOT NULL,
   "version" text NOT NULL,
   "error" text NOT NULL DEFAULT '',
-  CONSTRAINT "replicas_database_latency_non_negative" CHECK (database_latency >= 0)
+  CONSTRAINT "replicas_database_latency_non_negative" CHECK (database_latency >= 0),
+  CONSTRAINT "replicas_stopped_at_not_before_started_at" CHECK (stopped_at IS NULL OR stopped_at >= started_at)
 );
 -- Create enum type "provisioner_type"
 CREATE TYPE "public"."provisioner_type" AS ENUM ('echo', 'terraform');
