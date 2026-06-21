@@ -177,7 +177,15 @@ CREATE TABLE `orders` (
     CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CHECK (`total_amount` >= 0),
     CHECK (`shipping_cost` >= 0),
-    CHECK (CHAR_LENGTH(TRIM(`order_reference`)) > 0)
+    CHECK (CHAR_LENGTH(TRIM(`order_reference`)) > 0),
+    CHECK (
+      (`status` = 'PENDING' AND `order_status` = 'pending') OR
+      (`status` = 'PROCESSING' AND `order_status` = 'processing') OR
+      (`status` = 'SHIPPED' AND `order_status` = 'shipped') OR
+      (`status` = 'DELIVERED' AND `order_status` = 'delivered') OR
+      (`status` = 'CANCELLED' AND `order_status` = 'cancelled') OR
+      (`status` = 'RETURNED' AND `order_status` = 'returned')
+    )
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing orders placed by users';
 
 -- Create 'order_items' table

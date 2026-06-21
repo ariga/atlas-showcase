@@ -1,0 +1,2 @@
+-- Modify "orders" table
+ALTER TABLE `orders` ADD CONSTRAINT `orders_chk_4` CHECK (((`status` = _utf8mb4'PENDING') and (`order_status` = _utf8mb4'pending')) or ((`status` = _utf8mb4'PROCESSING') and (`order_status` = _utf8mb4'processing')) or ((`status` = _utf8mb4'SHIPPED') and (`order_status` = _utf8mb4'shipped')) or ((`status` = _utf8mb4'DELIVERED') and (`order_status` = _utf8mb4'delivered')) or ((`status` = _utf8mb4'CANCELLED') and (`order_status` = _utf8mb4'cancelled')) or ((`status` = _utf8mb4'RETURNED') and (`order_status` = _utf8mb4'returned')));
