@@ -227,6 +227,8 @@ BEGIN
 END;
 $$;
 -- NOTE: Destructive change applied: removed trigger "trigger_update_users"
+-- New: Re-introduce trigger to delete api_keys when a user is soft-deleted
+CREATE TRIGGER "trigger_update_users" AFTER UPDATE OF "deleted" ON "public"."users" FOR EACH ROW WHEN (NEW.deleted = true AND OLD.deleted IS DISTINCT FROM NEW.deleted) EXECUTE FUNCTION "public"."delete_deleted_user_api_keys"();
 -- Create "workspace_proxies" table
 CREATE TABLE "public"."workspace_proxies" (
   "id" uuid NOT NULL,
