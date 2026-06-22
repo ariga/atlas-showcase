@@ -185,6 +185,9 @@ REVOKE SELECT ON TABLE "public"."users" FROM analyst_role;
 -- CHANGE: prevent analysts from seeing sensitive compensation data
 REVOKE SELECT ("salary") ON TABLE "public"."employees" FROM analyst_role;
 
+-- CHANGE (new): fully restrict analyst access to employees table (PII/HR data)
+REVOKE SELECT ON TABLE "public"."employees" FROM analyst_role;
+
 -- Database-level permissions: Auditor access (read-only on audit logs)
 GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users for audit context
