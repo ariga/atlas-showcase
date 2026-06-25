@@ -166,6 +166,7 @@ CREATE TABLE `orders` (
     INDEX `orders_user_id_created_at` (`user_id`, `created_at`),
     INDEX `orders_user_id_order_reference` (`user_id`, `order_reference`),
     INDEX `user_id_order_reference` (`user_id`, `order_reference`),
+    INDEX `orders_user_id_order_reference_opt` (`user_id`, `order_reference`),
     INDEX `orders_order_status_created_at` (`order_status`, `created_at`),
     INDEX `orders_user_id_fulfillment_center_id` (`user_id`, `fulfillment_center_id`),
     INDEX `orders_order_reference_user_id` (`order_reference`, `user_id`),
