@@ -734,6 +734,8 @@ CREATE INDEX "workspace_builds_workspace_id_created_at_desc_idx" ON "public"."wo
 CREATE INDEX "workspace_builds_job_id_idx" ON "public"."workspace_builds" ("job_id");
 -- New: Index to speed up queries filtering workspace builds by template version
 CREATE INDEX "workspace_builds_template_version_id_idx" ON "public"."workspace_builds" ("template_version_id");
+-- New: Index to speed up selecting builds by real (non-sentinel) deadlines (e.g. overdue/pending)
+CREATE INDEX "workspace_builds_deadline_idx" ON "public"."workspace_builds" ("deadline") WHERE (deadline > TIMESTAMPTZ '0001-01-01 00:00:00+00');
 -- Create "workspace_build_parameters" table
 CREATE TABLE "public"."workspace_build_parameters" (
   "workspace_build_id" uuid NOT NULL,
