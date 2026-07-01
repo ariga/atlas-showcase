@@ -107,7 +107,7 @@ CREATE TABLE "public"."api_keys" (
   "lifetime_seconds" bigint NOT NULL DEFAULT 86400,
   "ip_address" inet NOT NULL DEFAULT '0.0.0.0',
   "scope" "public"."api_key_scope" NOT NULL DEFAULT 'all',
-  "token_name" text NOT NULL DEFAULT '',
+  "token_name" text NOT NULL,
   PRIMARY KEY ("id"),
   CONSTRAINT "api_keys_user_id_uuid_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "api_keys_lifetime_seconds_non_negative" CHECK (lifetime_seconds >= 0),
@@ -115,7 +115,8 @@ CREATE TABLE "public"."api_keys" (
   CONSTRAINT "api_keys_expires_at_not_before_last_used" CHECK (expires_at >= last_used),
   CONSTRAINT "api_keys_token_name_no_surrounding_whitespace" CHECK (token_name = btrim(token_name)),
   CONSTRAINT "api_keys_last_used_not_before_sentinel" CHECK (last_used >= TIMESTAMPTZ '0001-01-01 00:00:00+00'),
-  CONSTRAINT "api_keys_ip_address_not_unspecified_v6" CHECK (ip_address <> '::'::inet)
+  CONSTRAINT "api_keys_ip_address_not_unspecified_v6" CHECK (ip_address <> '::'::inet),
+  CONSTRAINT "api_keys_token_name_not_empty" CHECK (length(btrim(token_name)) > 0)
 );
 -- Create index "idx_api_key_name" to table: "api_keys"
 CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token_name") WHERE (login_type = 'token'::public.login_type);
