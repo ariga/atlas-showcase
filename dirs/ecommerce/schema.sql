@@ -189,7 +189,6 @@ CREATE TABLE `order_items` (
     `price` decimal(10,2) NOT NULL COMMENT 'Price of the product at the time of order',
     `order_reference` varchar(100) NULL COMMENT 'Optional reference number for the order',
     PRIMARY KEY (`order_id`, `product_id`),
-    INDEX `order_id` (`order_id`),
     INDEX `product_id` (`product_id`),
     CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
