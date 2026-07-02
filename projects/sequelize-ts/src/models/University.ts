@@ -7,7 +7,6 @@ import { Department } from './Department';
     paranoid: true,
 })
 export class University extends Model {
-    @Unique
     @AllowNull(false)
     @Column(DataType.STRING(200))
     name!: string;
