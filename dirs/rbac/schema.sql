@@ -191,6 +191,8 @@ REVOKE SELECT ON TABLE "public"."audit_logs" FROM analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
 GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
+-- CHANGE: explicitly grant access to before/after payload columns for audit investigations
+GRANT SELECT ("old_values", "new_values") ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users for audit context
 GRANT SELECT ON TABLE "public"."users" TO auditor_role;
 -- Destructive change: revoke auditor access to employees
