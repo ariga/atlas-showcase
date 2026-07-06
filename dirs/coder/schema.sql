@@ -700,7 +700,8 @@ CREATE TABLE "public"."workspaces" (
   CONSTRAINT "workspaces_ttl_non_negative" CHECK (ttl IS NULL OR ttl >= 0),
   CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= TIMESTAMP '0001-01-01 00:00:00'),
   CONSTRAINT "workspaces_last_used_at_not_in_future" CHECK (last_used_at <= (now() AT TIME ZONE 'UTC')),
-  CONSTRAINT "workspaces_last_used_at_not_negative_epoch" CHECK (last_used_at >= TIMESTAMP '1970-01-01 00:00:00')
+  CONSTRAINT "workspaces_last_used_at_not_negative_epoch" CHECK (last_used_at >= TIMESTAMP '1970-01-01 00:00:00'),
+  CONSTRAINT "workspaces_autostart_schedule_null_or_trimmed_non_empty" CHECK (autostart_schedule IS NULL OR (autostart_schedule = btrim(autostart_schedule) AND length(btrim(autostart_schedule)) > 0))
 );
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);
 CREATE INDEX "workspaces_organization_id_idx" ON "public"."workspaces" ("organization_id");
