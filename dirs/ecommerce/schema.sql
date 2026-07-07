@@ -178,7 +178,7 @@ CREATE TABLE `orders` (
     CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`fulfillment_center_id`) REFERENCES `fulfillment_centers` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CHECK (`total_amount` >= 0),
     CHECK (`shipping_cost` >= 0),
-    CHECK (CHAR_LENGTH(TRIM(`order_reference`)) > 0)
+    CHECK (CHAR_LENGTH(TRIM(`order_reference`)) BETWEEN 1 AND 255)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing orders placed by users';
 
 -- Create 'order_items' table
