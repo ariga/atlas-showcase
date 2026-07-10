@@ -168,6 +168,9 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT USAGE, SELECT ON SEQUENCES TO 
 -- CHANGE: disallow deletion of audit logs by read/write application role
 REVOKE DELETE ON TABLE "public"."audit_logs" FROM readwrite_role;
 
+-- CHANGE (new): disallow updates of audit logs by read/write application role
+REVOKE UPDATE ON TABLE "public"."audit_logs" FROM readwrite_role;
+
 -- CHANGE (new): prevent read/write application role from reading sensitive compensation data
 REVOKE SELECT ("salary") ON TABLE "public"."employees" FROM readwrite_role;
 
