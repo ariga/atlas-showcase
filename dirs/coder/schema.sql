@@ -165,6 +165,8 @@ CREATE INDEX "idx_audit_logs_user_time_desc" ON "public"."audit_logs" ("user_id"
 CREATE INDEX "idx_audit_logs_request_id" ON "public"."audit_logs" ("request_id") WHERE (request_id IS NOT NULL);
 -- New: Create index to speed resource lookups in audit logs
 CREATE INDEX "idx_audit_logs_resource_type_id" ON "public"."audit_logs" ("resource_type", "resource_id");
+-- New: Create index to speed up lookups by resource_id
+CREATE INDEX "idx_audit_logs_resource_id" ON "public"."audit_logs" ("resource_id") WHERE (resource_id IS NOT NULL);
 -- Create "files" table
 CREATE TABLE "public"."files" (
   "hash" character varying(64) NOT NULL,
