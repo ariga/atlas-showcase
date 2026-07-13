@@ -1,0 +1,2 @@
+-- Create index "idx_audit_logs_resource_id" to table: "audit_logs"
+CREATE INDEX "idx_audit_logs_resource_id" ON "audit_logs" ("resource_id") WHERE (resource_id IS NOT NULL);
