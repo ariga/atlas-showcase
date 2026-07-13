@@ -135,6 +135,9 @@ BEGIN
 END;
 $$;
 
+-- CHANGE (RBAC hardening): remove implicit execute from PUBLIC on function
+REVOKE EXECUTE ON FUNCTION "public"."set_updated_at"() FROM PUBLIC;
+
 -- Triggers
 CREATE TRIGGER "users_set_updated_at"
 BEFORE UPDATE ON "public"."users"
