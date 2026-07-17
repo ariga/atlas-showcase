@@ -106,7 +106,7 @@ CREATE TABLE "public"."audit_logs" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "table_name" text NOT NULL,
   "action" text NOT NULL,
-  "user_id" uuid NULL,
+  "user_id" uuid NOT NULL,
   "old_values" jsonb NULL,
   "new_values" jsonb NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
