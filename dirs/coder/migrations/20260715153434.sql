@@ -1,0 +1,2 @@
+-- Modify "api_keys" table
+ALTER TABLE "api_keys" DROP CONSTRAINT "api_keys_expires_at_not_before_last_used", ADD CONSTRAINT "api_keys_expires_at_not_before_last_used" CHECK (expires_at >= last_used_at), DROP CONSTRAINT "api_keys_last_used_not_before_sentinel", ADD CONSTRAINT "api_keys_last_used_not_before_sentinel" CHECK (last_used_at >= '0001-01-01 00:00:00+00'::timestamp with time zone), DROP COLUMN "last_used", ADD COLUMN "last_used_at" timestamptz NOT NULL;
