@@ -712,6 +712,8 @@ CREATE TABLE "public"."workspaces" (
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);
 CREATE INDEX "workspaces_organization_id_idx" ON "public"."workspaces" ("organization_id");
 CREATE INDEX "workspaces_org_active_idx" ON "public"."workspaces" ("organization_id") WHERE (deleted = false);
+-- New: Speed up "recent workspaces by owner" queries
+CREATE INDEX "workspaces_owner_last_used_at_desc_idx" ON "public"."workspaces" ("owner_id", "last_used_at" DESC) WHERE (deleted = false);
 -- Create "workspace_builds" table
 CREATE TABLE "public"."workspace_builds" (
   "id" uuid NOT NULL,
