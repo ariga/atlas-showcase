@@ -48,6 +48,9 @@ CREATE TABLE "public"."users" (
 -- Enforce case-insensitive email uniqueness (replaces users_email_unique)
 CREATE UNIQUE INDEX "users_email_unique" ON "public"."users" (lower("email"));
 
+-- CHANGE: add index to speed handle lookups (in addition to uniqueness constraint)
+CREATE INDEX "idx_users_handle" ON "public"."users" ("handle");
+
 -- Create "departments" table
 CREATE TABLE "public"."departments" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
