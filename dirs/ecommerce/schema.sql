@@ -235,11 +235,11 @@ CREATE TABLE `payment_methods` (
 -- Automatically ensure 'total_amount' in 'orders' matches 'order_items'
 DELIMITER $$
 CREATE TRIGGER before_order_check
-BEFORE INSERT ON orders
+BEFORE UPDATE ON orders
 FOR EACH ROW
 BEGIN
   DECLARE order_total DECIMAL(10, 2);
-  SELECT SUM(quantity * price) INTO order_total FROM order_items WHERE order_id = NEW.id;
+  SELECT COALESCE(SUM(quantity * price), 0.00) INTO order_total FROM order_items WHERE order_id = NEW.id;
   IF NEW.total_amount < order_total THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
   END IF;
