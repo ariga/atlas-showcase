@@ -250,7 +250,8 @@ CREATE TABLE "public"."workspace_proxies" (
   "updated_at" timestamptz NOT NULL,
   "deleted" boolean NOT NULL,
   "token_hashed_secret" bytea NOT NULL,
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  CONSTRAINT "workspace_proxies_updated_at_not_before_created_at" CHECK (updated_at >= created_at)
 );
 -- Create index "workspace_proxies_lower_name_idx" to table: "workspace_proxies"
 CREATE UNIQUE INDEX "workspace_proxies_lower_name_idx" ON "public"."workspace_proxies" ((lower(name))) WHERE (deleted = false);
