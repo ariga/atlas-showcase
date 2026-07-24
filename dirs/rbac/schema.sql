@@ -74,6 +74,7 @@ CREATE TABLE "public"."employees" (
   CONSTRAINT "employees_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "employees_department_id_fkey" FOREIGN KEY ("department_id") REFERENCES "public"."departments" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "employees_salary_positive_chk" CHECK ("salary" >= 15.00),
+  CONSTRAINT "employees_salary_reasonable_max_chk" CHECK ("salary" <= 99999999.99),
   CONSTRAINT "employees_start_date_not_future_chk" CHECK ("start_date" <= CURRENT_DATE)
 );
 
