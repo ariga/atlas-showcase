@@ -36,21 +36,21 @@ CREATE TYPE "public"."user_status" AS ENUM ('active', 'inactive', 'suspended');
 CREATE TABLE "public"."users" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "email" text NOT NULL,
-  "handle" text NOT NULL,
+  "username" text NOT NULL,
   "status" "public"."user_status" NOT NULL DEFAULT 'active',
   "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
-  CONSTRAINT "users_handle_unique" UNIQUE ("handle"),
+  CONSTRAINT "users_username_unique" UNIQUE ("username"),
   CONSTRAINT "users_email_lowercase_chk" CHECK ("email" = lower("email") AND "email" = btrim("email")),
-  CONSTRAINT "users_handle_lowercase_chk" CHECK ("handle" = lower("handle") AND "handle" = btrim("handle"))
+  CONSTRAINT "users_username_lowercase_chk" CHECK ("username" = lower("username") AND "username" = btrim("username"))
 );
 
 -- Enforce case-insensitive email uniqueness (replaces users_email_unique)
 CREATE UNIQUE INDEX "users_email_unique" ON "public"."users" (lower("email"));
 
 -- CHANGE: add index to speed handle lookups (in addition to uniqueness constraint)
-CREATE INDEX "idx_users_handle" ON "public"."users" ("handle");
+CREATE INDEX "idx_users_handle" ON "public"."users" ("username");
 
 -- Create "departments" table
 CREATE TABLE "public"."departments" (
