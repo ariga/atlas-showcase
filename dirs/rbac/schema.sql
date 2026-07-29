@@ -156,6 +156,9 @@ GRANT USAGE ON SCHEMA "public" TO admin_role;
 GRANT USAGE ON SCHEMA "public" TO analyst_role;
 GRANT USAGE ON SCHEMA "public" TO auditor_role;
 
+-- CHANGE: prevent PUBLIC from creating objects in the public schema
+REVOKE CREATE ON SCHEMA "public" FROM PUBLIC;
+
 -- Database-level permissions: Read-only access
 GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO readonly_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT ON TABLES TO readonly_role;
