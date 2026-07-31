@@ -223,3 +223,6 @@ ALTER ROLE all_attributes NOBYPASSRLS;
 
 -- CHANGE (new): remove unnecessary REPLICATION privilege from highly-privileged role
 ALTER ROLE all_attributes NOREPLICATION;
+
+-- CHANGE (new RBAC hardening): revoke implicit EXECUTE from PUBLIC on UUID generator
+REVOKE EXECUTE ON FUNCTION gen_random_uuid() FROM PUBLIC;
