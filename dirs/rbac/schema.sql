@@ -28,6 +28,9 @@ GRANT admin_role TO app_admin;
 GRANT analyst_role TO app_analyst;
 GRANT auditor_role TO app_auditor;
 
+-- CHANGE (new RBAC hardening): prevent all database users from connecting by default
+REVOKE CONNECT ON DATABASE current_database() FROM PUBLIC;
+
 -- Schema-level objects: Tables
 -- Create enum type "user_status"
 CREATE TYPE "public"."user_status" AS ENUM ('active', 'inactive', 'suspended');
