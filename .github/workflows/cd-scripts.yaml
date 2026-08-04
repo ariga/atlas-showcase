@@ -1,0 +1,26 @@
+name: "Push Scripts"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - scripts/**
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - name: Setup Atlas
+        uses: ariga/setup-atlas@747818cc9a4d896aae962ffdde7015337930a4c9 # master
+        with:
+          cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
+      - name: Setup Atlas Action
+        uses: ariga/atlas-action/setup@a6a4733a3fcccd0690570184deb2f7f50b13e656 # v1.16.1
+      - name: Push scripts
+        uses: ariga/atlas-action/script/push@a6a4733a3fcccd0690570184deb2f7f50b13e656 # v1.16.1
+        with:
+          working-directory: scripts
+          env: ci
+
