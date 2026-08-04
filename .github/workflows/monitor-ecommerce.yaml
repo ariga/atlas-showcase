@@ -33,7 +33,7 @@ jobs:
 
       # The next steps are the only ones required to monitor schema changes.
       - name: Setup Atlas
-        uses: ariga/setup-atlas@2f3c785c89a15e1c0d07bcae3900fb5feb969eea # v0
+        uses: ariga/setup-atlas@75c2689a056549668d567854bd98ce837f41cfc1 # v0
       - name: Set up Atlas action
         uses: ariga/atlas-action/setup@d24493894b48c9f8567228edd56c4430301d9eb6 # v1
       - uses: ariga/atlas-action/monitor/schema@d24493894b48c9f8567228edd56c4430301d9eb6 # v1
