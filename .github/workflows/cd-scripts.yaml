@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - .github/workflows/cd-scripts.yaml
       - scripts/**
 
 jobs:
@@ -13,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - name: Setup Atlas
-        uses: ariga/setup-atlas@747818cc9a4d896aae962ffdde7015337930a4c9 # master
+        uses: ariga/setup-atlas@75c2689a056549668d567854bd98ce837f41cfc1 # master
         with:
           cloud-token: ${{ secrets.ATLAS_PUBLIC_TENANT_TOKEN }}
       - name: Setup Atlas Action
