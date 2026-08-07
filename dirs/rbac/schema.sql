@@ -64,7 +64,9 @@ CREATE TABLE "public"."departments" (
   "description" text NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
-  CONSTRAINT "departments_name_unique" UNIQUE ("name")
+  CONSTRAINT "departments_name_unique" UNIQUE ("name"),
+  -- CHANGE: prevent blank/whitespace-only department names
+  CONSTRAINT "departments_name_not_blank_chk" CHECK (btrim("name") <> '')
 );
 
 -- Create "employees" table
