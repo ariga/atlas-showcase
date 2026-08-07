@@ -135,7 +135,7 @@ CREATE TRIGGER "trigger_insert_apikeys" BEFORE INSERT ON "public"."api_keys" FOR
 -- Create "audit_logs" table
 CREATE TABLE "public"."audit_logs" (
   "id" uuid NOT NULL,
-  "time" timestamptz NOT NULL,
+  "logged_at" timestamptz NOT NULL,
   "user_id" uuid NOT NULL,
   "organization_id" uuid NOT NULL,
   "ip" inet NULL,
@@ -158,11 +158,11 @@ CREATE INDEX "idx_audit_log_organization_id" ON "public"."audit_logs" ("organiza
 -- Create index "idx_audit_log_user_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_log_user_id" ON "public"."audit_logs" ("user_id");
 -- Create index "idx_audit_logs_time_desc" to table: "audit_logs"
-CREATE INDEX "idx_audit_logs_time_desc" ON "public"."audit_logs" ("time" DESC);
+CREATE INDEX "idx_audit_logs_time_desc" ON "public"."audit_logs" ("logged_at" DESC);
 -- Create index "idx_audit_logs_org_time_desc" to table: "audit_logs"
-CREATE INDEX "idx_audit_logs_org_time_desc" ON "public"."audit_logs" ("organization_id", "time" DESC);
+CREATE INDEX "idx_audit_logs_org_time_desc" ON "public"."audit_logs" ("organization_id", "logged_at" DESC);
 -- Create index "idx_audit_logs_user_time_desc" to table: "audit_logs"
-CREATE INDEX "idx_audit_logs_user_time_desc" ON "public"."audit_logs" ("user_id", "time" DESC);
+CREATE INDEX "idx_audit_logs_user_time_desc" ON "public"."audit_logs" ("user_id", "logged_at" DESC);
 -- Create index "idx_audit_logs_request_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_logs_request_id" ON "public"."audit_logs" ("request_id") WHERE (request_id IS NOT NULL);
 -- New: Create index to speed resource lookups in audit logs (now partial to avoid NULL entries)
@@ -170,9 +170,9 @@ CREATE INDEX "idx_audit_logs_resource_type_id" ON "public"."audit_logs" ("resour
 -- New: Create index to speed up lookups by resource_id
 CREATE INDEX "idx_audit_logs_resource_id" ON "public"."audit_logs" ("resource_id") WHERE (resource_id IS NOT NULL);
 -- New: Composite index for per-organization resource audit history, ordered by newest first
-CREATE INDEX "idx_audit_logs_org_resource_time_desc" ON "public"."audit_logs" ("organization_id", "resource_type", "resource_id", "time" DESC);
+CREATE INDEX "idx_audit_logs_org_resource_time_desc" ON "public"."audit_logs" ("organization_id", "resource_type", "resource_id", "logged_at" DESC);
 -- New (single change in this revision): Redundant-looking but frequently used “latest per org” covering index
-CREATE INDEX "idx_audit_logs_organization_time_desc" ON "public"."audit_logs" ("organization_id", "time" DESC);
+CREATE INDEX "idx_audit_logs_organization_time_desc" ON "public"."audit_logs" ("organization_id", "logged_at" DESC);
 -- Create "files" table
 CREATE TABLE "public"."files" (
   "hash" character varying(64) NOT NULL,
