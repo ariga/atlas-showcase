@@ -82,6 +82,7 @@ CREATE TABLE `products` (
     INDEX `products_status_category_id` (`status`, `category_id`),
     INDEX `products_category_id_status` (`category_id`, `status`),
     INDEX `products_manufacturer` (`manufacturer`),
+    INDEX `products_manufacturer_status` (`manufacturer`, `status`),
     INDEX `products_price` (`price`),
     INDEX `products_deleted_at` (`deleted_at`),
     CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
