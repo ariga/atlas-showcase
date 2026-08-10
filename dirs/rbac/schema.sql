@@ -96,6 +96,8 @@ CREATE TABLE "public"."projects" (
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "projects_name_unique" UNIQUE ("name"),
+  -- CHANGE: prevent blank/whitespace-only project names
+  CONSTRAINT "projects_name_not_blank_chk" CHECK (btrim("name") <> ''),
   CONSTRAINT "projects_end_date_after_start_date_chk" CHECK ("end_date" IS NULL OR "end_date" >= "start_date"),
   CONSTRAINT "projects_budget_non_negative_chk" CHECK ("budget" >= 0)
 );
