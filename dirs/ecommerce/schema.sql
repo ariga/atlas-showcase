@@ -27,7 +27,7 @@ CREATE TABLE `users` (
     PRIMARY KEY (`id`),
     UNIQUE (`email_address`),
     UNIQUE INDEX `user_name` (`user_name`),
-    UNIQUE INDEX `phone_number` (`phone_number`),
+    UNIQUE INDEX `phone_number` ((COALESCE(`phone_number`, CONCAT('NULL#', `id`)))),
     UNIQUE INDEX `user_name_email_address` (`user_name`, `email_address`),
     UNIQUE INDEX `country_code_phone_number` (`country_code`, `phone_number`),
     INDEX `last_login` (`last_login`),
