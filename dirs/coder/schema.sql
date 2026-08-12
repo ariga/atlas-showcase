@@ -342,7 +342,9 @@ CREATE TABLE "public"."organizations" (
   "created_at" timestamptz NOT NULL,
   "updated_at" timestamptz NOT NULL,
   "deleted" boolean NOT NULL DEFAULT false,
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  CONSTRAINT "organizations_name_no_surrounding_whitespace" CHECK (name = btrim(name)),
+  CONSTRAINT "organizations_name_not_empty" CHECK (length(btrim(name)) > 0)
 );
 -- Create index "idx_organization_name" to table: "organizations"
 CREATE UNIQUE INDEX "idx_organization_name" ON "public"."organizations" ("name");
