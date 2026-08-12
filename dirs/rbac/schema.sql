@@ -8,7 +8,7 @@ CREATE USER app_readonly WITH PASSWORD 'readonly_password';
 CREATE USER app_readwrite WITH PASSWORD 'readwrite_password';
 CREATE USER app_admin WITH PASSWORD 'admin_password';
 CREATE USER app_analyst WITH PASSWORD 'analyst_password';
-CREATE USER app_auditor WITH PASSWORD 'auditor_password';
+-- (REMOVED) CREATE USER app_auditor WITH PASSWORD 'auditor_password';
 
 -- Database-level objects: Roles
 CREATE ROLE readonly_role;
@@ -26,7 +26,7 @@ GRANT readonly_role TO app_readonly;
 GRANT readwrite_role TO app_readwrite;
 GRANT admin_role TO app_admin;
 GRANT analyst_role TO app_analyst;
-GRANT auditor_role TO app_auditor;
+-- (REMOVED) GRANT auditor_role TO app_auditor;
 
 -- CHANGE (new RBAC hardening): prevent all database users from connecting by default
 REVOKE CONNECT ON DATABASE current_database() FROM PUBLIC;
