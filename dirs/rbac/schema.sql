@@ -31,6 +31,13 @@ GRANT analyst_role TO app_analyst;
 -- CHANGE (new RBAC hardening): prevent all database users from connecting by default
 REVOKE CONNECT ON DATABASE current_database() FROM PUBLIC;
 
+-- CHANGE (RBAC fix): allow intended application roles to connect while keeping PUBLIC denied
+GRANT CONNECT ON DATABASE current_database() TO readonly_role;
+GRANT CONNECT ON DATABASE current_database() TO readwrite_role;
+GRANT CONNECT ON DATABASE current_database() TO admin_role;
+GRANT CONNECT ON DATABASE current_database() TO analyst_role;
+GRANT CONNECT ON DATABASE current_database() TO auditor_role;
+
 -- Schema-level objects: Tables
 -- Create enum type "user_status"
 CREATE TYPE "public"."user_status" AS ENUM ('active', 'inactive', 'suspended');
