@@ -175,6 +175,8 @@ CREATE INDEX "idx_audit_logs_resource_id" ON "public"."audit_logs" ("resource_id
 CREATE INDEX "idx_audit_logs_org_resource_time_desc" ON "public"."audit_logs" ("organization_id", "resource_type", "resource_id", "time" DESC);
 -- New (single change in this revision): Redundant-looking but frequently used “latest per org” covering index
 CREATE INDEX "idx_audit_logs_organization_time_desc" ON "public"."audit_logs" ("organization_id", "time" DESC);
+-- New (single change in this revision): Speed up “recent audit events by resource type” queries
+CREATE INDEX "idx_audit_logs_resource_type_time_desc" ON "public"."audit_logs" ("resource_type", "time" DESC) WHERE (resource_type IS NOT NULL);
 -- Create "files" table
 CREATE TABLE "public"."files" (
   "hash" character varying(64) NOT NULL,
