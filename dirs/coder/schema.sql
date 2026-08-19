@@ -665,6 +665,8 @@ CREATE UNLOGGED TABLE "public"."workspace_agent_metadata" (
   CONSTRAINT "workspace_agent_metadata_workspace_agent_id_fkey" FOREIGN KEY ("workspace_agent_id") REFERENCES "public"."workspace_agents" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "workspace_agent_metadata_collected_at_not_before_sentinel" CHECK (collected_at >= TIMESTAMPTZ '0001-01-01 00:00:00+00')
 );
+-- New (single change in this revision): Speed up fetching latest metadata per agent
+CREATE INDEX "workspace_agent_metadata_agent_collected_at_desc_idx" ON "public"."workspace_agent_metadata" ("workspace_agent_id", "collected_at" DESC);
 -- Create "workspace_agent_startup_logs" table
 CREATE TABLE "public"."workspace_agent_startup_logs" (
   "agent_id" uuid NOT NULL,
