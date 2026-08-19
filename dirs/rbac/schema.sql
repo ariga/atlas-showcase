@@ -159,6 +159,12 @@ BEFORE UPDATE ON "public"."users"
 FOR EACH ROW
 EXECUTE FUNCTION "public"."set_updated_at"();
 
+-- CHANGE: also set updated_at on INSERT for consistency
+CREATE TRIGGER "users_set_updated_at_on_insert"
+BEFORE INSERT ON "public"."users"
+FOR EACH ROW
+EXECUTE FUNCTION "public"."set_updated_at"();
+
 -- Database-level permissions: Grant schema usage
 GRANT USAGE ON SCHEMA "public" TO readonly_role;
 GRANT USAGE ON SCHEMA "public" TO readwrite_role;
