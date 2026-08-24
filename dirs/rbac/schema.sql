@@ -45,9 +45,8 @@ CREATE TABLE "public"."users" (
   "updated_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "users_username_unique" UNIQUE ("username"),
-  -- CHANGE: strengthen normalization guarantee to match the unique index expression
-  CONSTRAINT "users_email_normalized_chk" CHECK ("email" = lower(btrim("email"))),
-  CONSTRAINT "users_email_lowercase_chk" CHECK ("email" = lower("email") AND "email" = btrim("email")),
+  -- CHANGE: strengthen normalization guarantee to also prevent any whitespace characters inside email
+  CONSTRAINT "users_email_normalized_chk" CHECK ("email" = lower(btrim("email")) AND "email" !~ E'\\s'),
   CONSTRAINT "users_username_lowercase_chk" CHECK ("username" = lower("username") AND "username" = btrim("username"))
 );
 
