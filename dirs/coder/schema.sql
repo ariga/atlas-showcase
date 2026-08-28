@@ -417,6 +417,8 @@ CREATE TABLE "public"."provisioner_jobs" (
 );
 -- Create index "provisioner_jobs_started_at_idx" to table: "provisioner_jobs"
 CREATE INDEX "provisioner_jobs_started_at_idx" ON "public"."provisioner_jobs" ("started_at") WHERE (started_at IS NULL);
+-- New (single change in this revision): Speed up listing newest jobs per organization
+CREATE INDEX "provisioner_jobs_organization_created_at_desc_idx" ON "public"."provisioner_jobs" ("organization_id", "created_at" DESC);
 -- Create "parameter_schemas" table
 CREATE TABLE "public"."parameter_schemas" (
   "id" uuid NOT NULL,
