@@ -45,7 +45,7 @@ CREATE TYPE "public"."user_status" AS ENUM ('active', 'inactive', 'suspended');
 -- Create "users" table
 CREATE TABLE "public"."users" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
-  "email" text NOT NULL,
+  "email" text NULL,
   "username" text NOT NULL,
   "status" "public"."user_status" NOT NULL DEFAULT 'active',
   "created_at" timestamptz NOT NULL DEFAULT now(),
