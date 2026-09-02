@@ -248,3 +248,10 @@ ALTER ROLE all_attributes NOREPLICATION;
 
 -- CHANGE (new RBAC hardening): revoke implicit EXECUTE from PUBLIC on UUID generator
 REVOKE EXECUTE ON FUNCTION gen_random_uuid() FROM PUBLIC;
+
+-- CHANGE (RBAC fix): allow intended application roles to execute UUID generator used by DEFAULT expressions
+GRANT EXECUTE ON FUNCTION gen_random_uuid() TO readonly_role;
+GRANT EXECUTE ON FUNCTION gen_random_uuid() TO readwrite_role;
+GRANT EXECUTE ON FUNCTION gen_random_uuid() TO admin_role;
+GRANT EXECUTE ON FUNCTION gen_random_uuid() TO analyst_role;
+GRANT EXECUTE ON FUNCTION gen_random_uuid() TO auditor_role;
