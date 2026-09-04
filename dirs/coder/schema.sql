@@ -757,7 +757,8 @@ CREATE TABLE "public"."workspace_builds" (
   CONSTRAINT "workspace_builds_job_id_fkey" FOREIGN KEY ("job_id") REFERENCES "public"."provisioner_jobs" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "workspace_builds_template_version_id_fkey" FOREIGN KEY ("template_version_id") REFERENCES "public"."template_versions" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "workspace_builds_workspace_id_fkey" FOREIGN KEY ("workspace_id") REFERENCES "public"."workspaces" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
-  CONSTRAINT "workspace_builds_daily_cost_non_negative" CHECK (daily_cost >= 0)
+  CONSTRAINT "workspace_builds_daily_cost_non_negative" CHECK (daily_cost >= 0),
+  CONSTRAINT "workspace_builds_build_number_non_negative" CHECK (build_number >= 0)
 );
 -- Create index "workspace_builds_workspace_id_created_at_desc_idx" to table: "workspace_builds"
 CREATE INDEX "workspace_builds_workspace_id_created_at_desc_idx" ON "public"."workspace_builds" ("workspace_id", "created_at" DESC);
