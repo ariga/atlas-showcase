@@ -35,7 +35,7 @@ CREATE TABLE `users` (
     CHECK (`email_address` REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$' OR `phone_number` IS NULL),
     CHECK (`last_order_date` IS NULL OR `last_order_date` >= `created_at`),
-    CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')),
+    CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')), 
     CHECK (`reward_points` >= 0 AND `reward_points` <= 100000),
     CHECK ((`deleted_at` IS NULL) OR (`active` = 0))
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table storing user information, including authentication and profile details';
@@ -150,7 +150,7 @@ CREATE TABLE `orders` (
     `shipping_address` varchar(255) NOT NULL COMMENT 'Shipping address for the order',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the order was created',
     `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
-    `order_reference` varchar(255) NOT NULL COMMENT 'Optional reference number for the order',
+    `order_reference` varchar(512) NOT NULL COMMENT 'Optional reference number for the order',
     `is_featured` bool NOT NULL DEFAULT 0 COMMENT 'Flag indicating if the order is featured, defaults to false',
     `description` text NULL COMMENT 'Additional details about the order',
     `order_status` ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled', 'returned') NOT NULL DEFAULT 'pending' COMMENT 'Status of the order',
