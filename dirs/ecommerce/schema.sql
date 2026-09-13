@@ -1,7 +1,7 @@
 -- Create 'users' table
 CREATE TABLE `users` (
     `id` int NOT NULL COMMENT 'Unique identifier for each user',
-    `user_name` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'The username of the user, must be unique',
+    `username` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'The username of the user, must be unique',
     `email_address` varchar(255) COLLATE utf8mb4_0900_as_ci NOT NULL COMMENT 'Email address of the user, now stored case-insensitively',
     `phone_number` char(15) NOT NULL COMMENT 'Phone number of the user, now required (migration fails if existing rows contain NULL)',
     `country_code` char(3) NULL DEFAULT '+1' COMMENT 'Country code for the phone number, defaults to US and can now be NULL',
@@ -26,9 +26,9 @@ CREATE TABLE `users` (
     `preferred_language` varchar(10) NOT NULL DEFAULT 'en' COMMENT 'Preferred language of the user, defaults to English',
     PRIMARY KEY (`id`),
     UNIQUE (`email_address`),
-    UNIQUE INDEX `user_name` (`user_name`),
+    UNIQUE INDEX `username` (`username`),
     UNIQUE INDEX `phone_number` ((COALESCE(`phone_number`, CONCAT('NULL#', `id`)))),
-    UNIQUE INDEX `user_name_email_address` (`user_name`, `email_address`),
+    UNIQUE INDEX `username_email_address` (`username`, `email_address`),
     UNIQUE INDEX `country_code_phone_number` (`country_code`, `phone_number`),
     INDEX `last_login` (`last_login`),
     INDEX `users_email_address_lower` ((LOWER(`email_address`))),
