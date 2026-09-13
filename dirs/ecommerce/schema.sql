@@ -35,7 +35,7 @@ CREATE TABLE `users` (
     CHECK (`email_address` REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'),
     CHECK (`phone_number` REGEXP '^[0-9]{1,15}$' OR `phone_number` IS NULL),
     CHECK (`last_order_date` IS NULL OR `last_order_date` >= `created_at`),
-    CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')), 
+    CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')),
     CHECK (`reward_points` >= 0 AND `reward_points` <= 100000),
     CHECK ((`deleted_at` IS NULL) OR (`active` = 0))
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table storing user information, including authentication and profile details';
@@ -204,7 +204,8 @@ CREATE TABLE `order_items` (
     INDEX `product_id` (`product_id`),
     CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-    CHECK (`quantity` >= 1)
+    CHECK (`quantity` >= 1),
+    CHECK (`price` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing items in each order placed by users';
 
 -- Create 'posts' table
