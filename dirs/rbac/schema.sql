@@ -233,7 +233,7 @@ GRANT SELECT ON TABLE "public"."projects" TO analyst_role;
 GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
-GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
+REVOKE SELECT ON TABLE "public"."audit_logs" FROM auditor_role;
 -- CHANGE: explicitly grant access to before/after payload columns for audit investigations
 GRANT SELECT ("old_values", "new_values") ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users for audit context
