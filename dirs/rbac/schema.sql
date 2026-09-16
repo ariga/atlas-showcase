@@ -53,7 +53,12 @@ CREATE TABLE "public"."users" (
   PRIMARY KEY ("id"),
   CONSTRAINT "users_username_unique" UNIQUE ("username"),
   -- CHANGE: strengthen normalization guarantee to also prevent any whitespace characters inside email
-  CONSTRAINT "users_email_normalized_chk" CHECK ("email" = lower(btrim("email")) AND "email" !~ E'\\s'),
+  -- and require a minimal email structure (one '@' and a dot in the domain)
+  CONSTRAINT "users_email_normalized_chk" CHECK (
+    "email" = lower(btrim("email"))
+    AND "email" !~ E'\\s'
+    AND "email" ~ E'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'
+  ),
   CONSTRAINT "users_username_lowercase_chk" CHECK ("username" = lower("username") AND "username" = btrim("username"))
 );
 
