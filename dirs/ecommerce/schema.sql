@@ -199,7 +199,7 @@ CREATE TABLE `order_items` (
     `order_id` int NOT NULL COMMENT 'Foreign key referencing the order',
     `product_id` int NOT NULL COMMENT 'Foreign key referencing the product',
     `quantity` int NOT NULL COMMENT 'Quantity of the product in the order',
-    `price` decimal(10,2) NOT NULL COMMENT 'Price of the product at the time of order',
+    `price` decimal(12,2) NOT NULL COMMENT 'Price of the product at the time of order',
     `order_reference` varchar(100) NULL COMMENT 'Optional reference number for the order',
     PRIMARY KEY (`order_id`, `product_id`),
     INDEX `product_id` (`product_id`),
