@@ -237,6 +237,9 @@ REVOKE SELECT ON TABLE "public"."audit_logs" FROM analyst_role;
 GRANT SELECT ON TABLE "public"."projects" TO analyst_role;
 GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
 
+-- CHANGE (NEW): allow analysts to read department reference data
+GRANT SELECT ON TABLE "public"."departments" TO analyst_role;
+
 -- Database-level permissions: Auditor access (read-only on audit logs)
 REVOKE SELECT ON TABLE "public"."audit_logs" FROM auditor_role;
 -- CHANGE: explicitly grant access to before/after payload columns for audit investigations
