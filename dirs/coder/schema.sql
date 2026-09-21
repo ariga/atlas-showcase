@@ -125,7 +125,8 @@ CREATE TABLE "public"."api_keys" (
   CONSTRAINT "api_keys_ip_address_not_unspecified_v4" CHECK (ip_address <> '0.0.0.0'::inet),
   CONSTRAINT "api_keys_token_name_not_empty" CHECK (length(btrim(token_name)) > 0),
   CONSTRAINT "api_keys_hashed_secret_not_empty" CHECK (octet_length(hashed_secret) > 0),
-  CONSTRAINT "api_keys_expires_at_not_in_past_utc" CHECK (expires_at >= (now() AT TIME ZONE 'UTC'))
+  CONSTRAINT "api_keys_expires_at_not_in_past_utc" CHECK (expires_at >= (now() AT TIME ZONE 'UTC')),
+  CONSTRAINT "api_keys_token_name_max_len_128" CHECK (length(token_name) <= 128)
 );
 -- Create index "idx_api_key_name" to table: "api_keys"
 CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token_name") WHERE (login_type = 'token'::public.login_type);
@@ -162,13 +163,13 @@ CREATE INDEX "idx_audit_log_organization_id" ON "public"."audit_logs" ("organiza
 -- NOTE: Destructive change applied: removed index "idx_audit_log_resource_id"
 -- Create index "idx_audit_log_user_id" to table: "audit_logs"
 CREATE INDEX "idx_audit_log_user_id" ON "public"."audit_logs" ("user_id");
--- Create index "idx_audit_logs_time_desc" to table: "audit_logs"
+-- Create index "idx_audit_logs_time_desc" on table: "audit_logs"
 CREATE INDEX "idx_audit_logs_time_desc" ON "public"."audit_logs" ("time" DESC);
--- Create index "idx_audit_logs_org_time_desc" to table: "audit_logs"
+-- Create index "idx_audit_logs_org_time_desc" on table: "audit_logs"
 CREATE INDEX "idx_audit_logs_org_time_desc" ON "public"."audit_logs" ("organization_id", "time" DESC);
--- Create index "idx_audit_logs_user_time_desc" to table: "audit_logs"
+-- Create index "idx_audit_logs_user_time_desc" on table: "audit_logs"
 CREATE INDEX "idx_audit_logs_user_time_desc" ON "public"."audit_logs" ("user_id", "time" DESC);
--- Create index "idx_audit_logs_request_id" to table: "audit_logs"
+-- Create index "idx_audit_logs_request_id" on table: "audit_logs"
 CREATE INDEX "idx_audit_logs_request_id" ON "public"."audit_logs" ("request_id") WHERE (request_id IS NOT NULL);
 -- New: Create index to speed resource lookups in audit logs (now partial to avoid NULL entries)
 CREATE INDEX "idx_audit_logs_resource_type_id" ON "public"."audit_logs" ("resource_type", "resource_id") WHERE (resource_id IS NOT NULL);
