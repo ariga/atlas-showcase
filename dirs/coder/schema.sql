@@ -66,6 +66,7 @@ CREATE TABLE "public"."users" (
   CONSTRAINT "users_email_lowercase_only" CHECK (email = lower(email)),
   CONSTRAINT "users_email_normalized" CHECK (email = lower(btrim(email)) AND length(btrim(email)) > 0),
   CONSTRAINT "users_email_basic_shape" CHECK (email ~ '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
+  CONSTRAINT "users_email_max_len_320" CHECK (length(email) <= 320),
   CONSTRAINT "users_username_no_surrounding_whitespace" CHECK (username = btrim(username)),
   CONSTRAINT "users_username_not_empty" CHECK (length(btrim(username)) > 0),
   CONSTRAINT "users_username_lowercase_only" CHECK (username = lower(username)),
@@ -576,7 +577,7 @@ COMMENT ON COLUMN "public"."template_version_variables"."name" IS 'Variable name
 COMMENT ON COLUMN "public"."template_version_variables"."description" IS 'Variable description';
 COMMENT ON COLUMN "public"."template_version_variables"."type" IS 'Variable type';
 COMMENT ON COLUMN "public"."template_version_variables"."value" IS 'Variable value';
-COMMENT ON COLUMN "public"."template_version_variables"."default_value" IS 'Variable default value';
+COMMENT ON COLUMN "public"."template_version_variables"."default_value" IS 'Variable type';
 COMMENT ON COLUMN "public"."template_version_variables"."required" IS 'Required variables needs a default value or a value provided by template admin';
 COMMENT ON COLUMN "public"."template_version_variables"."sensitive" IS 'Sensitive variables have their values redacted in logs or site UI';
 -- Create "user_links" table
