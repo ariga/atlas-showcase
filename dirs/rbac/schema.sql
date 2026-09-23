@@ -244,6 +244,8 @@ GRANT SELECT ON TABLE "public"."departments" TO analyst_role;
 REVOKE SELECT ON TABLE "public"."audit_logs" FROM auditor_role;
 -- CHANGE: explicitly grant access to before/after payload columns for audit investigations
 GRANT SELECT ("old_values", "new_values") ON TABLE "public"."audit_logs" TO auditor_role;
+-- CHANGE (single change in this iteration): grant auditor access to audit log metadata too
+GRANT SELECT ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users for audit context
 GRANT SELECT ON TABLE "public"."users" TO auditor_role;
 -- Destructive change: revoke auditor access to employees
