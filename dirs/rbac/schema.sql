@@ -1,4 +1,4 @@
--- Add new schema named "public"
+            -- Add new schema named "public"
 CREATE SCHEMA IF NOT EXISTS "public";
 -- Set comment to schema: "public"
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -244,6 +244,8 @@ GRANT SELECT ON TABLE "public"."departments" TO analyst_role;
 REVOKE SELECT ON TABLE "public"."audit_logs" FROM auditor_role;
 -- CHANGE: explicitly grant access to before/after payload columns for audit investigations
 GRANT SELECT ("old_values", "new_values") ON TABLE "public"."audit_logs" TO auditor_role;
+-- CHANGE (NEW): allow auditors to read audit log metadata columns needed for investigations
+GRANT SELECT ("id", "table_name", "action", "user_id", "created_at") ON TABLE "public"."audit_logs" TO auditor_role;
 -- Grant read-only on users for audit context
 GRANT SELECT ON TABLE "public"."users" TO auditor_role;
 -- Destructive change: revoke auditor access to employees
