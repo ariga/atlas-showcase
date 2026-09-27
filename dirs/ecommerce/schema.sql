@@ -147,7 +147,6 @@ CREATE TABLE `orders` (
     `total_amount` decimal(12,2) UNSIGNED NOT NULL COMMENT 'Total amount for the order',
     `shipping_cost` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Shipping cost associated with the order',
     `comment` varchar(100) NULL COMMENT 'Optional comment for the order',
-    `status` ENUM('PENDING','PROCESSING','SHIPPED','DELIVERED','CANCELLED','RETURNED') NOT NULL DEFAULT 'PENDING' COMMENT 'Current status of the order',
     `shipping_address` varchar(255) NOT NULL COMMENT 'Shipping address for the order',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp of when the order was created',
     `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp of the last update to the order record',
@@ -190,7 +189,6 @@ CREATE TABLE `orders` (
     CHECK (CHAR_LENGTH(`order_reference`) <= 255),
     CHECK (CHAR_LENGTH(TRIM(`shipping_address`)) BETWEEN 1 AND 255),
     CHECK (`total_amount` >= `shipping_cost`),
-    CHECK (LOWER(`status`) = `order_status`),
     CHECK (`order_reference` IS NOT NULL AND CHAR_LENGTH(TRIM(`order_reference`)) > 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing orders placed by users';
 
