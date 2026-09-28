@@ -1,4 +1,4 @@
-                        -- Add new schema named "public"
+-- Add new schema named "public"
 CREATE SCHEMA IF NOT EXISTS "public";
 -- Set comment to schema: "public"
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -36,7 +36,6 @@ GRANT CONNECT ON DATABASE current_database() TO readonly_role;
 GRANT CONNECT ON DATABASE current_database() TO readwrite_role;
 GRANT CONNECT ON DATABASE current_database() TO admin_role;
 GRANT CONNECT ON DATABASE current_database() TO analyst_role;
-GRANT CONNECT ON DATABASE current_database() TO auditor_role;
 
 -- Schema-level objects: Tables
 -- Create enum type "user_status"
