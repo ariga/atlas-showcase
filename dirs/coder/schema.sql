@@ -87,6 +87,8 @@ CREATE UNIQUE INDEX "idx_users_email" ON "public"."users" ("email") WHERE (delet
 CREATE UNIQUE INDEX "idx_users_username" ON "public"."users" ("username") WHERE (deleted = false);
 -- NOTE: Destructive change applied: removed redundant index "users_email_lower_idx"
 -- NOTE: Destructive change applied: removed duplicate index "users_username_lower_idx"
+-- New: Speed up lookups of recently active users (non-deleted)
+CREATE INDEX "idx_users_last_seen_at_desc" ON "public"."users" ("last_seen_at" DESC) WHERE (deleted = false);
 -- Create "insert_apikey_fail_if_user_deleted" function
 CREATE FUNCTION "public"."insert_apikey_fail_if_user_deleted" () RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE
