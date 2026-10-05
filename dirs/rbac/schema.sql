@@ -1,4 +1,4 @@
-                        -- Add new schema named "public"
+                                    -- Add new schema named "public"
 CREATE SCHEMA IF NOT EXISTS "public";
 -- Set comment to schema: "public"
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -186,6 +186,9 @@ GRANT USAGE ON SCHEMA "public" TO auditor_role;
 
 -- CHANGE: prevent PUBLIC from creating objects in the public schema
 REVOKE CREATE ON SCHEMA "public" FROM PUBLIC;
+
+-- CHANGE (RBAC hardening): prevent application read/write role from creating schema objects
+REVOKE CREATE ON SCHEMA "public" FROM readwrite_role;
 
 -- Database-level permissions: Read-only access
 GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO readonly_role;
