@@ -1,4 +1,4 @@
-                        -- Add new schema named "public"
+-- Add new schema named "public"
 CREATE SCHEMA IF NOT EXISTS "public";
 -- Set comment to schema: "public"
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -46,12 +46,12 @@ CREATE TYPE "public"."user_status" AS ENUM ('active', 'inactive', 'suspended');
 CREATE TABLE "public"."users" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "email" text NOT NULL,
-  "username" text NOT NULL,
+  "handle" text NOT NULL,
   "status" "public"."user_status" NOT NULL DEFAULT 'active',
   "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
-  CONSTRAINT "users_username_unique" UNIQUE ("username"),
+  CONSTRAINT "users_handle_unique" UNIQUE ("handle"),
   -- CHANGE: strengthen normalization guarantee to also prevent any whitespace characters inside email
   -- and require a minimal email structure (one '@' and a dot in the domain)
   CONSTRAINT "users_email_normalized_chk" CHECK (
@@ -59,14 +59,14 @@ CREATE TABLE "public"."users" (
     AND "email" !~ E'\\s'
     AND "email" ~ E'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'
   ),
-  CONSTRAINT "users_username_lowercase_chk" CHECK ("username" = lower("username") AND "username" = btrim("username"))
+  CONSTRAINT "users_handle_lowercase_chk" CHECK ("handle" = lower("handle") AND "handle" = btrim("handle"))
 );
 
 -- Enforce case-insensitive email uniqueness (replaces users_email_unique)
 CREATE UNIQUE INDEX "users_email_unique" ON "public"."users" (lower("email"));
 
 -- CHANGE: add index to speed handle lookups (in addition to uniqueness constraint)
-CREATE INDEX "idx_users_handle" ON "public"."users" ("username");
+CREATE INDEX "idx_users_handle" ON "public"."users" ("handle");
 
 -- Create "departments" table
 CREATE TABLE "public"."departments" (
