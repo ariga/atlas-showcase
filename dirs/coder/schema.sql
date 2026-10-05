@@ -492,7 +492,8 @@ CREATE TABLE "public"."templates" (
   "inactivity_ttl" bigint NOT NULL DEFAULT 0,
   PRIMARY KEY ("id"),
   CONSTRAINT "templates_created_by_fkey" FOREIGN KEY ("created_by") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
-  CONSTRAINT "templates_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations" ("id") ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT "templates_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
+  CONSTRAINT "templates_max_ttl_non_negative" CHECK (max_ttl >= 0)
 );
 -- Create index "templates_organization_id_name_idx" to table: "templates"
 CREATE UNIQUE INDEX "templates_organization_id_name_idx" ON "public"."templates" ("organization_id", (lower((name)::text))) WHERE (deleted = false);
