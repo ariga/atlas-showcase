@@ -1,4 +1,4 @@
-                        -- Add new schema named "public"
+                                    -- Add new schema named "public"
 CREATE SCHEMA IF NOT EXISTS "public";
 -- Set comment to schema: "public"
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -137,7 +137,9 @@ CREATE TABLE "public"."audit_logs" (
   "old_values" jsonb NULL,
   "new_values" jsonb NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  -- CHANGE: prevent logging an all-zero UUID as the actor
+  CONSTRAINT "audit_logs_user_id_not_nil_chk" CHECK ("user_id" <> '00000000-0000-0000-0000-000000000000'::uuid)
 );
 
 -- Create indexes
