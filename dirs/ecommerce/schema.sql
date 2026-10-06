@@ -197,14 +197,16 @@ CREATE TABLE `orders` (
 
 -- Create 'order_items' table
 CREATE TABLE `order_items` (
-    `id` int NOT NULL COMMENT 'Unique identifier for each order item',
+    `id` int NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for each order item',
     `order_id` int NOT NULL COMMENT 'Foreign key referencing the order',
     `product_id` int NOT NULL COMMENT 'Foreign key referencing the product',
     `quantity` int NOT NULL COMMENT 'Quantity of the product in the order',
     `price` decimal(12,2) NOT NULL COMMENT 'Price of the product at the time of order',
     `order_reference` varchar(100) NULL COMMENT 'Optional reference number for the order',
-    PRIMARY KEY (`order_id`, `product_id`),
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `order_items_order_id_product_id` (`order_id`, `product_id`),
     INDEX `product_id` (`product_id`),
+    INDEX `order_id` (`order_id`),
     CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CHECK (`quantity` >= 1)
