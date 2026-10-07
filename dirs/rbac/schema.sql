@@ -137,7 +137,8 @@ CREATE TABLE "public"."audit_logs" (
   "old_values" jsonb NULL,
   "new_values" jsonb NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  CONSTRAINT "audit_logs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT
 );
 
 -- Create indexes
