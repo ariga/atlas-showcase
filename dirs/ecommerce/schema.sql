@@ -209,7 +209,8 @@ CREATE TABLE `order_items` (
     INDEX `order_id` (`order_id`),
     CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-    CHECK (`quantity` >= 1)
+    CHECK (`quantity` >= 1),
+    CHECK (`price` >= 0)
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing items in each order placed by users';
 
 -- Create 'posts' table
