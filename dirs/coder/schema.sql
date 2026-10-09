@@ -731,15 +731,15 @@ CREATE TABLE "public"."workspaces" (
   "name" character varying(64) NOT NULL,
   "autostart_schedule" text NULL,
   "ttl" bigint NULL,
-  "last_used_at" timestamp NOT NULL DEFAULT '0001-01-01 00:00:00',
+  "last_used_at" timestamptz NOT NULL DEFAULT '0001-01-01 00:00:00+00',
   PRIMARY KEY ("id"),
   CONSTRAINT "workspaces_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "workspaces_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "workspaces_template_id_fkey" FOREIGN KEY ("template_id") REFERENCES "public"."templates" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "workspaces_ttl_non_negative" CHECK (ttl IS NULL OR ttl >= 0),
-  CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= TIMESTAMP '0001-01-01 00:00:00'),
+  CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= TIMESTAMPTZ '0001-01-01 00:00:00+00'),
   CONSTRAINT "workspaces_last_used_at_not_in_future" CHECK (last_used_at <= (now() AT TIME ZONE 'UTC')),
-  CONSTRAINT "workspaces_last_used_at_not_negative_epoch" CHECK (last_used_at >= TIMESTAMP '1970-01-01 00:00:00'),
+  CONSTRAINT "workspaces_last_used_at_not_negative_epoch" CHECK (last_used_at >= TIMESTAMPTZ '1970-01-01 00:00:00+00'),
   CONSTRAINT "workspaces_autostart_schedule_null_or_trimmed_non_empty" CHECK (autostart_schedule IS NULL OR (autostart_schedule = btrim(autostart_schedule) AND length(btrim(autostart_schedule)) > 0))
 );
 CREATE UNIQUE INDEX "workspaces_owner_id_lower_idx" ON "public"."workspaces" ("owner_id", (lower((name)::text))) WHERE (deleted = false);

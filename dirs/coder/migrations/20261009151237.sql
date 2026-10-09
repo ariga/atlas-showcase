@@ -1,0 +1,2 @@
+-- Modify "workspaces" table
+ALTER TABLE "workspaces" DROP CONSTRAINT "workspaces_last_used_at_not_before_sentinel", ADD CONSTRAINT "workspaces_last_used_at_not_before_sentinel" CHECK (last_used_at >= '0001-01-01 00:00:00+00'::timestamp with time zone), DROP CONSTRAINT "workspaces_last_used_at_not_negative_epoch", ADD CONSTRAINT "workspaces_last_used_at_not_negative_epoch" CHECK (last_used_at >= '1970-01-01 00:00:00+00'::timestamp with time zone), ALTER COLUMN "last_used_at" TYPE timestamptz, ALTER COLUMN "last_used_at" SET DEFAULT '0001-01-01 00:00:00+00';
