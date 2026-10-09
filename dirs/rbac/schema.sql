@@ -59,6 +59,8 @@ CREATE TABLE "public"."users" (
     AND "email" !~ E'\\s'
     AND "email" ~ E'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'
   ),
+  -- CHANGE (new): enforce practical maximum length for emails (RFC 5321/5322 common limit)
+  CONSTRAINT "users_email_max_length_chk" CHECK (length("email") <= 320),
   CONSTRAINT "users_handle_lowercase_chk" CHECK ("handle" = lower("handle") AND "handle" = btrim("handle"))
 );
 
