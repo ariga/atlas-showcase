@@ -36,7 +36,7 @@ GRANT CONNECT ON DATABASE current_database() TO readonly_role;
 GRANT CONNECT ON DATABASE current_database() TO readwrite_role;
 GRANT CONNECT ON DATABASE current_database() TO admin_role;
 GRANT CONNECT ON DATABASE current_database() TO analyst_role;
-GRANT CONNECT ON DATABASE current_database() TO auditor_role;
+-- DESTRUCTIVE CHANGE: removed CONNECT privilege for auditor_role
 
 -- Schema-level objects: Tables
 -- Create enum type "user_status"
