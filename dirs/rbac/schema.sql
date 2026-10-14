@@ -187,6 +187,9 @@ GRANT USAGE ON SCHEMA "public" TO admin_role;
 GRANT USAGE ON SCHEMA "public" TO analyst_role;
 GRANT USAGE ON SCHEMA "public" TO auditor_role;
 
+-- CHANGE: prevent PUBLIC from using the public schema
+REVOKE USAGE ON SCHEMA "public" FROM PUBLIC;
+
 -- CHANGE: prevent PUBLIC from creating objects in the public schema
 REVOKE CREATE ON SCHEMA "public" FROM PUBLIC;
 
