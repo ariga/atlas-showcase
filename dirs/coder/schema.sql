@@ -751,6 +751,8 @@ CREATE INDEX "workspaces_org_active_idx" ON "public"."workspaces" ("organization
 CREATE INDEX "workspaces_owner_last_used_at_desc_idx" ON "public"."workspaces" ("owner_id", "last_used_at" DESC) WHERE (deleted = false);
 -- New (single change in this revision): Speed up organization-level filtering by deleted flag
 CREATE INDEX "workspaces_organization_deleted_idx" ON "public"."workspaces" ("organization_id", "deleted");
+-- New (single change in this revision): Speed up generic owner-scoped workspace queries
+CREATE INDEX "workspaces_owner_id_idx" ON "public"."workspaces" ("owner_id");
 -- Create "workspace_builds" table
 CREATE TABLE "public"."workspace_builds" (
   "id" uuid NOT NULL,
