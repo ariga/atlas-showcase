@@ -219,6 +219,14 @@ REVOKE UPDATE ON TABLE "public"."audit_logs" FROM readwrite_role;
 -- CHANGE (new): prevent read/write application role from reading sensitive compensation data
 REVOKE SELECT ("salary") ON TABLE "public"."employees" FROM readwrite_role;
 
+-- CHANGE (NEW): disallow inserts into audit logs by read/write role; keep audit logs append-only to privileged writers
+REVOKE INSERT ON ALL TABLES IN SCHEMA "public" FROM readwrite_role;
+GRANT INSERT ON TABLE "public"."users" TO readwrite_role;
+GRANT INSERT ON TABLE "public"."departments" TO readwrite_role;
+GRANT INSERT ON TABLE "public"."employees" TO readwrite_role;
+GRANT INSERT ON TABLE "public"."projects" TO readwrite_role;
+GRANT INSERT ON TABLE "public"."project_assignments" TO readwrite_role;
+
 -- Database-level permissions: Admin access
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA "public" TO admin_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT ALL PRIVILEGES ON TABLES TO admin_role;
