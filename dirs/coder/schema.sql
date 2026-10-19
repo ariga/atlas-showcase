@@ -78,6 +78,7 @@ CREATE TABLE "public"."users" (
   CONSTRAINT "users_avatar_url_null_or_trimmed_non_empty" CHECK (avatar_url IS NULL OR (avatar_url = btrim(avatar_url) AND length(btrim(avatar_url)) > 0)),
   CONSTRAINT "users_avatar_url_null_or_http_https" CHECK (avatar_url IS NULL OR (avatar_url = btrim(avatar_url) AND length(btrim(avatar_url)) > 0 AND avatar_url ~ '^https?://')),
   CONSTRAINT "users_updated_at_not_before_created_at" CHECK (updated_at >= created_at),
+  CONSTRAINT "users_updated_at_not_before_sentinel" CHECK (updated_at >= TIMESTAMPTZ '0001-01-01 00:00:00+00'),
   CONSTRAINT "users_rbac_roles_reasonable_size" CHECK (cardinality(rbac_roles) <= 128),
   CONSTRAINT "users_deleted_not_null" CHECK (deleted IS NOT NULL),
   CONSTRAINT "users_deleted_password_login_type_forbidden" CHECK (deleted = false OR login_type <> 'password'::public.login_type)
