@@ -140,6 +140,8 @@ CREATE UNIQUE INDEX "idx_api_key_name" ON "public"."api_keys" ("user_id", "token
 CREATE INDEX "idx_api_keys_expires_at" ON "public"."api_keys" ("expires_at");
 -- New (single change in this revision): composite index for per-user expiration queries
 CREATE INDEX "idx_api_keys_user_id_expires_at" ON "public"."api_keys" ("user_id", "expires_at");
+-- New (single change in this revision): speed up joins/lookups by user_id
+CREATE INDEX "idx_api_keys_user_id" ON "public"."api_keys" ("user_id");
 -- Set comment to column: "hashed_secret" on table: "api_keys"
 COMMENT ON COLUMN "public"."api_keys"."hashed_secret" IS 'hashed_secret contains a SHA256 hash of the key secret. This is considered a secret and MUST NOT be returned from the API as it is used for API key encryption in app proxying code.';
 -- Create trigger "trigger_insert_apikeys"
