@@ -113,7 +113,9 @@ CREATE TABLE "public"."projects" (
   -- CHANGE: prevent blank/whitespace-only project names
   CONSTRAINT "projects_name_not_blank_chk" CHECK (btrim("name") <> ''),
   CONSTRAINT "projects_end_date_after_start_date_chk" CHECK ("end_date" IS NULL OR "end_date" >= "start_date"),
-  CONSTRAINT "projects_budget_non_negative_chk" CHECK ("budget" >= 0)
+  CONSTRAINT "projects_budget_non_negative_chk" CHECK ("budget" >= 0),
+  -- CHANGE (new): cap project budgets to a sensible maximum (data-dependent)
+  CONSTRAINT "projects_budget_reasonable_max_chk" CHECK ("budget" <= 1000000000.00)
 );
 
 -- Create "project_assignments" table
