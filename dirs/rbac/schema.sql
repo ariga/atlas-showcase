@@ -142,7 +142,9 @@ CREATE TABLE "public"."audit_logs" (
   "new_values" jsonb NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
-  CONSTRAINT "audit_logs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT
+  CONSTRAINT "audit_logs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
+  -- CHANGE (new): prevent inserting the nil UUID (often used accidentally as a placeholder)
+  CONSTRAINT "audit_logs_user_id_not_nil_chk" CHECK ("user_id" <> '00000000-0000-0000-0000-000000000000'::uuid)
 );
 
 -- Create indexes
