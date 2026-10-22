@@ -1,0 +1,55 @@
+databaseType = "MySql"
+id = "14b7d13c-6530-4a98-b5b0-ceb424a5b2db"
+name = "FlywayAutoPilot"
+
+[flyway]
+locations = [ "filesystem:migrations" ]
+mixed = true
+outOfOrder = true
+
+[flyway.check]
+majorTolerance = 0
+
+[flywayDesktop]
+developmentEnvironment = "development"
+shadowEnvironment = "shadow"
+
+[flywayDesktop.generate]
+undoScripts = true
+
+[redgateCompare]
+filterFile = "filter.rgf"
+
+[redgateCompare.mysql.options.ignores]
+ignoreNewlinesInTextObjects = "off"
+
+[environments.development]
+url = "jdbc:mysql://localhost:3306"
+schemas = [ "flywayapdev" ]
+displayName = "Development database"
+
+[environments.test]
+url = "jdbc:mysql://localhost:3308"
+schemas = [ "flywayaptest" ]
+displayName = "Test database"
+
+[environments.prod]
+url = "jdbc:mysql://localhost:3306"
+schemas = [ "flywayapprod" ]
+displayName = "Production database"
+
+[environments.shadow]
+url = "jdbc:mysql://localhost:3306"
+schemas = [ "flywayapshadow" ]
+displayName = "Shadow database"
+
+[environments.check]
+url = "jdbc:mysql://localhost:3306"
+schemas = [ "flywayapcheck" ]
+displayName = "Check database"
+
+[environments.build]
+url = "jdbc:mysql://localhost:3306"
+schemas = [ "flywayapbuild" ]
+displayName = "Build database"
+
