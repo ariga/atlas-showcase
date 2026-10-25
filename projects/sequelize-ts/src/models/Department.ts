@@ -17,7 +17,7 @@ export class Department extends Model {
     headOfDepartment?: string;
 
     @ForeignKey(() => University)
-    @AllowNull(false)
+    @AllowNull(true)
     @Column(DataType.INTEGER)
     universityId!: number;
 
