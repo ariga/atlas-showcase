@@ -87,7 +87,7 @@ CREATE TABLE "public"."employees" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "user_id" uuid NOT NULL,
   "department_id" uuid NOT NULL,
-  "salary" numeric(10,2) NOT NULL,
+  "salary" numeric(9,2) NOT NULL,
   "start_date" date NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
