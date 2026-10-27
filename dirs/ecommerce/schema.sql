@@ -194,7 +194,8 @@ CREATE TABLE `orders` (
     CHECK (CHAR_LENGTH(TRIM(`shipping_address`)) BETWEEN 1 AND 255),
     CHECK (`total_amount` >= `shipping_cost`),
     CHECK (LOWER(`status`) = `order_status`),
-    CHECK (`order_reference` IS NOT NULL AND CHAR_LENGTH(TRIM(`order_reference`)) > 0)
+    CHECK (`order_reference` IS NOT NULL AND CHAR_LENGTH(TRIM(`order_reference`)) > 0),
+    CHECK (`shipping_method` = LOWER(`shipping_method`))
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table for storing orders placed by users';
 
 -- Create 'order_items' table
