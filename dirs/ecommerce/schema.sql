@@ -38,7 +38,8 @@ CREATE TABLE `users` (
     CHECK ((`phone_verified` = 0) OR (`phone_number` IS NOT NULL AND `phone_number` REGEXP '^[0-9]{1,15}$')),
     CHECK (`reward_points` >= 0 AND `reward_points` <= 100000),
     CHECK ((`deleted_at` IS NULL) OR (`active` = 0)),
-    CHECK (`preferred_language` = LOWER(`preferred_language`))
+    CHECK (`preferred_language` = LOWER(`preferred_language`)),
+    CHECK ((`phone_verified` = 0) OR (`phone_number_verified_at` IS NOT NULL))
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT 'Table storing user information, including authentication and profile details';
 
 -- Create 'categories' table
