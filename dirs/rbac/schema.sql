@@ -170,6 +170,9 @@ $$;
 -- CHANGE (RBAC hardening): remove implicit execute from PUBLIC on function
 REVOKE EXECUTE ON FUNCTION "public"."set_updated_at"() FROM PUBLIC;
 
+-- CHANGE (RBAC fix): allow the application write role to execute the trigger function
+GRANT EXECUTE ON FUNCTION "public"."set_updated_at"() TO readwrite_role;
+
 -- Triggers
 CREATE TRIGGER "users_set_updated_at"
 BEFORE UPDATE ON "public"."users"
