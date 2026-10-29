@@ -89,6 +89,7 @@ CREATE TABLE `products` (
     INDEX `products_category_id_price` (`category_id`, `price`),
     INDEX `products_featured` (`featured`),
     INDEX `products_manufacturer_price` (`manufacturer`, `price`),
+    INDEX `products_category_id_status_price` (`category_id`, `status`, `price`),
     CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
     CHECK (`discount` BETWEEN 0.00 AND 100.00),
     CHECK (`discount` <= `max_discount`),
