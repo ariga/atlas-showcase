@@ -88,14 +88,14 @@ CREATE TABLE "public"."employees" (
   "user_id" uuid NOT NULL,
   "department_id" uuid NOT NULL,
   "salary" numeric(10,2) NOT NULL,
-  "start_date" date NOT NULL,
+  "hired_on" date NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY ("id"),
   CONSTRAINT "employees_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "employees_department_id_fkey" FOREIGN KEY ("department_id") REFERENCES "public"."departments" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT,
   CONSTRAINT "employees_salary_positive_chk" CHECK ("salary" >= 15.00),
   CONSTRAINT "employees_salary_reasonable_max_chk" CHECK ("salary" <= 99999999.99),
-  CONSTRAINT "employees_start_date_not_future_chk" CHECK ("start_date" <= CURRENT_DATE),
+  CONSTRAINT "employees_start_date_not_future_chk" CHECK ("hired_on" <= CURRENT_DATE),
   CONSTRAINT "employees_user_id_unique" UNIQUE ("user_id")
 );
 
