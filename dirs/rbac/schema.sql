@@ -21,6 +21,9 @@ CREATE ROLE all_attributes with CREATEDB CREATEROLE INHERIT LOGIN REPLICATION BY
 -- CHANGE: prevent direct logins using this highly-privileged role
 ALTER ROLE all_attributes NOLOGIN;
 
+-- CHANGE (RBAC hardening): remove unnecessary CREATEROLE from highly-privileged role
+ALTER ROLE all_attributes NOCREATEROLE;
+
 -- Grant role membership
 GRANT readonly_role TO app_readonly;
 GRANT readwrite_role TO app_readwrite;
