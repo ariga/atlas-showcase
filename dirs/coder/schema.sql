@@ -191,6 +191,8 @@ CREATE INDEX "idx_audit_logs_organization_time_desc" ON "public"."audit_logs" ("
 CREATE INDEX "idx_audit_logs_resource_type_time_desc" ON "public"."audit_logs" ("resource_type", "time" DESC) WHERE (resource_type IS NOT NULL);
 -- New (single change in this revision): Speed up filtering audit logs by HTTP status codes
 CREATE INDEX "idx_audit_logs_status_code" ON "public"."audit_logs" ("status_code");
+-- New (single change in this revision): Speed up filtering recent audit logs by organization and action
+CREATE INDEX "idx_audit_logs_org_action_time_desc" ON "public"."audit_logs" ("organization_id", "action", "time" DESC);
 -- Create "files" table
 CREATE TABLE "public"."files" (
   "hash" character varying(64) NOT NULL,
