@@ -198,6 +198,9 @@ REVOKE USAGE ON SCHEMA "public" FROM PUBLIC;
 -- CHANGE: prevent PUBLIC from creating objects in the public schema
 REVOKE CREATE ON SCHEMA "public" FROM PUBLIC;
 
+-- NEW CHANGE (RBAC hardening): prevent application read/write role from creating objects in the schema
+REVOKE CREATE ON SCHEMA "public" FROM readwrite_role;
+
 -- Database-level permissions: Read-only access
 GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO readonly_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA "public" GRANT SELECT ON TABLES TO readonly_role;
