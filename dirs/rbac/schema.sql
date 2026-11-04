@@ -15,7 +15,7 @@ CREATE ROLE readonly_role;
 CREATE ROLE readwrite_role;
 CREATE ROLE admin_role; -- removed CREATEDB for least privilege
 CREATE ROLE analyst_role; -- CHANGED: removed BYPASSRLS for least privilege
-CREATE ROLE auditor_role;
+-- (REMOVED) CREATE ROLE auditor_role;
 CREATE ROLE all_attributes with CREATEDB CREATEROLE INHERIT LOGIN REPLICATION BYPASSRLS;
 
 -- CHANGE: prevent direct logins using this highly-privileged role
@@ -36,7 +36,7 @@ GRANT CONNECT ON DATABASE current_database() TO readonly_role;
 GRANT CONNECT ON DATABASE current_database() TO readwrite_role;
 GRANT CONNECT ON DATABASE current_database() TO admin_role;
 GRANT CONNECT ON DATABASE current_database() TO analyst_role;
-GRANT CONNECT ON DATABASE current_database() TO auditor_role;
+-- (REMOVED) GRANT CONNECT ON DATABASE current_database() TO auditor_role;
 
 -- Schema-level objects: Tables
 -- Create enum type "user_status"
@@ -190,7 +190,7 @@ GRANT USAGE ON SCHEMA "public" TO readonly_role;
 GRANT USAGE ON SCHEMA "public" TO readwrite_role;
 GRANT USAGE ON SCHEMA "public" TO admin_role;
 GRANT USAGE ON SCHEMA "public" TO analyst_role;
-GRANT USAGE ON SCHEMA "public" TO auditor_role;
+-- (REMOVED) GRANT USAGE ON SCHEMA "public" TO auditor_role;
 
 -- CHANGE: prevent PUBLIC from using the public schema
 REVOKE USAGE ON SCHEMA "public" FROM PUBLIC;
@@ -261,18 +261,12 @@ GRANT SELECT ON TABLE "public"."project_assignments" TO analyst_role;
 GRANT SELECT ON TABLE "public"."departments" TO analyst_role;
 
 -- Database-level permissions: Auditor access (read-only on audit logs)
-REVOKE SELECT ON TABLE "public"."audit_logs" FROM auditor_role;
--- CHANGE: explicitly grant access to before/after payload columns for audit investigations
-GRANT SELECT ("old_values", "new_values") ON TABLE "public"."audit_logs" TO auditor_role;
--- CHANGE (NEW): allow auditors to read audit log metadata columns needed for investigations
-GRANT SELECT ("id", "table_name", "action", "user_id", "created_at") ON TABLE "public"."audit_logs" TO auditor_role;
--- Grant read-only on users for audit context
-GRANT SELECT ON TABLE "public"."users" TO auditor_role;
--- Destructive change: revoke auditor access to employees
-REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
-
--- CHANGE: restore auditor read access to employees for audit investigations
-GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
+-- (REMOVED) REVOKE SELECT ON TABLE "public"."audit_logs" FROM auditor_role;
+-- (REMOVED) GRANT SELECT ("old_values", "new_values") ON TABLE "public"."audit_logs" TO auditor_role;
+-- (REMOVED) GRANT SELECT ("id", "table_name", "action", "user_id", "created_at") ON TABLE "public"."audit_logs" TO auditor_role;
+-- (REMOVED) GRANT SELECT ON TABLE "public"."users" TO auditor_role;
+-- (REMOVED) REVOKE SELECT ON TABLE "public"."employees" FROM auditor_role;
+-- (REMOVED) GRANT SELECT ON TABLE "public"."employees" TO auditor_role;
 
 -- CHANGE (RBAC hardening): remove BYPASSRLS from a highly-privileged role
 ALTER ROLE all_attributes NOBYPASSRLS;
@@ -288,4 +282,4 @@ GRANT EXECUTE ON FUNCTION gen_random_uuid() TO readonly_role;
 GRANT EXECUTE ON FUNCTION gen_random_uuid() TO readwrite_role;
 GRANT EXECUTE ON FUNCTION gen_random_uuid() TO admin_role;
 GRANT EXECUTE ON FUNCTION gen_random_uuid() TO analyst_role;
-GRANT EXECUTE ON FUNCTION gen_random_uuid() TO auditor_role;
+-- (REMOVED) GRANT EXECUTE ON FUNCTION gen_random_uuid() TO auditor_role;
