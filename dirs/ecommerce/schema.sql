@@ -171,7 +171,7 @@ CREATE TABLE `orders` (
     INDEX `fulfillment_center_id_created_at` (`fulfillment_center_id`, `created_at`),
     INDEX `orders_fulfillment_center_id_order_status_created_at` (`fulfillment_center_id`, `order_status`, `created_at`),
     UNIQUE INDEX `order_reference` (`order_reference`),
-    INDEX `orders_user_id_created_at` (`user_id`, `created_at`),
+    INDEX `orders_user_id_created_at` (`user_id`, `created_at` DESC),
     INDEX `orders_user_id_order_reference` (`user_id`, `order_reference`),
     INDEX `user_id_order_reference` (`user_id`, `order_reference`),
     INDEX `orders_order_status_created_at` (`order_status`, `created_at`),
