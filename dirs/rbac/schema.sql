@@ -96,7 +96,9 @@ CREATE TABLE "public"."employees" (
   CONSTRAINT "employees_salary_positive_chk" CHECK ("salary" >= 15.00),
   CONSTRAINT "employees_salary_reasonable_max_chk" CHECK ("salary" <= 99999999.99),
   CONSTRAINT "employees_start_date_not_future_chk" CHECK ("hired_on" <= CURRENT_DATE),
-  CONSTRAINT "employees_user_id_unique" UNIQUE ("user_id")
+  CONSTRAINT "employees_user_id_unique" UNIQUE ("user_id"),
+  -- CHANGE (new): prevent duplicate employee rows for the same user within the same department
+  CONSTRAINT "employees_user_department_unique" UNIQUE ("user_id", "department_id")
 );
 
 -- Create "projects" table
