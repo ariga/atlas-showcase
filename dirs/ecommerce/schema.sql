@@ -252,20 +252,6 @@ CREATE TABLE `payment_methods` (
     CHECK (`card_number` REGEXP '^[0-9]{12,20}$')
 ) CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
--- Automatically ensure 'total_amount' in 'orders' matches 'order_items'
-DELIMITER $$
-CREATE TRIGGER before_order_check
-BEFORE UPDATE ON orders
-FOR EACH ROW
-BEGIN
-  DECLARE order_total DECIMAL(10, 2);
-  SELECT COALESCE(SUM(quantity * price), 0.00) INTO order_total FROM order_items WHERE order_id = NEW.id;
-  IF NEW.total_amount < order_total THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order total amount must be greater than or equal to the total price of the order items';
-  END IF;
-END$$
-DELIMITER ;
-
 -- NEW: Ensure orders.updated_at is always set on updates (and does not go backwards)
 DELIMITER $$
 CREATE TRIGGER orders_set_updated_at
