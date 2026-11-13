@@ -439,6 +439,8 @@ CREATE INDEX "provisioner_jobs_started_at_idx" ON "public"."provisioner_jobs" ("
 CREATE INDEX "provisioner_jobs_organization_created_at_desc_idx" ON "public"."provisioner_jobs" ("organization_id", "created_at" DESC);
 -- New (single change in this revision): Speed up joins/filtering on provisioner_jobs by organization_id
 CREATE INDEX "provisioner_jobs_organization_id_idx" ON "public"."provisioner_jobs" ("organization_id");
+-- New (single change in this revision): Speed up filtering/joins by worker_id
+CREATE INDEX "provisioner_jobs_worker_id_idx" ON "public"."provisioner_jobs" ("worker_id") WHERE (worker_id IS NOT NULL);
 -- Create "parameter_schemas" table
 CREATE TABLE "public"."parameter_schemas" (
   "id" uuid NOT NULL,
