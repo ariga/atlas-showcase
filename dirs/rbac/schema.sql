@@ -70,6 +70,9 @@ CREATE UNIQUE INDEX "users_email_unique" ON "public"."users" (lower("email"));
 -- CHANGE: add index to speed handle lookups (in addition to uniqueness constraint)
 CREATE INDEX "idx_users_handle" ON "public"."users" ("handle");
 
+-- CHANGE (new): index to speed filtering/sorting by user creation time
+CREATE INDEX "idx_users_created_at" ON "public"."users" ("created_at");
+
 -- Create "departments" table
 CREATE TABLE "public"."departments" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
