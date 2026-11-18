@@ -277,7 +277,8 @@ CREATE TABLE "public"."workspace_proxies" (
   CONSTRAINT "workspace_proxies_url_lowercase_only" CHECK (url = lower(url)),
   CONSTRAINT "workspace_proxies_name_no_surrounding_whitespace" CHECK (name = btrim(name)),
   CONSTRAINT "workspace_proxies_url_requires_http_https_scheme" CHECK (url ~ '^https?://'),
-  CONSTRAINT "workspace_proxies_deleted_not_null" CHECK (deleted IS NOT NULL)
+  CONSTRAINT "workspace_proxies_deleted_not_null" CHECK (deleted IS NOT NULL),
+  CONSTRAINT "workspace_proxies_wildcard_hostname_trimmed_non_empty" CHECK (wildcard_hostname = btrim(wildcard_hostname) AND length(btrim(wildcard_hostname)) > 0)
 );
 -- Create index "workspace_proxies_lower_name_idx" to table: "workspace_proxies"
 CREATE UNIQUE INDEX "workspace_proxies_lower_name_idx" ON "public"."workspace_proxies" ((lower(name))) WHERE (deleted = false);
