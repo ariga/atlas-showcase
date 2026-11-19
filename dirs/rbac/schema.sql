@@ -231,7 +231,8 @@ REVOKE SELECT ("salary") ON TABLE "public"."employees" FROM readwrite_role;
 REVOKE INSERT ON ALL TABLES IN SCHEMA "public" FROM readwrite_role;
 GRANT INSERT ON TABLE "public"."users" TO readwrite_role;
 GRANT INSERT ON TABLE "public"."departments" TO readwrite_role;
-GRANT INSERT ON TABLE "public"."employees" TO readwrite_role;
+-- CHANGE (RBAC hardening): remove employee creation from generic app read/write role
+REVOKE INSERT ON TABLE "public"."employees" FROM readwrite_role;
 GRANT INSERT ON TABLE "public"."projects" TO readwrite_role;
 GRANT INSERT ON TABLE "public"."project_assignments" TO readwrite_role;
 
