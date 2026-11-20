@@ -132,7 +132,11 @@ CREATE TABLE "public"."project_assignments" (
   CONSTRAINT "project_assignments_employee_id_fkey" FOREIGN KEY ("employee_id") REFERENCES "public"."employees" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "project_assignments_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "public"."projects" ("id") ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT "project_assignments_unique" UNIQUE ("employee_id", "project_id"),
-  CONSTRAINT "project_assignments_assignment_role_not_blank_chk" CHECK (btrim("assignment_role") <> '')
+  CONSTRAINT "project_assignments_assignment_role_not_blank_chk" CHECK (btrim("assignment_role") <> ''),
+  -- CHANGE (new): restrict assignment_role to a controlled vocabulary
+  CONSTRAINT "project_assignments_assignment_role_allowed_chk" CHECK (
+    "assignment_role" IN ('member', 'lead', 'manager', 'owner')
+  )
 );
 
 -- Create "audit_logs" table
