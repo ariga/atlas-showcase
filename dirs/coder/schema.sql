@@ -24,7 +24,7 @@ CREATE TYPE "public"."parameter_destination_scheme" AS ENUM ('none', 'environmen
 CREATE TABLE "public"."site_configs" (
   "key" character varying(256) NOT NULL,
   "value" character varying(8192) NOT NULL,
-  CONSTRAINT "site_configs_key_key" UNIQUE ("key")
+  PRIMARY KEY ("key")
 );
 -- Create enum type "resource_type"
 CREATE TYPE "public"."resource_type" AS ENUM ('organization', 'template', 'template_version', 'user', 'workspace', 'git_ssh_key', 'api_key', 'group', 'workspace_build', 'license', 'workspace_proxy');
